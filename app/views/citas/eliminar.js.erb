@@ -1,0 +1,22 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-cita' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-citas");
+   $("#form_buscar_citas_id").val("<%=@cita_elim.id%>")
+   $("#form-buscar-citas").submit();
+    setTimeout(function(){ 
+      
+      $("#msg-eliminar-cita").remove();
+      swal("La cita fue eliminada Exitosamente.");
+
+    }, 1000);
+      
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-cita' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-citas");
+  
+  setTimeout(function(){ 
+  
+    $("#msg-eliminar-cita").remove(); }, 2000);
+  	swal("No se pudo Eliminar la Cita. Intente más tarde.")
+    
+<% end %>

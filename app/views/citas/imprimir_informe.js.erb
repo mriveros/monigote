@@ -1,0 +1,23 @@
+<%if @cita.present?%>
+
+  
+  setTimeout(function(){ 
+
+    swal("Resumen generado Exitosamente!", "", "success");
+
+  }, 
+  1000);
+  
+  
+    window.open("<%= url_for(citas_generar_informe_pdf_path(@parametros))%>", '_blank')
+  
+
+<%else%>
+
+  setTimeout(function(){ 
+
+    swal("No se pudo generar el Resumen. Intente más tarde", "","warning");
+
+  }, 1000);
+
+<%end%>

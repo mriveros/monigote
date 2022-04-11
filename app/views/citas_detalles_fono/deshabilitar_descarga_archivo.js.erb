@@ -1,0 +1,18 @@
+<% if @valido == true %>
+
+  setTimeout(function(){
+
+    
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+    $("#link-to-cita-detalle-fono-<%= params[:cita_id]%>").trigger('click');
+    $("#form-buscar-citas").submit();
+    swal("Autorización de descarga de archivo desconfirmada.", "", "success");
+
+  }, 1000);
+  
+
+<% else %>
+  
+  swal({title: "Atención", text: "No se pudo deshabilitar la descarga. Intente más tarde", html: false});
+
+<% end %>

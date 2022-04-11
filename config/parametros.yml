@@ -1,0 +1,108 @@
+development:
+
+  #ROLES 
+  rol_administrador: 1
+  rol_tutor: 3
+  rol_super: 6
+
+  #ESTADOS CITAS
+  estado_cita_en_espera: 1
+  estado_cita_en_consultorio: 2
+  estado_cita_terminado: 3
+  estado_cita_postergado: 4
+  estado_cita_ausente: 5
+
+  #sistemas
+  sistema_RUE: 1
+  
+  #TIPOS ELEMENTOS INTERFAZ
+  radio_button: 1
+  check_box: 2
+  text: 3
+  combo_box: 4
+  
+  #TIPOS DATO
+  tipo_dato_numerico: 1
+  tipo_dato_texto: 2
+ 
+  #TIPOS DOCUMENTOS
+  certificado_nacimiento: 6
+  sin_documento: 5
+  cedula_identidad: 1
+
+  #ESPECIALIDADES
+  especialidad_fonoaudiologia: 1
+  clinica_general: 2
+
+  #TIPOS CONSULTAS FONO
+  entrevista: 1
+  evaluacion: 2
+  tratamiento: 3
+  informe_fono_alta: 4
+  informe_fono: 5
+
+  #TIPOS RESOLUCIONES
+  archivo_fonoaudiologico: 1
+  archivo_clinica_general: 2
+
+  #ESTADOS COBROS
+  estado_cobro_pendiente: 1
+  estado_cobro_cobrado: 2
+  estado_cobro_no_cobrado: 3
+  
+
+production:
+  
+
+  #ROLES 
+  rol_administrador: 1
+  rol_tutor: 3
+  rol_super: 6
+
+  #ESTADOS CITAS
+  estado_cita_en_espera: 1
+  estado_cita_en_consultorio: 2
+  estado_cita_terminado: 3
+  estado_cita_postergado: 4
+  estado_cita_ausente: 5
+
+   
+  #sistemas
+  sistema_RUE: 1
+  
+  #TIPOS ELEMENTOS INTERFAZ
+  radio_button: 1
+  check_box: 2
+  text: 3
+  combo_box: 4
+  
+  #TIPOS DATO
+  tipo_dato_numerico: 1
+  tipo_dato_texto: 2
+ 
+  #TIPOS DOCUMENTOS
+  certificado_nacimiento: 6
+  sin_documento: 5
+  cedula_identidad: 1
+
+  #ESPECIALIDADES
+  especialidad_fonoaudiologia: 1
+  clinica_general: 2
+
+  #TIPOS CONSULTAS FONO
+  entrevista: 1
+  evaluacion: 2
+  tratamiento: 3
+  informe_fono_alta: 4
+  informe_fono: 5
+
+  #TIPOS RESOLUCIONES
+  archivo_fonoaudiologico: 1
+  archivo_clinica_general: 2
+
+  #ESTADOS COBROS
+  estado_cobro_pendiente: 1
+  estado_cobro_cobrado: 2
+  estado_cobro_no_cobrado: 3
+  
+  
