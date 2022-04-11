@@ -194,7 +194,7 @@ class ApplicationController < ActionController::Base
     auditoria.accion = accion
     auditoria.tabla = tabla
     auditoria.pista_antes = objeto.to_json
-    auditoria.sistema = "Fonoware"
+    auditoria.sistema = "Monigote"
     auditoria.save
 
     auditoria.id

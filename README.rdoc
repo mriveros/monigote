@@ -1,4 +1,4 @@
-== FONOWARE -> Application for fonologish management.
+== Monigote -> Application for fonologish management.
 
 ==API APP
 This project will have API to see activities from the android and ios device, the development for react native expo project app.
