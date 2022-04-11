@@ -1,0 +1,204 @@
+<%= javascript_include_tag "modulos/personas.js" %>
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Personas</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-persona", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-personas">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag personas_lista_path, remote: true, id: "form-buscar-personas"  do  %>
+
+        <tr>
+
+          <th style="width:50px;">
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_personas_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personas', '#form_buscar_personas_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:10%;">
+            <span>Nacionalidad</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_personas_nacionalidad, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_personas_nacionalidad_id').val('');quitar_filtro('#form-buscar-personas', '#form_buscar_personas_nacionalidad');"><i class="fa fa-times"></i></span>
+            </div>
+
+            <%= hidden_field_tag :form_buscar_personas_nacionalidad_id %>
+            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+                  atributo_descripcion: :descripcion,
+                  atributo_tipo: :text, 
+                  model: :Nacionalidad, 
+                  limit: 10,
+                  cadena_consulta: "upper(quitar_acentos(descripcion))",
+                  orden: "descripcion"), 
+              parametro_id: "form_buscar_personas_nacionalidad", 
+              resultado_id: "form_buscar_personas_nacionalidad_id",
+              min_length: 2
+              ) %>
+          </th>
+
+          <th style="width:10%;">
+            <span>Tipo de Documento</span>
+            <div class="input-group input-group-sm">
+                <%= text_field_tag :form_buscar_personas_tipo_documento, nil, :class => 'form-control', :placeholder => "" %>
+                <span class="input-group-addon limpiar" onclick="$('#form_buscar_personas_tipo_documento_id').val('');quitar_filtro('#form-buscar-personas', '#form_buscar_personas_tipo_documento');"><i class="fa fa-times"></i></span>
+            </div>
+
+            <%= hidden_field_tag :form_buscar_personas_tipo_documento_id %>
+            <%= autocomplete_help( ruta:  autocompletar_path(atributo_id: :id,
+                  atributo_descripcion: :descripcion,
+                  atributo_tipo: :text, 
+                  model: :TipoDocumento, 
+                  limit: 10,
+                  cadena_consulta: "upper(quitar_acentos(descripcion))",
+                  orden: "descripcion"), 
+              parametro_id: "form_buscar_personas_tipo_documento", 
+              resultado_id: "form_buscar_personas_tipo_documento_id",
+              min_length: 2
+              ) %>
+          </th>
+
+          <th style="width:130px;">
+            <span>Documento</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_personas_documento_persona, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personas', '#form_buscar_personas_documento_persona');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th style="width:18%;">
+            <span>Nombres Completos<br/> <em style="font-size: 7px;"> Ej: JOSE GASPAR</em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_personas_nombre_persona, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personas', '#form_buscar_personas_nombre_persona');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:18%;">
+            <span>Apellidos Completos<br/> <em style="font-size: 7px;"> Ej: RODRIGUEZ DE FRANCIA</em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_personas_apellido_persona, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personas', '#form_buscar_personas_apellido_persona');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th style="width:10%;">
+            <span>Dirección</span>
+             <div class="input-group input-group-sm">
+            </div>
+          </th>
+          
+          <th style="width:5%;">
+            <span>Celular</span>
+             <div class="input-group input-group-sm">
+                
+            </div>
+          </th>
+
+           <th style="width:10%;">
+            <span>Email</span>
+             <div class="input-group input-group-sm">
+                
+            </div>
+          </th>
+          <th style="width:150px;"></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="personas-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+<table class="table table-striped table-bordered table-hover">
+  <tbody id="personas-footer"></tbody>
+</table>
+
+<%= modal_window( window_id: "modal-window-agregar-persona", link_to_id: "#link-to-agregar-persona", url: personas_agregar_path( window_id: "modal-window-agregar-persona") )%>
+<%= modal_window( window_id: "modal-window-agregar-persona-senatics", link_to_id: "#link-to-agregar-persona-senatics", url: personas_agregar_persona_senatics_path( window_id: "modal-window-agregar-persona-senatics") )%>
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-personas").bind("submit", function () {
+    var valido = true;
+    if($("#form_buscar_personas_nombre_persona").val().length !== 0 || $("#form_buscar_personas_apellido_persona").val().length !== 0){
+      valido = false;
+      if(($("#form_buscar_personas_nombre_persona").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_personas_apellido_persona").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      }else{
+        valido = false;
+        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#personas-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ // $("#form-buscar-personas").bind("submit", function () {
+
+    //$("#personas-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")
+
+ // })
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-personas input, #table-personas select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-personas").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-personas").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-persona").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-controladores table th { background:#e6e6e6;}
+    #form-buscar-controladores table th span.limpiar { background:#fff;}
+
+</style>

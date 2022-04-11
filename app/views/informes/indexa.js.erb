@@ -1,0 +1,28 @@
+<%if @cita.present?%>
+
+ 	
+  setTimeout(function(){ 
+
+  swal("Reporte generado Exitosamente!", "", "success");
+
+  }, 
+  1000);
+  
+  //$("#btn-generar-reporte").attr('disabled', false);
+  
+ 	window.open("<%= url_for(informes_generar_pdf_path(@parametros))%>", '_blank')
+  
+
+<%else%>
+
+setTimeout(function(){ 
+
+  swal("No hay datos que mostrar. Intente nuevamente", "","warning");
+
+}, 1000);
+
+$("#btn-generar-reporte").attr('disabled', false);
+
+
+
+<%end%>
