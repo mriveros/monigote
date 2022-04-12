@@ -1,4 +1,4 @@
-module PilotosHelper
+module TutoresHelper
 
 	def link_to_editar_piloto(piloto_id)
 		
