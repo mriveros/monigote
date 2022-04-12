@@ -1,0 +1,175 @@
+
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
+<div>
+
+  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
+    <h3 style="float:left;margin-top:5px;">Remuneraciones Extras</h3>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar".html_safe, "#", id: "link-to-agregar-pagos-remuneraciones-extras", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-pagos-remuneraciones-extras", link_to_id: "#link-to-agregar-pagos-remuneraciones-extras", url: pagos_remuneraciones_extras_agregar_path( window_id: "modal-window-agregar-pagos-remuneraciones-extras") )%>
+    
+  </div>
+</div>
+
+<div style="clear:both;"></div>
+ 
+<div class="table-responsive" id="table-pagos-remuneraciones-extras">
+
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+   
+    <thead>
+
+      <%= form_tag pagos_remuneraciones_extras_lista_path, remote: true, id: "form-buscar-pagos-remuneraciones-extras"  do  %>
+
+        <tr>
+
+          <th>
+            <span>ID</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_id, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+          
+          <th>
+            <div><%= label_tag nil, "Fecha".html_safe %></div>
+              <div class='input-group date'>
+                <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_fecha, nil, class: 'form-control input-sm' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-remuneracion-extra', '#form_buscar_pagos_remuneraciones_extras_fecha');"><i class="fa fa-times"></i></span>
+              </div>
+         </th>
+
+          <th>
+            <span>Nombre<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_nombre_personal, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_nombre_personal');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th>
+            <span>Apellido<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_apellido_personal, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_apellido_personal');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
+
+          <th>
+            <span>Mes<br/></span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_pagos_remuneraciones_extras, :mes_periodo_id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_mes_periodo_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Año<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_anho_periodo, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_anho_periodo');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th >
+            <span>Monto<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_monto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+           <th>
+            <span>Observación<br/></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_pagos_remuneraciones_extras_observacion, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-remuneraciones-extras', '#form_buscar_pagos_remuneraciones_extras_observacion');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+
+          <th></th>
+
+        </tr>
+
+        <% end %>
+
+      </thead> 
+
+    <tbody id="pagos-remuneraciones-extras-lista"></tbody>
+  
+  </table>
+
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  //---------------------------- RECUPERANDO DATOS ----------------------------//
+  $("#form-buscar-pagos-remuneraciones-extras").bind("submit", function () {
+    
+    var valido = true;
+    
+    if($("#form_buscar_pagos_remuneraciones_extras_nombre_personal").val().length !== 0 ){
+      
+      valido = false;
+
+      if(($("#form_buscar_pagos_remuneraciones_extras_nombre_personal").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_pagos_remuneraciones_extras_apellido_personal").val().replace(/\s/g,'')).length > 2){        
+        valido = true;
+      
+      }else{
+       
+        valido = false;      
+        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
+        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
+      }      
+    }
+      
+    if(valido){
+    $(".nmb").html('');       
+    $("#pagos-remuneraciones-extras-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    }
+
+    
+
+  })
+ 
+  //---------------------------------------------------------------------------//
+  //---------------------------- BUSCAR PERSONAS-------- -------------------------//
+  $("#table-pagos-remuneraciones-extras input, #table-pagos-remuneraciones-extras select").bind('change', function () {
+      $.ajaxQ.abortAll();
+      $("#form-buscar-pagos-remuneraciones-extras").submit();
+
+  })
+  //----------------------------------------------------------------------------//
+  //----------------------------INICIO -----------------------------------------//
+  aplicar_datepicker();
+  $("#form-buscar-pagos-remuneraciones-extras").submit();
+  <% if params[:agregar] %>
+    $("#link-to-agregar-pagos-remuneraciones-extras").trigger('click');
+  <% end %>
+  //----------------------------------------------------------------------------//
+</script>
+
+<style>
+    /*INTRO.JS*/
+    .introjs-helperNumberLayer{
+        width: 23px;
+        height: 23px;
+        padding: 0px;
+    }
+
+    #start-tour{
+        cursor: pointer;
+    }
+
+    #form-buscar-pagos-remuneraciones-extras table th { background:#e6e6e6;}
+    #form-buscar-pagos-remuneraciones-extras table th span.limpiar { background:#fff;}
+
+</style>
