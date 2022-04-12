@@ -1,4 +1,4 @@
-class Piloto < ActiveRecord::Base
+class Alumno < ActiveRecord::Base
 
   self.table_name="pilotos"
   self.primary_key="id"
