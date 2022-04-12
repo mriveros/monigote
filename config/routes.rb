@@ -9,6 +9,55 @@ Rails.application.routes.draw do
   
     end
   end  
+
+  #CARGOS
+  post 'cargos/lista'
+  get 'cargos/lista'
+  get 'cargos/agregar'
+  post 'cargos/guardar'
+  get 'cargos/eliminar'
+  get 'cargos/editar'
+  post 'cargos/actualizar'
+  get 'cargos/index'
+
+  #REMUNERACIONES EXTRAS
+  post 'pagos_remuneraciones_extras/lista'
+  get 'pagos_remuneraciones_extras/lista'
+  get 'pagos_remuneraciones_extras/agregar'
+  post 'pagos_remuneraciones_extras/guardar'
+  get 'pagos_remuneraciones_extras/eliminar'
+  get 'pagos_remuneraciones_extras/editar'
+  post 'pagos_remuneraciones_extras/actualizar'
+  get 'pagos_remuneraciones_extras/index'
+
+#DESCUENTOS
+  post 'pagos_descuentos/lista'
+  get 'pagos_descuentos/lista'
+  get 'pagos_descuentos/agregar'
+  post 'pagos_descuentos/guardar'
+  get 'pagos_descuentos/eliminar'
+  get 'pagos_descuentos/editar'
+  post 'pagos_descuentos/actualizar'
+  get 'pagos_descuentos/index'
+
+#ADELANTOS
+  post 'pagos_adelantos/lista'
+  get 'pagos_adelantos/lista'
+  get 'pagos_adelantos/agregar'
+  post 'pagos_adelantos/guardar'
+  get 'pagos_adelantos/eliminar'
+  get 'pagos_adelantos/editar'
+  post 'pagos_adelantos/actualizar'
+  get 'pagos_adelantos/index'
+
+#PAGOS DE SALARIOS
+  get 'pagos_salarios/index'
+  post 'pagos_salarios/lista'
+  get 'pagos_salarios/lista'
+  get 'pagos_salarios/agregar'
+  post 'pagos_salarios/guardar'
+  get 'pagos_salarios/eliminar'
+  get 'pagos_salarios/salario_detalle'
     
   #CRONTAB
   get "crontab_ultron/index"
