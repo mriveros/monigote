@@ -13,59 +13,52 @@ skip_before_action :verify_authenticity_token
     cond = []
     args = []
 
-    if params[:form_buscar_pilotos_id].present?
+    if params[:form_buscar_alumnos_id].present?
 
       cond << "piloto_id = ?"
-      args << params[:form_buscar_pilotos_id]
+      args << params[:form_buscar_alumnos_id]
 
     end
 
-    if params[:form_buscar_pilotos_nombre].present?
+    if params[:form_buscar_alumnos_nombre].present?
 
       cond << "nombres ilike ?"
-      args << "%#{params[:form_buscar_pilotos_nombre]}%"
+      args << "%#{params[:form_buscar_alumnos_nombre]}%"
 
     end
 
-    if params[:form_buscar_pilotos_apellido].present?
+    if params[:form_buscar_alumnos_apellido].present?
 
       cond << "apellidos ilike ?"
-      args << "%#{params[:form_buscar_pilotos_apellido]}%"
+      args << "%#{params[:form_buscar_alumnos_apellido]}%"
 
     end
 
-    if params[:form_buscar_pilotos_ci].present?
+    if params[:form_buscar_alumnos_ci].present?
 
       cond << "ci = ?"
-      args << params[:form_buscar_pilotos_ci]
+      args << params[:form_buscar_alumnos_ci]
 
     end
 
-    if params[:form_buscar_pilotos_fecha_nacimiento].present?
+    if params[:form_buscar_alumnos_fecha_nacimiento].present?
 
       cond << "fecha_nacimiento = ?"
-      args << params[:form_buscar_pilotos_fecha_nacimiento]
+      args << params[:form_buscar_alumnos_fecha_nacimiento]
 
     end
 
-    if params[:form_buscar_pilotos][:grupo_sanguineo_id].present?
-
-      cond << "grupo_sanguineo_id = ?"
-      args << params[:form_buscar_pilotos][:grupo_sanguineo_id]
-
-    end
-
-    if params[:form_buscar_pilotos_direccion].present?
+    if params[:form_buscar_alumnos_direccion].present?
 
       cond << "direccion ilike ?"
-      args << "%#{params[:form_buscar_pilotos_direccion]}%"
+      args << "%#{params[:form_buscar_alumnos_direccion]}%"
 
     end
 
-    if params[:form_buscar_pilotos_telefono].present?
+    if params[:form_buscar_alumnos_telefono].present?
 
       cond << "telefono ilike ?"
-      args << "%#{params[:form_buscar_pilotos_telefono]}%"
+      args << "%#{params[:form_buscar_alumnos_telefono]}%"
 
     end
 
@@ -73,12 +66,12 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @pilotos =  VPiloto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @alumnos =  VPiloto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VPiloto.where(cond).count
       
     else
 
-      @pilotos = VPiloto.orden_01.paginate(per_page: 10, page: params[:page])
+      @alumnos = VPiloto.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VPiloto.count
 
     end
@@ -126,7 +119,7 @@ skip_before_action :verify_authenticity_token
 
         if @piloto.save
 
-          auditoria_nueva("registrar piloto", "pilotos", @piloto)
+          auditoria_nueva("registrar piloto", "alumnos", @piloto)
           @guardado_ok = true
           @persona = Persona.where('documento_persona = ?', params[:ci]).first
           
@@ -192,7 +185,7 @@ skip_before_action :verify_authenticity_token
 
     @piloto = Piloto.find(params[:piloto_id])
 
-    auditoria_id = auditoria_antes("actualizar piloto", "pilotos", @piloto)
+    auditoria_id = auditoria_antes("actualizar piloto", "alumnos", @piloto)
 
     if valido
 
@@ -230,7 +223,7 @@ skip_before_action :verify_authenticity_token
 
   def buscar_piloto
     
-    @pilotos = Piloto.where("nombre ilike ?", "%#{params[:piloto]}%")
+    @alumnos = Piloto.where("nombre ilike ?", "%#{params[:piloto]}%")
 
     respond_to do |f|
       
@@ -268,7 +261,7 @@ skip_before_action :verify_authenticity_token
 
       if @piloto.destroy
 
-        auditoria_nueva("eliminar piloto", "pilotos", @piloto_elim)
+        auditoria_nueva("eliminar piloto", "alumnos", @piloto_elim)
 
         @eliminado = true
 
