@@ -9,7 +9,18 @@ Rails.application.routes.draw do
   
     end
   end  
-
+#-------------------------------------MONIGOTE----------------------------------------------------
+#ALUMNOS
+  post "alumnos/lista"
+  get "alumnos/lista"
+  get "alumnos/agregar"
+  post "alumnos/guardar"
+  get "alumnos/eliminar"
+  get "alumnos/editar"
+  post "alumnos/actualizar"
+  get "alumnos/index"
+  get "alumnos/buscar_alumno"
+  
   #CARGOS
   post 'cargos/lista'
   get 'cargos/lista'
@@ -58,7 +69,7 @@ Rails.application.routes.draw do
   post 'pagos_salarios/guardar'
   get 'pagos_salarios/eliminar'
   get 'pagos_salarios/salario_detalle'
-    
+#---------------------------------------FONOWARE------------------------------------------------------------------------    
   #CRONTAB
   get "crontab_ultron/index"
 
@@ -217,7 +228,8 @@ Rails.application.routes.draw do
   get "citas_detalles_fono/habilitar_descarga_archivo"
   get "citas_detalles_fono/deshabilitar_descarga_archivo"
   get "citas_detalles_fono/cita_detalle_fono_terminado"
-  
+
+#--------------------------------------------SISTEMA------------------------------------------------------------  
   #PERSONAS
   post "personas/lista"
   get "personas/lista"
