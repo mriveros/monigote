@@ -66,17 +66,17 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @alumnos =  VPiloto.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPiloto.where(cond).count
+      @alumnos =  VAlumno.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAlumno.where(cond).count
       
     else
 
-      @alumnos = VPiloto.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPiloto.count
+      @alumnos = VAlumno.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VAlumno.count
 
     end
 
-    @total_registros = VPiloto.count
+    @total_registros = VAlumno.count
 
   	respond_to do |f|
 	    
