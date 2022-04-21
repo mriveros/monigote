@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'dragonfly', '~> 1.0.11'
+gem 'avatar_magick', '~> 1.0.1'
+gem 'serviceworker-rails'
 gem 'chartkick', '~>2.0.0'
 gem 'highcharts'
 gem 'groupdate'

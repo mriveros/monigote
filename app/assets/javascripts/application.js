@@ -211,3 +211,4 @@ function formatear_numero(objeto) {
     console.log("Función en js: formatear_numero 2 ***");
     console.log(number.toLocaleString('es-PY'));
 }
+//= require serviceworker-companion
