@@ -1,7 +1,7 @@
-class Alumno < ActiveRecord::Base
+class VAlumno < ActiveRecord::Base
 
-  self.table_name="alumnos"
-  self.primary_key="id"
+  self.table_name="v_alumnos"
+  self.primary_key="alumno_id"
   extend Dragonfly::Model
   include Avatarable
 
@@ -9,7 +9,7 @@ class Alumno < ActiveRecord::Base
 
   attr_accessible :id, :nombres, :apellidos, :ci, :direccion, :telefono, :fecha_nacimiento
   
-  scope :orden_01, -> { order("id")}
+  scope :orden_01, -> { order("alumno_id")}
   scope :orden_nombres, -> { order("nombres, apellidos")}
   def full_name
     [nombres, apellidos].join(' ')
