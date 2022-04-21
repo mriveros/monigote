@@ -2,6 +2,7 @@ class VAlumno < ActiveRecord::Base
 
   self.table_name="v_alumnos"
   self.primary_key="alumno_id"
+  
   extend Dragonfly::Model
   include Avatarable
 
