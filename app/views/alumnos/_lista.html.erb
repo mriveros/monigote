@@ -1,6 +1,6 @@
-<% if @pilotos.present? %>
+<% if @alumnos.present? %>
 
-  <% @pilotos.each do |p| %>
+  <% @alumnos.each do |p| %>
 
     <tr>
 
@@ -17,7 +17,7 @@
         
         <%= link_to_editar_piloto(p.piloto_id) %>
         
-        <%= link_to icon_eliminar, pilotos_eliminar_path(piloto_id: p.piloto_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Piloto', data: { confirm: "Está seguro de eliminar el Piloto?"} %>
+        <%= link_to icon_eliminar, alumnos_eliminar_path(piloto_id: p.piloto_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Piloto', data: { confirm: "Está seguro de eliminar el Piloto?"} %>
       
        </td> 
 
@@ -29,7 +29,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate piloto, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate alumno, :params => params %></div></td>
 </tr>
 
 <tr>
