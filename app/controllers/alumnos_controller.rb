@@ -248,7 +248,7 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @alumno = alumno.find(params[:alumno_id])
+    @alumno = Alumno.find(params[:alumno_id])
 
     @alumno_elim = @alumno  
 
