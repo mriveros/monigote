@@ -188,7 +188,6 @@ skip_before_action :verify_authenticity_token
       @alumno.nombres = params[:alumno][:nombres].upcase
       @alumno.apellidos = params[:alumno][:apellidos].upcase
       @alumno.ci = params[:alumno][:ci]
-      @alumno.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
       @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
       @alumno.direccion = params[:alumno][:direccion].upcase
       @alumno.telefono = params[:alumno][:telefono]
@@ -206,7 +205,7 @@ skip_before_action :verify_authenticity_token
         #puts "Aqui si muestra el error ".concat(exc.message)
         if exc.present?        
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4])
+        @msg = @excep[3]
         end                
 
   	respond_to do |f|
