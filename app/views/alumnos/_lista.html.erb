@@ -4,20 +4,20 @@
 
     <tr>
 
-      <td style="width:50px;"><%= p.piloto_id %></td>
+      <td style="width:50px;"><%= p.alumno_id %></td>
       <td><%= p.nombres%></td>
       <td><%= p.apellidos%></td>
       <td><%= p.ci %></td>
       <td><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present?%></td>
       <td><%= p.direccion%></td>
       <td><%= p.telefono%></td>
-      <td><%= piloto_avatar(p, class: 'media-object img-circle', style: 'width:50px;height:50px;', value: 'M' ) %></td>
+      <td><%= alumno_avatar(p, class: 'media-object img-circle', style: 'width:50px;height:50px;', value: 'M' ) %></td>
       
       <td style="width:120px;">
         
-        <%= link_to_editar_piloto(p.piloto_id) %>
+        <%= link_to_editar_alumno(p.alumno_id) %>
         
-        <%= link_to icon_eliminar, alumnos_eliminar_path(piloto_id: p.piloto_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Piloto', data: { confirm: "Está seguro de eliminar el Piloto?"} %>
+        <%= link_to icon_eliminar, alumnos_eliminar_path(alumno_id: p.alumno_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el alumno', data: { confirm: "Está seguro de eliminar el alumno?"} %>
       
        </td> 
 
