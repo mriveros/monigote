@@ -5,7 +5,6 @@ skip_before_action :verify_authenticity_token
 
   def index
    
-
   end
 
   def lista
@@ -111,7 +110,6 @@ skip_before_action :verify_authenticity_token
       @alumno.nombres = params[:nombres].upcase
       @alumno.apellidos = params[:apellidos].upcase
       @alumno.ci = params[:ci]
-      @alumno.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
       @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
       @alumno.direccion = params[:direccion].upcase
       @alumno.telefono = params[:telefono]
@@ -135,7 +133,6 @@ skip_before_action :verify_authenticity_token
             @persona.direccion = params[:direccion].upcase
             @persona.telefono = params[:telefono]
             @persona.celular = params[:telefono]
-            @persona.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
             #sexo por defecto no especificado
             @persona.genero_id = 3 
             if @persona.save
@@ -154,8 +151,7 @@ skip_before_action :verify_authenticity_token
     #puts "Aqui si muestra el error ".concat(exc.message)
       if exc.present?        
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
-      
+        @msg = @excep.to_s
       end                
               
   	respond_to do |f|
@@ -168,7 +164,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
 
-    @alumno = alumno.find(params[:alumno_id])
+    @alumno = Alumno.find(params[:alumno_id])
 
   	respond_to do |f|
 	    
@@ -183,7 +179,7 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @alumno = alumno.find(params[:alumno_id])
+    @alumno = Alumno.find(params[:alumno_id])
 
     auditoria_id = auditoria_antes("actualizar alumno", "alumnos", @alumno)
 
@@ -223,7 +219,7 @@ skip_before_action :verify_authenticity_token
 
   def buscar_alumno
     
-    @alumnos = alumno.where("nombre ilike ?", "%#{params[:alumno]}%")
+    @alumnos = Alumno.where("nombre ilike ?", "%#{params[:alumno]}%")
 
     respond_to do |f|
       
@@ -292,7 +288,7 @@ skip_before_action :verify_authenticity_token
     
     if params[:documento].present?
 
-      @alumno = alumno.where("ci = ?", params[:documento])  
+      @alumno = Alumno.where("ci = ?", params[:documento])  
 
     end
 
