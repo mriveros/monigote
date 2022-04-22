@@ -1,12 +1,13 @@
 <% if @eliminado %>
 
-   $("<div class='col-sm-12' id='msg-eliminar-piloto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pilotos");
-   $("#form-buscar-pilotos").submit();
-    setTimeout(function(){ $("#msg-eliminar-piloto").remove(); }, 3000);
+   $("<div class='col-sm-12' id='msg-eliminar-alumno' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-alumnos");
+   $("#form_buscar_alumnos_id").val('<%= @alumno_elim.id %>'); 
+   $("#form-buscar-alumnos").submit();
+    setTimeout(function(){ $("#msg-eliminar-alumno").remove(); }, 3000);
     swal("Eliminado Exitosamente.")
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-piloto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-pilotos");
-  setTimeout(function(){ $("#msg-eliminar-piloto").remove(); }, 3000);
+  $("<div class='col-sm-12' id='msg-eliminar-alumno' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-alumnos");
+  setTimeout(function(){ $("#msg-eliminar-alumno").remove(); }, 3000);
   	swal("No se pudo Eliminar. Intente más tarde")
 <% end %>
