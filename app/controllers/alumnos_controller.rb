@@ -15,7 +15,7 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_alumnos_id].present?
 
-      cond << "piloto_id = ?"
+      cond << "alumno_id = ?"
       args << params[:form_buscar_alumnos_id]
 
     end
@@ -88,7 +88,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @piloto = Piloto.new
+    @alumno = Alumno.new
 
     respond_to do |f|
 	    
@@ -107,19 +107,19 @@ skip_before_action :verify_authenticity_token
 
     if @valido
       
-      @piloto = Piloto.new()
-      @piloto.nombres = params[:nombres].upcase
-      @piloto.apellidos = params[:apellidos].upcase
-      @piloto.ci = params[:ci]
-      @piloto.grupo_sanguineo_id = params[:piloto][:grupo_sanguineo_id]
-      @piloto.fecha_nacimiento = params[:piloto][:fecha_nacimiento]
-      @piloto.direccion = params[:direccion].upcase
-      @piloto.telefono = params[:telefono]
+      @alumno = Alumno.new()
+      @alumno.nombres = params[:nombres].upcase
+      @alumno.apellidos = params[:apellidos].upcase
+      @alumno.ci = params[:ci]
+      @alumno.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
+      @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
+      @alumno.direccion = params[:direccion].upcase
+      @alumno.telefono = params[:telefono]
       
 
-        if @piloto.save
+        if @alumno.save
 
-          auditoria_nueva("registrar piloto", "alumnos", @piloto)
+          auditoria_nueva("registrar alumno", "alumnos", @alumno)
           @guardado_ok = true
           @persona = Persona.where('documento_persona = ?', params[:ci]).first
           
@@ -131,11 +131,11 @@ skip_before_action :verify_authenticity_token
             @persona.documento_persona = params[:ci]
             @persona.tipo_documento_id = params[:persona][:tipo_documento_id]
             @persona.nacionalidad_id = params[:persona][:nacionalidad_id]
-            @persona.fecha_nacimiento = params[:piloto][:fecha_nacimiento]
+            @persona.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
             @persona.direccion = params[:direccion].upcase
             @persona.telefono = params[:telefono]
             @persona.celular = params[:telefono]
-            @persona.grupo_sanguineo_id = params[:piloto][:grupo_sanguineo_id]
+            @persona.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
             #sexo por defecto no especificado
             @persona.genero_id = 3 
             if @persona.save
@@ -168,7 +168,7 @@ skip_before_action :verify_authenticity_token
 
   def editar
 
-    @piloto = Piloto.find(params[:piloto_id])
+    @alumno = alumno.find(params[:alumno_id])
 
   	respond_to do |f|
 	    
@@ -183,24 +183,24 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @piloto = Piloto.find(params[:piloto_id])
+    @alumno = alumno.find(params[:alumno_id])
 
-    auditoria_id = auditoria_antes("actualizar piloto", "alumnos", @piloto)
+    auditoria_id = auditoria_antes("actualizar alumno", "alumnos", @alumno)
 
     if valido
 
-      @piloto.nombres = params[:piloto][:nombres].upcase
-      @piloto.apellidos = params[:piloto][:apellidos].upcase
-      @piloto.ci = params[:piloto][:ci]
-      @piloto.grupo_sanguineo_id = params[:piloto][:grupo_sanguineo_id]
-      @piloto.fecha_nacimiento = params[:piloto][:fecha_nacimiento]
-      @piloto.direccion = params[:piloto][:direccion].upcase
-      @piloto.telefono = params[:piloto][:telefono]
+      @alumno.nombres = params[:alumno][:nombres].upcase
+      @alumno.apellidos = params[:alumno][:apellidos].upcase
+      @alumno.ci = params[:alumno][:ci]
+      @alumno.grupo_sanguineo_id = params[:alumno][:grupo_sanguineo_id]
+      @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
+      @alumno.direccion = params[:alumno][:direccion].upcase
+      @alumno.telefono = params[:alumno][:telefono]
 
-      if @piloto.save
+      if @alumno.save
 
-        auditoria_despues(@piloto, auditoria_id)
-        @piloto_ok = true
+        auditoria_despues(@alumno, auditoria_id)
+        @alumno_ok = true
 
       end
 
@@ -221,9 +221,9 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def buscar_piloto
+  def buscar_alumno
     
-    @alumnos = Piloto.where("nombre ilike ?", "%#{params[:piloto]}%")
+    @alumnos = alumno.where("nombre ilike ?", "%#{params[:alumno]}%")
 
     respond_to do |f|
       
@@ -253,21 +253,21 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @piloto = Piloto.find(params[:piloto_id])
+    @alumno = alumno.find(params[:alumno_id])
 
-    @piloto_elim = @piloto  
+    @alumno_elim = @alumno  
 
     if valido
 
-      if @piloto.destroy
+      if @alumno.destroy
 
-        auditoria_nueva("eliminar piloto", "alumnos", @piloto_elim)
+        auditoria_nueva("eliminar alumno", "alumnos", @alumno_elim)
 
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el piloto."
+        @msg = "ERROR: No se ha podido eliminar el alumno."
 
       end
 
@@ -288,16 +288,16 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def buscar_piloto_documento
+  def buscar_alumno_documento
     
     if params[:documento].present?
 
-      @piloto = Piloto.where("ci = ?", params[:documento])  
+      @alumno = alumno.where("ci = ?", params[:documento])  
 
     end
 
     respond_to do |f|
-      f.json { render :json => @piloto.first}
+      f.json { render :json => @alumno.first}
     end
 
   end
