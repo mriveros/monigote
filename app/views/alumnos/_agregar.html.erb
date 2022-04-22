@@ -40,10 +40,6 @@
           <div class="col-sm-7"><%= text_field_tag :apellidos, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Grupo Sanguineo #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :alumno, :grupo_sanguineo_id, GrupoSanguineo.orden_id, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
-
           <div class="col-sm-4"><%= f.label :fecha_nacimiento, "Fecha de Nacimiento #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"> 
             <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
@@ -150,16 +146,16 @@
       
       }
 
-      if($("#alumno_grupo_sanguineo_id").val().length == 0){
+      if($("#direccion").val().length == 0){
 
-        msg +="Debe seleccionar un grupo sanguineo.\n"
+        msg +="Debe ingrear una dirección.\n"
         valido = false
       
       }
 
-      if($("#direccion").val().length == 0){
+      if($("#alumno_fecha_nacimiento").val().length == 0){
 
-        msg +="Debe ingrear una dirección.\n"
+        msg +="Se requiere ingresar la fecha de nacimiento.\n"
         valido = false
       
       }
