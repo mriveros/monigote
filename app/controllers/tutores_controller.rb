@@ -40,13 +40,6 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_tutores_fecha_nacimiento].present?
-
-      cond << "fecha_nacimiento = ?"
-      args << params[:form_buscar_tutores_fecha_nacimiento]
-
-    end
-
     if params[:form_buscar_tutores_direccion].present?
 
       cond << "direccion ilike ?"
