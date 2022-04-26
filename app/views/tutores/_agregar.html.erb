@@ -1,5 +1,5 @@
 
-<%= javascript_include_tag "modulos/pilotos.js" %>
+<%= javascript_include_tag "modulos/tutores.js" %>
 
 <div class="modal-dialog">
       
@@ -8,11 +8,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
            
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Piloto</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Tutor</h4>
       
     </div>
 
-    <%= form_for @piloto, remote: true, url: pilotos_guardar_url, html: { id: "form-agregar-piloto" }, method: 'POST' do |f| %>
+    <%= form_for @tutor, remote: true, url: tutores_guardar_url, html: { id: "form-agregar-tutor" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -41,7 +41,7 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Grupo Sanguineo #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :piloto, :grupo_sanguineo_id, GrupoSanguineo.orden_id, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :tutor, :grupo_sanguineo_id, GrupoSanguineo.orden_id, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :fecha_nacimiento, "Fecha de Nacimiento #{attr_requerido}".html_safe %></div>
@@ -70,7 +70,7 @@
       <div class="modal-footer" style="background:#e6e6e6;">
 
         <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-piloto" %>
+        <%= link_to "Guardar","#" ,class: "btn btn-primary", id: "btn-guardar-tutor" %>
           
       </div>
 
@@ -82,12 +82,12 @@
 
 <style type="text/css">
 
-  #form-agregar-piloto label, #form-agregar-piloto input[type='text'], #form-agregar-piloto select , #form-agregar-piloto input[type='checkbox']{ float:left; margin-top:5px;}
-  #form-agregar-piloto br {clear:both; }
-  #form-agregar-piloto label { width:200px;font-size:12px;margin-top:10px;}
-  #form-agregar-piloto #persona_tipo_documento_persona_id { width:60%;}
-  #form-agregar-piloto #persona_nacionalidad_id { width:60%;}
-  #form-agregar-piloto #persona_documento { width:50%;}
+  #form-agregar-tutor label, #form-agregar-tutor input[type='text'], #form-agregar-tutor select , #form-agregar-tutor input[type='checkbox']{ float:left; margin-top:5px;}
+  #form-agregar-tutor br {clear:both; }
+  #form-agregar-tutor label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-tutor #persona_tipo_documento_persona_id { width:60%;}
+  #form-agregar-tutor #persona_nacionalidad_id { width:60%;}
+  #form-agregar-tutor #persona_documento { width:50%;}
 
 
 </style>
@@ -105,12 +105,12 @@
       
     if(e.keyCode == 13 || e.keyCode == 9){
 
-    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#ci").val(),"<%= url_for(pilotos_buscar_persona_path ) %>");
+    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#ci").val(),"<%= url_for(tutores_buscar_persona_path ) %>");
       return false;
     }
   })
 
-  $("#btn-guardar-piloto").bind('click', function () {
+  $("#btn-guardar-tutor").bind('click', function () {
 
       valido = true
       msg = ""
@@ -131,7 +131,7 @@
 
       if($("#ci").val().length == 0){
 
-        msg +="El documento del Piloto no puede estar vacío.\n"
+        msg +="El documento del tutor no puede estar vacío.\n"
         valido = false
       
       }
@@ -150,7 +150,7 @@
       
       }
 
-      if($("#piloto_grupo_sanguineo_id").val().length == 0){
+      if($("#tutor_grupo_sanguineo_id").val().length == 0){
 
         msg +="Debe seleccionar un grupo sanguineo.\n"
         valido = false
@@ -167,8 +167,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Piloto",
-          text: "Al confirmar el Piloto estará diponible para su incripción en campeonatos habilitados.",
+          title: "Confirmar tutor",
+          text: "Al confirmar el tutor estará diponible para su incripción en campeonatos habilitados.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -180,7 +180,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-piloto").submit();
+            $("#form-agregar-tutor").submit();
             
           } 
 
