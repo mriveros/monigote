@@ -1,0 +1,4 @@
+
+<%= link_to icon_editar, "#", id: "link-to-editar-tutor-#{tutor_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del tutor.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-editar-tutor", link_to_id: "#link-to-editar-tutor-#{tutor_id}", url: tutors_editar_path( window_id: "modal-window-editar-tutor", tutor_id: tutor_id) )%>
+
