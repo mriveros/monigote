@@ -180,7 +180,6 @@ skip_before_action :verify_authenticity_token
       @tutor.nombres = params[:tutor][:nombres].upcase
       @tutor.apellidos = params[:tutor][:apellidos].upcase
       @tutor.ci = params[:tutor][:ci]
-      @tutor.fecha_nacimiento = params[:tutor][:fecha_nacimiento]
       @tutor.direccion = params[:tutor][:direccion].upcase
       @tutor.telefono = params[:tutor][:telefono]
 

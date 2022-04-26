@@ -1,22 +1,22 @@
-<% if @piloto_ok.present? %>
+<% if @tutor_ok.present? %>
     
-   $("<div class='col-sm-12' id='msg-editar-piloto' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-piloto");
+   $("<div class='col-sm-12' id='msg-editar-tutor' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-tutor");
    
-  $("#form_buscar_pilotos_id").val('<%= @piloto.id %>');
-  $("#form_buscar_pilotos_nombres").val('');
-  $("#form_buscar_pilotos_apellidos").val('');
-  $("#form_buscar_pilotos_direccion").val('');
-  $("#form_buscar_pilotos_telefono").val('');
+  $("#form_buscar_tutores_id").val('<%= @tutor.id %>');
+  $("#form_buscar_tutores_nombres").val('');
+  $("#form_buscar_tutores_apellidos").val('');
+  $("#form_buscar_tutores_direccion").val('');
+  $("#form_buscar_tutores_telefono").val('');
   
   $("#<%= params[:window_id]%>").modal('hide'); 
   setTimeout(function(){ 
-  	swal("Piloto actualizado Exitosamente.");	
+  	swal("Tutor actualizado Exitosamente.");	
   }, 1000);
   
-  $("#form-buscar-pilotos").submit();
+  $("#form-buscar-tutores").submit();
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-editar-piloto' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-piloto");
+  $("<div class='col-sm-12' id='msg-editar-tutor' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg) %></div>").insertBefore("#form-editar-tutor");
 
 <% end %>
