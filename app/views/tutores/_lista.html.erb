@@ -1,24 +1,22 @@
-<% if @pilotos.present? %>
+<% if @tutores.present? %>
 
-  <% @pilotos.each do |p| %>
+  <% @tutores.each do |p| %>
 
     <tr>
 
-      <td style="width:50px;"><%= p.piloto_id %></td>
+      <td style="width:50px;"><%= p.tutor_id %></td>
       <td><%= p.nombres%></td>
       <td><%= p.apellidos%></td>
       <td><%= p.ci %></td>
-      <td><%= p.grupo_sanguineo%></td>
-      <td><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present?%></td>
       <td><%= p.direccion%></td>
       <td><%= p.telefono%></td>
-      <td><%= piloto_avatar(p, class: 'media-object img-circle', style: 'width:50px;height:50px;', value: 'M' ) %></td>
+      <td><%= tutor_avatar(p, class: 'media-object img-circle', style: 'width:50px;height:50px;', value: 'M' ) %></td>
       
       <td style="width:120px;">
         
-        <%= link_to_editar_piloto(p.piloto_id) %>
+        <%= link_to_editar_tutor(p.tutor_id) %>
         
-        <%= link_to icon_eliminar, pilotos_eliminar_path(piloto_id: p.piloto_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Piloto', data: { confirm: "Está seguro de eliminar el Piloto?"} %>
+        <%= link_to icon_eliminar, tutores_eliminar_path(tutor_id: p.tutor_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Tutor', data: { confirm: "Está seguro de eliminar el Tutor?"} %>
       
        </td> 
 
@@ -30,7 +28,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate piloto, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate tutor, :params => params %></div></td>
 </tr>
 
 <tr>

@@ -40,18 +40,6 @@
           <div class="col-sm-7"><%= text_field_tag :apellidos, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Grupo Sanguineo #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :tutor, :grupo_sanguineo_id, GrupoSanguineo.orden_id, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :fecha_nacimiento, "Fecha de Nacimiento #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"> 
-            <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
-              <%= f.text_field :fecha_nacimiento, class: 'form-control input-sm', style: "margin-top:0px;" %>
-              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            </div>
-          </div>
-
           <div class="col-sm-4"><%= label_tag nil, "Dirección #{attr_requerido}".html_safe, id: "lbl-direccion" %></div>
           <div class="col-sm-7"><%= text_field_tag :direccion, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
@@ -150,12 +138,6 @@
       
       }
 
-      if($("#tutor_grupo_sanguineo_id").val().length == 0){
-
-        msg +="Debe seleccionar un grupo sanguineo.\n"
-        valido = false
-      
-      }
 
       if($("#direccion").val().length == 0){
 
@@ -168,7 +150,7 @@
 
         swal({
           title: "Confirmar tutor",
-          text: "Al confirmar el tutor estará diponible para su incripción en campeonatos habilitados.",
+          text: "Al confirmar el tutor estará diponible para asignar a alumnos",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",

@@ -1,4 +1,0 @@
-
-<%= link_to icon_editar, "#", id: "link-to-editar-piloto-#{piloto_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del piloto.', onclick: "$('.modal').html('');return false;" %>
-<%= modal_window( window_id: "modal-window-editar-piloto", link_to_id: "#link-to-editar-piloto-#{piloto_id}", url: pilotos_editar_path( window_id: "modal-window-editar-piloto", piloto_id: piloto_id) )%>
-

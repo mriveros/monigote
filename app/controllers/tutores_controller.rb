@@ -103,7 +103,6 @@ skip_before_action :verify_authenticity_token
       @tutor.nombres = params[:nombres].upcase
       @tutor.apellidos = params[:apellidos].upcase
       @tutor.ci = params[:ci]
-      @tutor.fecha_nacimiento = params[:tutor][:fecha_nacimiento]
       @tutor.direccion = params[:direccion].upcase
       @tutor.telefono = params[:telefono]
       
@@ -208,6 +207,21 @@ skip_before_action :verify_authenticity_token
     end
 
   end
+
+  def buscar_persona
+    
+    if params[:tipo_documento_id].present? && params[:nacionalidad_id] && params[:documento].present?
+
+      @persona = Persona.where("tipo_documento_id = ? and nacionalidad_id = ? and documento_persona = ?", params[:tipo_documento_id], params[:nacionalidad_id], params[:documento])  
+
+    end
+
+    respond_to do |f|
+      f.json { render :json => @persona.first}
+    end
+
+  end
+
 
   def buscar_tutor
     
