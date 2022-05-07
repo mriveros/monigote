@@ -289,16 +289,16 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def buscar_tutor_documento
+  def buscar_alumno_documento
     
     if params[:documento].present?
 
-      @tutor = tutor.where("ci = ?", params[:documento])  
+      @alumno = Alumno.where("ci = ?", params[:documento])  
 
     end
 
     respond_to do |f|
-      f.json { render :json => @tutor.first}
+      f.json { render :json => @alumno.first}
     end
 
   end

@@ -39,6 +39,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "tutores/index"
   get "tutores/buscar_tutor"
   get "tutores/buscar_persona" 
+  get "tutores/buscar_alumno_documento"
   get "tutores/tutor_detalle"
   get "tutores/agregar_tutor_detalle"
   post "tutores/guardar_tutor_detalle"
