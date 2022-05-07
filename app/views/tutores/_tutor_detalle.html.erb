@@ -24,12 +24,9 @@
             <tr role="row">
               
               <th>ID</th>
-              <th>Datos Piloto</th>
-              <th>CI Piloto</th>
-              <th>Número</th>
-              <th>Fecha Inscripción</th>
-              <th>Monto Inscripción</th>
-              <th>Estado Inscripción</th>
+              <th>Nombre Alumno</th>
+              <th>CI Alumno</th>
+              <th>Parentezco</th>
               <th style='text-align:right;'></th>
               
             </tr>
@@ -44,14 +41,11 @@
 
                 <tr>
                   <td><%= id.tutor_detalle_id%></td>
-                  <td><%= id.nombre_piloto %></td>
+                  <td><%= id.nombre_alumno %></td>
                   <td><%= id.ci %></td>
-                  <td><%= id.numero %></td>
-                  <td style="text-align:center;"><%= id.fecha_tutor.strftime("%d/%m/%Y") if id.fecha_tutor.present? %></td>
-                  <td><%= id.monto_tutor.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
-                  <td><%= id.estado_tutor_detalle %></td>
+                  <td><%= id.parentezco %></td>
                   <td style="width: 50px;text-align:right;">
-                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{id.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-tutor-detalle", title: 'Haga click para eliminar al Piloto de esta Inscripción'  %>
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{id.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-tutor-detalle", title: 'Haga click para eliminar al alumno de la tutela.'  %>
                   </td>
 
                 </tr>

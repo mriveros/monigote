@@ -15,7 +15,7 @@
       <td style="width:120px;">
         
         <%= link_to_editar_tutor(p.tutor_id) %>
-        
+        <%= link_to_tutor_detalle(p.tutor_id) %>
         <%= link_to icon_eliminar, tutores_eliminar_path(tutor_id: p.tutor_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Tutor', data: { confirm: "Está seguro de eliminar el Tutor?"} %>
       
        </td> 
