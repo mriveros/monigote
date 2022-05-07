@@ -1,0 +1,124 @@
+<td colspan="12">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Pilotos Inscriptos</h3>
+        <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> agregar alumno".html_safe, "#", id: "link-to-agregar-tutor-detalle", class: "btn btn-primary btn-xs", style: "float:right;" %>
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-tutor-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Datos Piloto</th>
+              <th>CI Piloto</th>
+              <th>Número</th>
+              <th>Fecha Inscripción</th>
+              <th>Monto Inscripción</th>
+              <th>Estado Inscripción</th>
+              <th style='text-align:right;'></th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="tutor-detalle-lista">
+
+            <% if @tutores_detalles.present? %>
+            
+              <% @tutores_detalles.each do |id|%>
+
+                <tr>
+                  <td><%= id.tutor_detalle_id%></td>
+                  <td><%= id.nombre_piloto %></td>
+                  <td><%= id.ci %></td>
+                  <td><%= id.numero %></td>
+                  <td style="text-align:center;"><%= id.fecha_tutor.strftime("%d/%m/%Y") if id.fecha_tutor.present? %></td>
+                  <td><%= id.monto_tutor.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse  %></td>
+                  <td><%= id.estado_tutor_detalle %></td>
+                  <td style="width: 50px;text-align:right;">
+                    <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{id.tutor_detalle_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-tutor-detalle", title: 'Haga click para eliminar al Piloto de esta Inscripción'  %>
+                  </td>
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @tutores_detalles, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <%= modal_window( window_id: "modal-window-agregar-tutor-detalle", link_to_id: "#link-to-agregar-tutor-detalle", url: tutores_agregar_tutor_detalle_path( window_id: "modal-window-agregar-tutor-detalle", tutor_id: params[:tutor_id]) )%>
+
+</td>
+
+
+  <script type="text/javascript">
+
+    function eliminar_registro(tutor_detalle_id) {
+
+        swal({
+          title: "Confirmar",
+          text: "Al confirmar el alumno dejara de estar bajo la tutela de la persona.",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonClass: "btn-confirm",
+          confirmButtonText: "Confirmar",
+          cancelButtonText: "Cancelar",
+          closeOnConfirm: true,
+          closeOnCancel: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+
+              $.ajax({
+                url: "<%= url_for(tutores_eliminar_tutor_detalle_path) %>", 
+                data: {tutor_detalle_id: tutor_detalle_id},
+                dataType: 'script'
+              });
+            
+          } else{
+
+            return false;
+
+          }
+
+        });
+
+    
+    }
+
+    
+
+  </script>
