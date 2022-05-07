@@ -4,7 +4,7 @@ before_filter :require_usuario
 skip_before_action :verify_authenticity_token
 
   def index
-   
+    
   end
 
   def lista
@@ -17,7 +17,7 @@ skip_before_action :verify_authenticity_token
       cond << "tutor_id = ?"
       args << params[:form_buscar_tutores_id]
 
-    end
+    end 
 
     if params[:form_buscar_tutores_nombre].present?
 
@@ -324,7 +324,6 @@ skip_before_action :verify_authenticity_token
   def tutor_detalle
     
     @tutor_detalle = VTutorDetalle.where("tutor_id = ?", params[:tutor_id])
-
 
      respond_to do |f|
 
