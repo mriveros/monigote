@@ -90,6 +90,20 @@
       
       }
 
+       if($("#ci").val().length == 0){
+
+        msg +="El numero de documento no puede estar vacío \n"
+        valido = false
+      
+      }
+
+       if($("#parentezco_id").val().length == 0){
+
+        msg +="Debe seleccionar el tipo de parentezco. \n"
+        valido = false
+      
+      }
+
 
       if (valido){
 
