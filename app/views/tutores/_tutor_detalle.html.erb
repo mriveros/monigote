@@ -35,9 +35,9 @@
        
           <tbody id="tutor-detalle-lista">
 
-            <% if @tutores_detalles.present? %>
+            <% if @tutor_detalle.present? %>
             
-              <% @tutores_detalles.each do |id|%>
+              <% @tutor_detalle.each do |id|%>
 
                 <tr>
                   <td><%= id.tutor_detalle_id%></td>
@@ -54,7 +54,7 @@
 
               <tr id="tab-paginacion">
 
-                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @tutores_detalles, :params => params %></div></td>
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @tutor_detalle, :params => params %></div></td>
               </tr>
 
             <% else %>
