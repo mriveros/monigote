@@ -45,7 +45,7 @@ function buscar_persona_v2(tipo_documento_id, nacionalidad_id, documento, ruta){
 function buscar_alumno(documento, ruta){
   
   $("#msg-documento-persona").remove();
-  $('#buscar_piloto').html('');
+  $('#buscar_alumno').html('');
   $.ajax({
     type: 'GET',
     url: ruta,

@@ -27,6 +27,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "alumnos/index"
   get "alumnos/buscar_alumno"
   get "alumnos/buscar_persona" 
+  get "alumnos/buscar_alumno_documento"
 
 #TUTORES
   post "tutores/lista"
@@ -39,7 +40,6 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "tutores/index"
   get "tutores/buscar_tutor"
   get "tutores/buscar_persona" 
-  get "tutores/buscar_alumno_documento"
   get "tutores/tutor_detalle"
   get "tutores/agregar_tutor_detalle"
   post "tutores/guardar_tutor_detalle"
