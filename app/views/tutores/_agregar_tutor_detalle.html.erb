@@ -37,6 +37,10 @@
           <div class="col-sm-7"><%= text_field_tag :apellidos, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
+          <div class="col-sm-4"><%= label_tag nil, "Parentezco #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :parentezco, :id, Parentezco.orden_01, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-1"></div><br /><br />
+
       </div>
       
     </div>        
@@ -92,7 +96,7 @@
 
        if($("#ci").val().length == 0){
 
-        msg +="El numero de documento no puede estar vacío \n"
+        msg +="El número de documento no puede estar vacío \n"
         valido = false
       
       }
