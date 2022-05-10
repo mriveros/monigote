@@ -353,32 +353,27 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:persona_documento].present?
+    unless params[:alumno_id].present?
 
       @valido = false
-      @msg += " Debe Completar el campo Documento. \n"
+      @msg += " El necesario agregar un alumno como tutelado. \n"
 
     end
 
-    unless params[:persona_nombre].present?
+    unless params[:ci].present?
 
       @valido = false
-      @msg += " El nombre del Paciente no puede estar vacío. \n"
+      @msg += " El campo número de documento no puede estar vac&iacuteo. \n"
 
     end
 
-    unless params[:parentezco][:id].present?
-
-      @valido = false
-      @msg += " El apellido del Paciente no puede estar vacío. \n"
-
-    end
+    
 
     if @valido
       
       @tutor_Detalle = TutorDetalle.new()
       @tutor_Detalle.tutor_id = params[:tutor_id]
-      @tutor_Detalle.paciente_id = params[:paciente_id]
+      @tutor_Detalle.paciente_id = params[:alumno_ci]
       @tutor_Detalle.parentezco_id = params[:parentezco][:id]
 
         if @tutor_Detalle.save
