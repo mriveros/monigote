@@ -373,7 +373,7 @@ skip_before_action :verify_authenticity_token
       
       @tutor_Detalle = TutorDetalle.new()
       @tutor_Detalle.tutor_id = params[:tutor_id]
-      @tutor_Detalle.alumno_id = params[:alumno_ci]
+      @tutor_Detalle.alumno_id = params[:alumno_id]
       @tutor_Detalle.parentezco_id = params[:parentezco][:id]
 
         if @tutor_Detalle.save
