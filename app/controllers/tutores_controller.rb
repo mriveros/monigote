@@ -4,7 +4,7 @@ before_filter :require_usuario
 skip_before_action :verify_authenticity_token
 
   def index
-    
+     
   end
 
   def lista
@@ -323,7 +323,7 @@ skip_before_action :verify_authenticity_token
 
   def tutor_detalle
     
-    @tutor_detalle = VTutorDetalle.where("tutor_id = ?", params[:tutor_id])
+    @tutor_detalle = VTutorDetalle.where("tutor_id = ?", params[:tutor_id],).paginate(per_page: 5, page: params[:page])
 
      respond_to do |f|
 
@@ -353,46 +353,29 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
 
-    unless params[:alumno_id].present?
+    @tutor_detalle = TutorDetalle.where('tutor_id = ? and alumno_id = ?',params[:tutor_id], params[:alumno_id]).first
+    if @tutor_detalle.present?
 
       @valido = false
-      @msg += " El necesario agregar un alumno como tutelado. \n"
+      @msg = 'El Alumno ya fue asignado a este Tutor.'
 
     end
-
-    unless params[:ci].present?
-
-      @valido = false
-      @msg += " El campo número de documento no puede estar vac&iacuteo. \n"
-
-    end
-
-    
 
     if @valido
       
-      @tutor_Detalle = TutorDetalle.new()
-      @tutor_Detalle.tutor_id = params[:tutor_id]
-      @tutor_Detalle.alumno_id = params[:alumno_id]
-      @tutor_Detalle.parentezco_id = params[:parentezco][:id]
+      @tutor_detalle = TutorDetalle.new()
+      @tutor_detalle.tutor_id = params[:tutor_id]
+      @tutor_detalle.alumno_id = params[:alumno_id]
+      @tutor_detalle.parentezco_id = params[:parentezco][:id]
 
-        if @tutor_Detalle.save
+        if @tutor_detalle.save
 
-          auditoria_nueva("registrar alumno asignado a tutor", "tutores_detalles", @tutor_Detalle)
+          auditoria_nueva("registrar alumno asignado a tutor", "tutores_detalles", @tutor_detalle)
           @guardado_ok = true
          
         end 
 
-    end
-  
-    rescue Exception => exc  
-    # dispone el mensaje de error 
-    #puts "Aqui si muestra el error ".concat(exc.message)
-      if exc.present?        
-        @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
-      
-      end                
+    end            
 
     respond_to do |f|
 
