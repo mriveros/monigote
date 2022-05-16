@@ -34,18 +34,26 @@
           
 
           <th >
-          <span>ID</span>
+          <span>Nivel</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :tipo_consulta_id, Nivel.especialidad_fonoaudiologia, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_id');"><i class="fa fa-times"></i></span>
+              <%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_nivel_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
-          <th style="width:120px;">
-            <span>Sueldo</span>
+          <th >
+          <span>Sala</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_matriculaciones_sueldo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_sueldo');"><i class="fa fa-times"></i></span>
+              <%= f.collection_select :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_sala_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+          <span>Periodo Escolar</span>
+            <div class="input-group input-group-sm">
+              <%= f.collection_select :periodo_id, PeriodoEscolar.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -72,9 +80,9 @@
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-matriculaciones").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_matriculaciones_descripcion").val().length !== 0 ){
+    if($("#form_buscar_matriculaciones_nivel_id").val().length !== 0 ){
       valido = false;
-      if(($("#form_buscar_matriculaciones_descripcion").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_matriculaciones_descripcion").val().replace(/\s/g,'')).length > 2){        
+      if(($("#form_buscar_matriculaciones_nivel_id").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_matriculaciones_nivel_id").val().replace(/\s/g,'')).length > 2){        
         valido = true;
       }else{
         valido = false;
