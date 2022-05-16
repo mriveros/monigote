@@ -16,6 +16,19 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
 }, as: :avatar
 
 #-------------------------------------MONIGOTE----------------------------------------------------
+#MATRICULACIONES
+  get "matriculaciones/index"
+  post "matriculaciones/lista"
+  get "matriculaciones/lista"
+  get "matriculaciones/agregar"
+  post "matriculaciones/guardar"
+  get "matriculaciones/editar"
+  post "matriculaciones/actualizar"
+  get "matriculaciones/eliminar"
+  get "matriculaciones/agregar_matriculacion_detalle"
+  post "matriculaciones/guardar_matriculacion_detalle"
+  get "matriculaciones/eliminar_matriculacion_detalle"
+
 #ALUMNOS
   post "alumnos/lista"
   get "alumnos/lista"
