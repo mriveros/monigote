@@ -30,7 +30,7 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :nivel_id, "Estado Matriculación#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :sala_id, EstadoMatriculacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-7"><%= f.collection_select :estado_matriculacion_id, EstadoMatriculacion.orden_descripcion, :id, :descripcion, { include_blank: false}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
        
       </div>

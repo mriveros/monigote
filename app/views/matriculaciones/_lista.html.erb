@@ -1,17 +1,19 @@
-<% if cargos.present? %>
+<% if matriculaciones.present? %>
 
-  <% cargos.each do |dc| %>
+  <% matriculaciones.each do |m| %>
 
     <tr>
 
-      <td ><%= dc.id %></td>
-      <td ><%= dc.descripcion%></td>
-      <td ><%= dc.sueldo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= m.matriculacion_id %></td>
+      <td ><%= m.perido_escolar%></td>
+      <td ><%= m.nivel #m.sueldo.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td ><%= m.sala%></td>
+      <td ><%= m.estado_matriculacion%></td>
       <td >
         
-        <%= link_to_editar_cargo(dc) %>
+        <%= link_to_editar_cargo(m) %>
 
-        <%= link_to icon_eliminar, cargos_eliminar_path(id: dc.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el Cargo', data: { confirm: "Está seguro de eliminar el Cargo?"} %>
+        <%= link_to icon_eliminar, matriculaciones_eliminar_path(id: m.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar  la matriculación', data: { confirm: "Está seguro de eliminar la Mtriculación?"} %>
          
        </td>
 
@@ -23,7 +25,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cargos, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate matriculaciones, :params => params %></div></td>
 </tr>
 
 <tr>

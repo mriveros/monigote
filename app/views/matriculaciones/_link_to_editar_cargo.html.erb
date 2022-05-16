@@ -1,5 +1,5 @@
-<%= link_to icon_editar, "#", id: "link-to-editar-cargo-#{cargo.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar el Cargo.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to icon_editar, "#", id: "link-to-editar-matriculacion-#{matriculacion.id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar la matriculación.', onclick: "$('.modal').html('');return false;" %>
 
 
-<%= modal_window( window_id: "modal-window-editar-cargo", link_to_id: "#link-to-editar-cargo-#{cargo.id}", url: cargos_editar_path( window_id: "modal-window-editar-cargo", id: cargo.id) )%>
+<%= modal_window( window_id: "modal-window-editar-matriculacion", link_to_id: "#link-to-editar-matriculacion-#{matriculacion.id}", url: matriculaciones_editar_path( window_id: "modal-window-editar-matriculacion", id: matriculacion.id) )%>
 
