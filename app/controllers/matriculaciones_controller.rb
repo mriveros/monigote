@@ -13,7 +13,7 @@ class MatriculacionesController < ApplicationController
 
 	    if params[:form_buscar_matriculaciones_id].present?
 
-	      cond << "id = ?"
+	      cond << "matriculacion_id = ?"
 	      args << params[:form_buscar_matriculaciones_id]
 
 	    end
@@ -41,7 +41,7 @@ class MatriculacionesController < ApplicationController
 
 	    if params[:form_buscar_matriculaciones_estado_matriculacion_id].present?
 
-	      cond << "periodo_id = ?"
+	      cond << "estado_matriculacion_id = ?"
 	      args << params[:form_buscar_matriculaciones_estado_matriculacion_id]
 
 	    end
@@ -52,17 +52,17 @@ class MatriculacionesController < ApplicationController
 
 	    if cond.size > 0
 
-	      @matriculaciones =  Matriculacion.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = Matriculacion.where(cond).count
+	      @matriculaciones =  VMatriculacion.orden_niveles.where(cond).paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = VMatriculacion.where(cond).count
 
 	    else
 
-	      @matriculaciones = Matriculacion.orden_01.paginate(per_page: 10, page: params[:page])
-	      @total_encontrados = Matriculacion.count
+	      @matriculaciones = VMatriculacion.orden_niveles.paginate(per_page: 10, page: params[:page])
+	      @total_encontrados = VMatriculacion.count
 
 	    end
 
-	    @total_registros = Matriculacion.count
+	    @total_registros = VMatriculacion.count
 
 	    respond_to do |f|
 

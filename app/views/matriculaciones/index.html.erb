@@ -35,15 +35,15 @@
           <th >
           <span>Periodo Escolar</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :periodo_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <%= collection_select :form_buscar_matriculaciones, :periodo_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-          
+
           <th >
           <span>Nivel</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <%= collection_select :form_buscar_matriculaciones, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_nivel_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -51,7 +51,7 @@
           <th >
           <span>Sala</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <%= collection_select :form_buscar_matriculaciones, :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_sala_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -59,7 +59,7 @@
           <th >
           <span>Estado Matriculación</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :periodo_id, EstadoMatriculacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <%= collection_select :form_buscar_matriculaciones, :estado_matriculacion_id, EstadoMatriculacion.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_estado_matriculacion_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
@@ -87,17 +87,6 @@
   //---------------------------- RECUPERANDO DATOS ----------------------------//
   $("#form-buscar-matriculaciones").bind("submit", function () {
     var valido = true;
-    if($("#form_buscar_matriculaciones_nivel_id").val().length !== 0 ){
-      valido = false;
-      if(($("#form_buscar_matriculaciones_nivel_id").val().replace(/\s/g,'')).length > 2 && ($("#form_buscar_matriculaciones_nivel_id").val().replace(/\s/g,'')).length > 2){        
-        valido = true;
-      }else{
-        valido = false;
-        //swal("Para la búsqueda por Nombre y Apellido Ingrese minimo 3(tres) carácteres en cada caja de texto", "", "error");         
-        $(".nmb").html('*Ingrese minimo 3(tres) carácteres para cada caja de texto');
-        $(".nmb").attr({'style':'color: red;font-size: 8px;'});      
-      }      
-    }
       
     if(valido){
     $(".nmb").html('');       
@@ -120,7 +109,7 @@
   aplicar_datepicker();
   $("#form-buscar-matriculaciones").submit();
   <% if params[:agregar] %>
-    $("#link-to-agregar-matriculacion").trigger('click');
+    //$("#link-to-agregar-matriculacion").trigger('click');
   <% end %>
   //----------------------------------------------------------------------------//
 </script>
