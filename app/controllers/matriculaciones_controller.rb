@@ -32,8 +32,6 @@ class MatriculacionesController < ApplicationController
 
 	    end
 
-	    
-
 	    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
 	    if cond.size > 0
