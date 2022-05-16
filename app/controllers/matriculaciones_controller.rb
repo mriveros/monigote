@@ -18,31 +18,31 @@ class MatriculacionesController < ApplicationController
 
 	    end
 
-	    if params[:form_buscar_matriculaciones_nivel_id].present?
+	    if params[:form_buscar_matriculaciones][:nivel_id].present?
 
 	      cond << "nivel_id = ?"
-	      args << params[:form_buscar_matriculaciones_nivel_id]
+	      args << params[:form_buscar_matriculaciones][:nivel_id]
 
 	    end
 
-	    if params[:form_buscar_matriculaciones_sala_id].present?
+	    if params[:form_buscar_matriculaciones][:sala_id].present?
 
 	      cond << "sala_id = ?"
-	      args << params[:form_buscar_matriculaciones_sala_id]
+	      args << params[:form_buscar_matriculaciones][:sala_id]
 
 	    end
 
-	    if params[:form_buscar_matriculaciones_periodo_id].present?
+	    if params[:form_buscar_matriculaciones][:periodo_id].present?
 
 	      cond << "periodo_id = ?"
-	      args << params[:form_buscar_matriculaciones_periodo_id]
+	      args << params[:form_buscar_matriculaciones][:periodo_id]
 
 	    end
 
-	    if params[:form_buscar_matriculaciones_estado_matriculacion_id].present?
+	    if params[:form_buscar_matriculaciones][:estado_matriculacion_id].present?
 
 	      cond << "estado_matriculacion_id = ?"
-	      args << params[:form_buscar_matriculaciones_estado_matriculacion_id]
+	      args << params[:form_buscar_matriculaciones][:estado_matriculacion_id]
 
 	    end
 
