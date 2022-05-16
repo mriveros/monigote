@@ -18,20 +18,6 @@ class MatriculacionesController < ApplicationController
 
 	    end
 
-	    if params[:form_buscar_matriculaciones_descripcion].present?
-
-	      cond << "descripcion ilike ?"
-	      args << "%#{params[:form_buscar_matriculaciones_descripcion]}%"
-
-	    end
-
-	    if params[:form_buscar_matriculaciones_sueldo].present?
-
-	      cond << "sueldo = ?"
-	      args << params[:form_buscar_matriculaciones_sueldo]
-
-	    end
-
 	    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
 	    if cond.size > 0
