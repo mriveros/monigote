@@ -1,21 +1,23 @@
 <% if @cargo_ok.present? %>
 
-   $("<div class='col-sm-12' id='msg-editar-cargo' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-cargo");
+   $("<div class='col-sm-12' id='msg-editar-matriculacion' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Actualizado Exitosamente.</div>").insertBefore("#form-editar-matriculacion");
    
-  $("#form_buscar_cargos_id").val('<%= @cargo.id %>');
-  $("#form_buscar_cargos_descripcion").val('');
-  $("#form_buscar_cargos_sueldo").val('');
+  $("#form_buscar_matriculaciones_id").val('<%= @cargo.id %>');
+  $("#form_buscar_matriculaciones_periodo_id").val('');
+  $("#form_buscar_matriculaciones_nivel_id").val('');
+  $("#form_buscar_matriculaciones_sala_id").val('');
+  $("#form_buscar_matriculaciones_estado_matriculacion_id").val('');
   
   setTimeout(function(){
 
   	swal("Actualizado Exitosamente.")
   	$("#<%= params[:window_id]%>").modal('hide'); 
-  	$("#form-buscar-cargos").submit(); 
+  	$("#form-buscar-matriculaciones").submit(); 
 
   }, 1500);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-editar-cargo' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al modificar el Cargo. Intente más tarde.</div>").insertBefore("#form-editar-cargo");
+  $("<div class='col-sm-12' id='msg-editar-matriculacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al modificar la matriculación. Intente más tarde.</div>").insertBefore("#form-editar-matriculacion");
 
 <% end %>
