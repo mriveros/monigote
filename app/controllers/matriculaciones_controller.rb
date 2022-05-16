@@ -93,8 +93,10 @@ class MatriculacionesController < ApplicationController
 
 	    @matriculacion = Matriculacion.new()
 
-	    @matriculacion.descripcion = params[:matriculacion][:descripcion].upcase
-	    @matriculacion.sueldo = params[:matriculacion][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    @matriculacion.periodo_id = params[:matriculacion][:periodo_id]
+	    @matriculacion.nivel_id = params[:matriculacion][:nivel_id]
+	    @matriculacion.sala_id = params[:matriculacion][:sala_id]
+	    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
 	    
 	      if @matriculacion.save
 
