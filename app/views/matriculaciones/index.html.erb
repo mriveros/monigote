@@ -52,7 +52,7 @@
           <th >
           <span>Periodo Escolar</span>
             <div class="input-group input-group-sm">
-              <%= f.collection_select :periodo_id, PeriodoEscolar.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
+              <%= f.collection_select :periodo_id, PeriodoEscolar.orden_periodo, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
