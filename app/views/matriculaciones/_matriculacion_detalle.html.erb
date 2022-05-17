@@ -1,0 +1,83 @@
+<td colspan="12" style="background: #e6e6e6; ">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Matriculaciones Detalles</h3>
+       
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-matriculacion-detalle">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Nombre Alumno</th>
+              <th>Costo Matriculación</th>
+              <th>Fecha</th>
+              <th>Estado Matriculación</th>
+              
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="matriculacion-detalle">
+
+            <% if @matriculacion_detalle.present? %>
+            
+              <% @matriculacion_detalle.each do |md|%>
+
+                <tr>
+                  <td><%=md.matriculacion_detalle_id %></td>
+                  <td><%=md.nombre_alumno%></td>
+                  <td><%=md.costo_matriculacion.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=md.fecha_matriculacion %></td>
+                  <td><%=md.estado_matriculacion_detalle%></td>
+                  
+                  
+                  <td style="width: 50px;text-align:right;">
+                    
+                    
+                  </td> 
+
+                </tr>
+
+              <% end %>
+
+              <tr id="tab-paginacion">
+
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @matriculacion_detalle, :params => params %></div></td>
+              </tr>
+
+            <% else %>
+
+              <tr><td colspan=3>No se han encontrado datos.</td></tr>
+
+            <% end %>
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+
+</td>
