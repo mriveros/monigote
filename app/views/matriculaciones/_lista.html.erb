@@ -12,7 +12,7 @@
       <td >
         
         <%= link_to_editar_matriculacion(m) %>
-        <%#= link_to_matriculacion_detalle(m.matriculacion_id) %>
+        <%= link_to_matriculacion_detalle(m.matriculacion_id) %>
         <%= link_to icon_eliminar, matriculaciones_eliminar_path(id: m.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar  la matriculación', data: { confirm: "Está seguro de eliminar la Mtriculación?"} %>
          
        </td>
