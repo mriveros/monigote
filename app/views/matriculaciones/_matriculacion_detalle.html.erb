@@ -41,6 +41,7 @@
               <% @matriculacion_detalle.each do |md|%>
 
                 <tr>
+                  
                   <td><%=md.matriculacion_detalle_id %></td>
                   <td><%=md.nombre_alumno%></td>
                   <td><%=md.costo_matriculacion.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
