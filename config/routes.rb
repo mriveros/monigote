@@ -25,6 +25,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "matriculaciones/editar"
   post "matriculaciones/actualizar"
   get "matriculaciones/eliminar"
+  get "matriculaciones/matriculacion_detalle"
   get "matriculaciones/agregar_matriculacion_detalle"
   post "matriculaciones/guardar_matriculacion_detalle"
   get "matriculaciones/eliminar_matriculacion_detalle"

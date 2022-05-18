@@ -184,6 +184,18 @@ class MatriculacionesController < ApplicationController
 	    end
 
 	  end
+
+	  def matriculacion_detalle
+
+	  	@matriculacion_detalle = Matriculacion.orden_fecha.where('matriculacion_id = ?', params[:matriculacion_id]).paginate(per_page: 10, page: params[:page])
+
+	  	respond_to do |f|
+
+	      f.js
+
+	    end
+
+	  end
 	    
 
 end

@@ -6,9 +6,9 @@ module MatriculacionesHelper
       
   end
 
-  def link_to_matriculacion_detalle(matriculacion)
+  def link_to_matriculacion_detalle(matriculacion_id)
 
-      render partial: 'link_to_matriculacion_detalle', locals: { matriculacion: matriculacion }
+      render partial: 'link_to_matriculacion_detalle', locals: { matriculacion_id: matriculacion_id }
       
   end
 
