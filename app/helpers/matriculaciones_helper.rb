@@ -6,5 +6,13 @@ module MatriculacionesHelper
       
   end
 
+  def link_to_matriculacion_detalle(matriculacion)
+
+      render partial: 'link_to_matriculacion_detalle', locals: { matriculacion: matriculacion }
+      
+  end
+
+  
+
   
 end
