@@ -29,6 +29,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "matriculaciones/agregar_matriculacion_detalle"
   post "matriculaciones/guardar_matriculacion_detalle"
   get "matriculaciones/eliminar_matriculacion_detalle"
+ 
 
 #ALUMNOS
   post "alumnos/lista"

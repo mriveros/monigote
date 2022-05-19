@@ -196,6 +196,48 @@ class MatriculacionesController < ApplicationController
 	    end
 
 	  end
+
+	  def agregar_matriculacion_detalle
+
+	    @matriculacion_detalle = MatriculacionDetalle.new
+
+	    respond_to do |f|
+
+	      f.js
+
+	    end
+
+	  end
+
+	  def guardar_matriculacion_detalle
+
+	    valido = true
+	    @msg = ""
+
+	    @matriculacion_detalle = MatriculacionDetalle.new()
+
+	    @matriculacion_detalle.matriculacion_id = params[:matriculacion][:periodo_id]
+	    @matriculacion_detalle.alumno_id = params[:matriculacion][:nivel_id]
+	    @matriculacion_detalle.precio_id = params[:matriculacion][:sala_id]
+	    @matriculacion_detalle.fecha_matriculacion = params[:matriculacion][:sala_id]
+	    @matriculacion_detalle.estado_matriculacion_detalle_id = params[:matriculacion][:estado_matriculacion_id]
+	    
+	      if @matriculacion_detalle.save
+
+	        auditoria_nueva("registrar matriculacion detalle", "matriculaciones_detalles", @matriculacion_detalle)
+	       
+	        @matriculacion_ok = true
+	       
+
+	      end              
+	               
+	    respond_to do |f|
+
+	      f.js
+
+	    end
+
+	  end
 	    
 
 end
