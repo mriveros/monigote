@@ -30,17 +30,6 @@ development:
   sin_documento: 5
   cedula_identidad: 1
 
-  #ESPECIALIDADES
-  especialidad_fonoaudiologia: 1
-  clinica_general: 2
-
-  #TIPOS CONSULTAS FONO
-  entrevista: 1
-  evaluacion: 2
-  tratamiento: 3
-  informe_fono_alta: 4
-  informe_fono: 5
-
   #TIPOS RESOLUCIONES
   archivo_fonoaudiologico: 1
   archivo_clinica_general: 2
@@ -49,7 +38,14 @@ development:
   estado_cobro_pendiente: 1
   estado_cobro_cobrado: 2
   estado_cobro_no_cobrado: 3
-  
+
+  #ESTADOS MATRICULACIONES
+  estado_matriculacion_activo: 1
+  estado_matriculacion_inactivo: 2
+
+  #ESTADOS MATRICULACIONES DETALLES
+  estado_matriculacion_detalle_activo: 1
+  estado_matriculacion_detalle_inactivo: 2
 
 production:
   
@@ -85,17 +81,6 @@ production:
   sin_documento: 5
   cedula_identidad: 1
 
-  #ESPECIALIDADES
-  especialidad_fonoaudiologia: 1
-  clinica_general: 2
-
-  #TIPOS CONSULTAS FONO
-  entrevista: 1
-  evaluacion: 2
-  tratamiento: 3
-  informe_fono_alta: 4
-  informe_fono: 5
-
   #TIPOS RESOLUCIONES
   archivo_fonoaudiologico: 1
   archivo_clinica_general: 2
@@ -104,5 +89,13 @@ production:
   estado_cobro_pendiente: 1
   estado_cobro_cobrado: 2
   estado_cobro_no_cobrado: 3
+  
+  #ESTADOS MATRICULACIONES
+  estado_matriculacion_activo: 1
+  estado_matriculacion_inactivo: 2
+
+  #ESTADOS MATRICULACIONES DETALLES
+  estado_matriculacion_detalle_activo: 1
+  estado_matriculacion_detalle_inactivo: 2
   
   

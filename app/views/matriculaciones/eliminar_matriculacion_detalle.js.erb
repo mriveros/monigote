@@ -1,0 +1,28 @@
+<% if @eliminado %>
+
+   $("<div class='col-sm-12' id='msg-eliminar-matriculacion-detalle' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-matriculacion-detalle");
+   
+    setTimeout(
+
+      function(){ $("#msg-eliminar-matriculacion-detalle").remove(); 
+     
+      $("#link-to-matriculacion-detalle-<%= @matriculacion_detalle.matriculacion_id%>").trigger('click');
+      $("#link-to-matriculacion-detalle-<%=  @matriculacion_detalle.matriculacion_id%>").trigger('click');
+      
+       
+
+    }, 1000);
+   swal("Matriculación eliminada exitosamente.");
+    
+<% else %>
+
+  $("<div class='col-sm-12' id='msg-eliminar-matriculacion-detalle' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'><%= j(@msg).html_safe %></div>").insertBefore("#table-matriculacion-detalle");
+  setTimeout(function(){ 
+    
+    $("#msg-eliminar-matriculacion-detalle").remove();
+
+    swal("No se pudo eliminar la matriculación. Intente más tarde.")
+
+     }, 2000);
+    
+<% end %>

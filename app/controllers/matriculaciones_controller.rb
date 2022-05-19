@@ -216,11 +216,11 @@ class MatriculacionesController < ApplicationController
 
 	    @matriculacion_detalle = MatriculacionDetalle.new()
 
-	    @matriculacion_detalle.matriculacion_id = params[:matriculacion][:periodo_id]
-	    @matriculacion_detalle.alumno_id = params[:matriculacion][:nivel_id]
-	    @matriculacion_detalle.precio_id = params[:matriculacion][:sala_id]
-	    @matriculacion_detalle.fecha_matriculacion = params[:matriculacion][:sala_id]
-	    @matriculacion_detalle.estado_matriculacion_detalle_id = params[:matriculacion][:estado_matriculacion_id]
+	    @matriculacion_detalle.matriculacion_id = params[:matriculacion_id]
+	    @matriculacion_detalle.alumno_id = params[:alumno_id]
+	    @matriculacion_detalle.precio_id = params[:matriculacion_detalle][:precio_id]
+	    @matriculacion_detalle.fecha_matriculacion = params[:matriculacion][:fecha_matriculacion]
+	    @matriculacion_detalle.estado_matriculacion_detalle_id = PARAMETRO[:estado_matriculacion_detalle_activo]
 	    
 	      if @matriculacion_detalle.save
 
