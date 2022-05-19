@@ -219,7 +219,7 @@ class MatriculacionesController < ApplicationController
 	    @matriculacion_detalle.matriculacion_id = params[:matriculacion_id]
 	    @matriculacion_detalle.alumno_id = params[:alumno_id]
 	    @matriculacion_detalle.precio_id = params[:matriculacion_detalle][:precio_id]
-	    @matriculacion_detalle.fecha_matriculacion = params[:matriculacion][:fecha_matriculacion]
+	    @matriculacion_detalle.fecha_matriculacion = params[:fecha_matriculacion]
 	    @matriculacion_detalle.estado_matriculacion_detalle_id = PARAMETRO[:estado_matriculacion_detalle_activo]
 	    
 	      if @matriculacion_detalle.save
