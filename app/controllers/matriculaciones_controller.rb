@@ -187,7 +187,7 @@ class MatriculacionesController < ApplicationController
 
 	  def matriculacion_detalle
 
-	  	@matriculacion_detalle = MatriculacionDetalle.orden_fecha.where('matriculacion_id = ?', params[:matriculacion_id]).paginate(per_page: 10, page: params[:page])
+	  	@matriculacion_detalle = VMatriculacionDetalle.orden_fecha.where('matriculacion_id = ?', params[:matriculacion_id]).paginate(per_page: 10, page: params[:page])
 
 	  	respond_to do |f|
 
@@ -237,7 +237,7 @@ class MatriculacionesController < ApplicationController
 
 		      end              
 	    end
-	              
+
 	    respond_to do |f|
 
 	      f.js
