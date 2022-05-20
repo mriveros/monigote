@@ -1,15 +1,15 @@
 <% if @matriculacion_ok %>
   
   setTimeout(function(){ 
+    $("#<%= params[:window_id]%>").modal('hide');
+    $("#link-to-matriculacion-detalle-<%=params[:matriculacion_id]%>").trigger('click');
+    $("#link-to-matriculacion-detalle-<%=params[:matriculacion_id]%>").trigger('click');
     
-   
-    $("#link-to-matriculacion-detalle-<%= params[:matriculacion_id]%>").trigger('click');
-    $("#link-to-matriculacion-detalle-<%= params[:matriculacion_id]%>").trigger('click');
     swal("La matriculación se ha agregado exitosamente!");
 
-  }, 1000);
+  }, 2000);
     
- 
+
 <% else %>
 
   swal('Error al guardar la matriculación. <%=@msg%>');

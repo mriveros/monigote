@@ -6,8 +6,8 @@
 
       function(){ $("#msg-eliminar-matriculacion-detalle").remove(); 
      
-      $("#link-to-matriculacion-detalle-<%= @matriculacion_detalle.matriculacion_id%>").trigger('click');
-      $("#link-to-matriculacion-detalle-<%=  @matriculacion_detalle.matriculacion_id%>").trigger('click');
+      $("#link-to-matriculacion-detalle-<%= @matriculacion_detalle_elim.matriculacion_id%>").trigger('click');
+      $("#link-to-matriculacion-detalle-<%=  @matriculacion_detalle_elim.matriculacion_id%>").trigger('click');
       
        
 
@@ -21,7 +21,7 @@
     
     $("#msg-eliminar-matriculacion-detalle").remove();
 
-    swal("No se pudo eliminar la matriculación. Intente más tarde.")
+    swal("No se pudo eliminar la matriculación. <%=@msg%>")
 
      }, 2000);
     

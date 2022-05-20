@@ -245,6 +245,48 @@ class MatriculacionesController < ApplicationController
 	    end
 
 	  end
+
+	def eliminar_matriculacion_detalle
+
+    @valido = true
+    @msg = ""
+
+    @matriculacion_detalle = MatriculacionDetalle.find(params[:matriculacion_detalle_id])
+    @matriculacion_detalle_elim = @matriculacion_detalle
+
+    if @valido
+
+      if @matriculacion_detalle.destroy
+
+        auditoria_nueva("eliminar matriculacion detalle", "matriculaciones_detalles", @matriculacion_detalle)
+
+        @eliminado = true
+
+      else
+
+        @msg = "ERROR: No se ha podido eliminar esta matriculación"
+
+      end
+
+    end
+
+        rescue Exception => exc  
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+           
+          @msg = 'Esta matriculación ya cuenta con detalles'
+          @eliminado = false
+        
+        end
+        
+    respond_to do |f|
+
+      f.js
+
+    end
+  
+end
 	    
 
 end
