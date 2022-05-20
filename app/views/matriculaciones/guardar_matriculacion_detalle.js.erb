@@ -1,4 +1,4 @@
-<% if @guardado_ok %>
+<% if @matriculacion_ok %>
   
   setTimeout(function(){ 
     
@@ -12,6 +12,6 @@
  
 <% else %>
 
-  swal('Error al guardar la matriculación. Intente más tarde');
+  swal('Error al guardar la matriculación. <%=@msg%>');
 
 <% end %>
