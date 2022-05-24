@@ -17,6 +17,18 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
 
 #-------------------------------------MONIGOTE----------------------------------------------------
 
+#GENERACION DE CUOTAS
+  get 'cuotas/index'
+  post 'cuotas/lista'
+  get 'cuotas/lista'
+  get 'cuotas/agregar'
+  post 'cuotas/guardar'
+  get 'cuotas/eliminar'
+  get 'cuotas/cuota_detalle'
+  post 'cuotas/lista_cuota_detalle'
+  get 'cuotas/lista_cuota_detalle'
+  get 'cuotas/pagar_cuota_detalle'
+  post 'cuotas/guardar_pago_cuota_detalle'
 
 #PERSONALES
   post 'personales/lista'
