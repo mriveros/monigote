@@ -88,17 +88,17 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @cuotas =  VPagoSalario.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPagoSalario.where(cond).count
+      @cuotas =  VCuota.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCuota.where(cond).count
       
     else
 
-      @cuotas = VPagoSalario.orden_01.paginate(per_page: 10, page: params[:page])
-      @total_encontrados = VPagoSalario.count
+      @cuotas = VCuota.orden_01.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCuota.count
 
     end
 
-    @total_registros = VPagoSalario.count
+    @total_registros = VCuota.count
 
     respond_to do |f|
       
@@ -110,7 +110,7 @@ skip_before_action :verify_authenticity_token
 
   def agregar
 
-    @pago_salario = PagoSalario.new
+    @pago_salario = Cuota.new
 
     respond_to do |f|
       
@@ -153,9 +153,9 @@ skip_before_action :verify_authenticity_token
       @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
       @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
       
-      PagoSalarioDetalle.transaction do    
+      CuotaDetalle.transaction do    
 
-        @pago_salario = PagoSalario.new()
+        @pago_salario = Cuota.new()
         @pago_salario.fecha = params[:fecha]
         @pago_salario.mes_periodo_id = params[:mes_periodo][:id]
         @pago_salario.anho_periodo = params[:anho_periodo]
@@ -236,8 +236,8 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @pago_salario = PagoSalario.find(params[:id])
-    pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", params[:id])
+    @pago_salario = Cuota.find(params[:id])
+    pago_salario_detalle = CuotaDetalle.where("pago_salario_id = ?", params[:id])
     pago_salario_detalle.destroy_all
     @pago_salario_elim = @pago_salario  
 
@@ -269,10 +269,10 @@ skip_before_action :verify_authenticity_token
 
   end
 
-  def salario_detalle
+  def cuota_detalle
 
-    @pago_salario = PagoSalario.where("id = ?", params[:pago_salario_id] ).first
-    @pago_salario_detalle = VPagoSalarioDetalle.where("pago_salario_id = ?", params[:pago_salario_id]).paginate(per_page: 10, page: params[:page])
+    @pago_salario = Cuota.where("id = ?", params[:pago_salario_id] ).first
+    @pago_salario_detalle = VCuotaDetalle.where("pago_salario_id = ?", params[:pago_salario_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
