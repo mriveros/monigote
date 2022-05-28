@@ -4,7 +4,6 @@ before_filter :require_usuario
 skip_before_action :verify_authenticity_token
 
   def index
-   
 
   end
 
