@@ -57,9 +57,9 @@
           </th>
 
           <th>
-            <span>Hacienda<br/></span>
+            <span>Sucursal<br/></span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_cuotas, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_cuotas, :hacienda_id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
