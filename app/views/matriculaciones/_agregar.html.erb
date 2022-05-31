@@ -17,7 +17,7 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :tipo_consulta, "Periodo Escolar#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :periodo_escolar_id, "Periodo Escolar#{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :periodo_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
 
@@ -25,7 +25,7 @@
           <div class="col-sm-7"><%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :nivel_id, "Sala#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :sala_id, "Sala#{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
 
