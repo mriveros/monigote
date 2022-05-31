@@ -6,11 +6,11 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Pago Salarios</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Cuota</h4>
       
     </div>
 
-    <%= form_for @pago_salario, remote: true, url: pagos_salarios_guardar_url, html: { id: "form-agregar-pago-salario" , autocomplete: 'off'}, method: 'POST' do |f| %>
+    <%= form_for @cuota, remote: true, url: cuotas_guardar_url, html: { id: "form-agregar-cuota" , autocomplete: 'off'}, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -21,26 +21,30 @@
           <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= date_field_tag :fecha, Date.today, class: 'form-control input-sm' %>
           </div>    
-          <div class="col-sm-1"></div><br /><br />
-
-          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
           <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.year, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
-          <div class="col-sm-1"></div><br /><br />
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :nivel_id, "Nivel#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :sala_id, "Sala#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-1"></div><br />
               
       </div>
 
       <div class="modal-footer" style="background:#e6e6e6;">
         
          <%= link_to "Cerrar", "#", class: "btn btn-default", onclick: "$('##{params[:window_id]}').modal('hide');" %> 
-        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-pago-salario" %> 
+        <%= link_to "Guardar","#", class: "btn btn-primary", id: "btn-guardar-cuota" %> 
 
       </div>
 
@@ -52,45 +56,41 @@
 
 <style type="text/css">
 
-  #form-agregar-pago-salario label, #form-agregar-pago-salario input[type='text'], #form-agregar-pago-salario select { float:left; margin-top:5px;}
-  #form-agregar-pago-salario br {clear:both; }
-  #form-agregar-pago-salario label { width:200px;font-size:12px;margin-top:10px;}
+  #form-agregar-cuota label, #form-agregar-cuota input[type='text'], #form-agregar-cuota select { float:left; margin-top:5px;}
+  #form-agregar-cuota br {clear:both; }
+  #form-agregar-cuota label { width:200px;font-size:12px;margin-top:10px;}
   
   
 
 </style>
 
 <script type="text/javascript">
+ 
+ aplicar_datepicker2();
 
- $("#btn-guardar-pago-salario").bind('click', function () {
+ $("#btn-guardar-cuota").bind('click', function () {
 
       valido = true
       msg = ""
 
-      if($("#fecha").val().length == 0){
-
-        msg +="Ingrese la fecha del gasto.\n"
-        valido = false
-      
-      }
-
-      if($("#hacienda_id").val().length == 0){
-
-        msg +="Debe ingresar una Hacienda.\n"
-        valido = false
-      
-      }
-
       if($("#mes_periodo_id").val().length == 0){
 
-        msg +="Debe ingresar el Mes.\n"
+        msg +="Debe seleccionar un mes.\n"
         valido = false
       
       }
 
-      if($("#anho_periodo").val().length == 0){
 
-        msg +="Debe ingresar el Año.\n"
+      if($("#cuota_nivel_id").val().length == 0){
+
+        msg +="Debe seleccionar un nivel.\n"
+        valido = false
+      
+      }
+
+      if($("#cuota_sala_id").val().length == 0){
+
+        msg +="Debe seleccionar una sala.\n"
         valido = false
       
       }
@@ -98,8 +98,8 @@
       if (valido){
 
         swal({
-          title: "Confirmar Pago de Salario",
-          text: "Al confirmar se Generará el Registro de Pagos de Salarios de todos los empleados de la Estancia seleccionada.",
+          title: "Confirmar",
+          text: "Al confirmar se registrará la cuota y se generarán los detalles.",
           type: "warning",
           showCancelButton: true,
           confirmButtonClass: "btn-confirm",
@@ -111,7 +111,7 @@
         function(isConfirm) {
           if (isConfirm) {
 
-            $("#form-agregar-pago-salario").submit();
+            $("#form-agregar-cuota").submit();
             
           } 
 
@@ -126,6 +126,5 @@
       return false;
     
     })
-
 
 </script>
