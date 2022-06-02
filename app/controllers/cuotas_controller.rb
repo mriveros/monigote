@@ -128,7 +128,7 @@ skip_before_action :verify_authenticity_token
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @sucursal = Sucursal.where("id = ?", 1).first
 
-    @cuota = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ? and sucursal_id = ? and nivel_id and sala_id", params[:mes_periodo][:id], params[:anho_periodo], 1, params[:cuota][:nivel_id],params[:cuota][:sala_id]).first
+    @cuota = Cuota.where("mes_periodo_id = ? and anho_periodo = ? and sucursal_id = ? and nivel_id = ? and sala_id = ?", params[:mes_periodo][:id], params[:anho_periodo], 1, params[:cuota][:nivel_id],params[:cuota][:sala_id]).first
     
     if @cuota.present?
 
