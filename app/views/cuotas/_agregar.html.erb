@@ -27,8 +27,8 @@
           <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.year, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Año Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :periodo_escolar,:id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :nivel_id, "Nivel#{attr_requerido}".html_safe %></div>
