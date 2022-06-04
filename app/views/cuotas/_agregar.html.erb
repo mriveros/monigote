@@ -18,11 +18,6 @@
  
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= label_tag :nil, "Fecha #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= date_field_tag :fecha, Date.today, class: 'form-control input-sm' %>
-          </div>    
-          <div class="col-sm-1"></div><br />
-
           <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
           <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
