@@ -47,6 +47,11 @@ development:
   estado_matriculacion_detalle_activo: 1
   estado_matriculacion_detalle_inactivo: 2
 
+  #ESTADOS CUOTAS DETALLES
+  estado_pago_cuota_detalle_pendiente: 1
+  estado_pago_cuota_detalle_pagado: 2
+  estado_pago_cuota_detalle_pago_parcial: 3
+
 production:
   
 
@@ -98,4 +103,8 @@ production:
   estado_matriculacion_detalle_activo: 1
   estado_matriculacion_detalle_inactivo: 2
   
+  #ESTADOS CUOTAS DETALLES
+  estado_pago_cuota_detalle_pendiente: 1
+  estado_pago_cuota_detalle_pagado: 2
+  estado_pago_cuota_detalle_pago_parcial: 3
   
