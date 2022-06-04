@@ -14,7 +14,7 @@ skip_before_action :verify_authenticity_token
 
     if params[:form_buscar_cuotas_id].present?
 
-      cond << "pago_salario_id = ?"
+      cond << "cuota_id = ?"
       args << params[:form_buscar_cuotas_id]
 
     end
@@ -33,53 +33,46 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_cuotas_anho_periodo].present?
+    if params[:form_buscar_cuotas][:periodo_escolar_id].present?
 
-      cond << "anho_periodo ilike ?"
-      args << "%#{params[:form_buscar_cuotas_anho_periodo]}%"
-
-    end
-
-    if params[:form_buscar_cuotas][:hacienda_id].present?
-
-      cond << "hacienda_id = ?"
-      args << params[:form_buscar_cuotas][:hacienda_id]
+      cond << "periodo_escolar_id = ?"
+      args << params[:form_buscar_cuotas][:periodo_escolar_id]
 
     end
 
-    if params[:form_buscar_cuotas_total_salario].present?
+    if params[:form_buscar_cuotas][:sucursal_id].present?
 
-      cond << "total_salario = ?"
-      args << params[:form_buscar_cuotas_total_salario]
-
-    end
-
-    if params[:form_buscar_cuotas_total_adelantos].present?
-
-      cond << "total_adelantos = ?"
-      args << params[:form_buscar_cuotas_total_adelantos]
+      cond << "sucursal_id = ?"
+      args << params[:form_buscar_cuotas][:sucursal_id]
 
     end
 
-    if params[:form_buscar_cuotas_total_descuentos].present?
+    if params[:form_buscar_cuotas][:nivel_id].present?
 
-      cond << "total_descuentos = ?"
-      args << params[:form_buscar_cuotas_total_descuentos]
+      cond << "nivel_id = ?"
+      args << params[:form_buscar_cuotas][:nivel_id]
 
     end
 
-    if params[:form_buscar_cuotas_total_remuneraciones_extras].present?
+    if params[:form_buscar_cuotas][:sala_id].present?
 
-      cond << "total_remuneraciones_extras = ?"
-      args << params[:form_buscar_cuotas_total_remuneraciones_extras]
+      cond << "sala_id = ?"
+      args << params[:form_buscar_cuotas][:sala_id]
 
     end
 
 
-    if params[:form_buscar_cuotas_monto_total_pagado].present?
+    if params[:form_buscar_cuotas_total_cuotas].present?
 
-      cond << "monto_total_pagado = ?"
-      args << params[:form_buscar_cuotas_monto_total_pagado]
+      cond << "total_cuotas = ?"
+      args << params[:form_buscar_cuotas_total_cuotas]
+
+    end
+
+    if params[:form_buscar_cuotas_total_cobradas].present?
+
+      cond << "total_cobradas = ?"
+      args << params[:form_buscar_cuotas_total_cobradas]
 
     end
 
@@ -129,50 +122,54 @@ skip_before_action :verify_authenticity_token
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @matriculaciones = Matriculacion.where('periodo_escolar_id = ?', params[:periodo_escolar][:id])
     
-    @matriculaciones.each do |m|
+    CuotaDetalle.transaction do   
 
-        matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id)
+      @matriculaciones.each do |m|
 
-        if matriculacion_detalle.count > 0
-          
-          @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
-          
-          unless @cuota.present?
+          matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id)
 
-            @cuota = Cuota.new
-            @cuota.fecha_generacion = Date.today
-            @cuota.mes_periodo_id = params[:mes_periodo][:id]
-            @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
-            @cuota.matriculacion_id = m.id
-            if @cuota.save
-              
-              matriculacion_detalle.each do |md|
+          if matriculacion_detalle.count > 0
+            
+            @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
+            
+            unless @cuota.present?
 
-                cuota_detalle = CuotaDetalle.new
-                cuota_detalle.cuota_id = @cuota.id
-                cuota_detall.alumno_id = md.alumno_id
-                precio = Precio.where('precio_id = ?', md.precio_id).first
-                cuota_detalle.monto_cuota = precio.monto
-                cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
-                if cuota_detalle.save
-
-                  @guardado_ok = true
-
-                else
-
-                  @guardado_error = true
-
-                end
+              @cuota = Cuota.new
+              @cuota.fecha_generacion = Date.today
+              @cuota.mes_periodo_id = params[:mes_periodo][:id]
+              @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
+              @cuota.matriculacion_id = m.id
+              if @cuota.save
                 
-              end #end each md
+                matriculacion_detalle.each do |md|
+
+                  cuota_detalle = CuotaDetalle.new
+                  cuota_detalle.cuota_id = @cuota.id
+                  cuota_detalle.alumno_id = md.alumno_id
+                  precio = Precio.where('id = ?', md.precio_id).first
+                  cuota_detalle.monto_cuota = precio.monto
+                  cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                  if cuota_detalle.save
+
+                    @guardado_ok = true
+
+                  else
+
+                    @guardado_error = true
+
+                  end
+                  
+                end #end each md
+
+              end
 
             end
 
           end
 
-        end
+      end
 
-    end
+    end #end TRANSACTION
   
     respond_to do |f|
       
