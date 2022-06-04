@@ -142,11 +142,11 @@ skip_before_action :verify_authenticity_token
             @cuota = Cuota.new
             @cuota.fecha_generacion = Date.today
             @cuota.mes_periodo_id = params[:mes_periodo][:id]
-            @cuota.perioo_escolar_id = params[:periodo_escolar][:id]
+            @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
             @cuota.matriculacion_id = m.id
             if @cuota.save
               
-              matriculacion_detalle.each do |m|
+              matriculacion_detalle.each do |md|
 
                 cuota_detalle = CuotaDetalle.new
                 cuota_detalle.cuota_id = @cuota.id
