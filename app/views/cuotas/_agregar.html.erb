@@ -6,7 +6,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Cuota</h4>
+      <h4 class="modal-title" id="myModalLabel">Generar Cuotas</h4>
       
     </div>
 
@@ -28,15 +28,7 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Año Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :periodo_escolar,:id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {class: 'form-control input-sm'} %></div>
-          <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :nivel_id, "Nivel#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
-          <div class="col-sm-1"></div><br />
-
-          <div class="col-sm-4"><%= f.label :sala_id, "Sala#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-7"><%= collection_select :periodo_escolar,:id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
               
       </div>
@@ -77,22 +69,14 @@
 
         msg +="Debe seleccionar un mes.\n"
         valido = false
-      
+
       }
 
+      if($("#periodo_escolar_id").val().length == 0){
 
-      if($("#cuota_nivel_id").val().length == 0){
-
-        msg +="Debe seleccionar un nivel.\n"
+        msg +="Debe seleccionar un año escolar.\n"
         valido = false
-      
-      }
 
-      if($("#cuota_sala_id").val().length == 0){
-
-        msg +="Debe seleccionar una sala.\n"
-        valido = false
-      
       }
 
       if (valido){
