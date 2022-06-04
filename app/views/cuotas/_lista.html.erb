@@ -1,25 +1,24 @@
-<% if pagos_salarios.present? %>
+<% if cuotas.present? %>
 
-  <% pagos_salarios.each do |ps| %>
+  <% cuotas.each do |ps| %>
 
     <tr>
 
-      <td><%= ps.pago_salario_id %></td>
-      <td><%= ps.fecha.strftime('%d/%m/%Y')%></td>
+      <td><%= ps.cuota_id %></td>
+      <td><%= ps.fecha_generacion.strftime('%d/%m/%Y')%></td>
       <td><%= ps.mes_periodo %></td>
-      <td><%= ps.anho_periodo %></td>
-      <td><%= ps.hacienda %></td>
-      <td><%= ps.total_salario.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= ps.total_adelantos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= ps.total_descuentos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= ps.total_remuneraciones_extras.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= ps.monto_total_pagado.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-
+      <td><%= ps.periodo_escolar %></td>
+      <td><%= ps.sucursal %></td>
+      <td><%= ps.nivel %></td>
+      <td><%= ps.sala %></td>
+      <td><%= ps.total_cuotas.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td><%= ps.total_cobradas.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      
       <td>
       
       <%#= link_to_editar_pago_salario(ps) %>
 
-      <%= link_to_salario_detalle(ps.pago_salario_id) %>
+      <%#= link_to_salario_detalle(ps.pago_salario_id) %>
       
       <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ps.id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-pago-salario", title: 'Haga click para eliminar el Pago de Salario Generado'  %>
        
@@ -37,7 +36,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate pagos_salarios, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cuotas, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -79,7 +78,7 @@
       if (isConfirm) {
 
         $.ajax({
-          url: "<%= url_for(pagos_salarios_eliminar_path) %>",
+          url: "<%= url_for(cuotas_eliminar_path) %>",
           data: {id: pago_salario_id},
           dataType: 'script'
         });

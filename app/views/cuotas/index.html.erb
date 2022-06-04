@@ -5,21 +5,21 @@
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
     <h3 style="float:left;margin-top:5px;">Pagos de Cuotas</h3>
-    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> generar cuotas".html_safe, "#", id: "link-to-agregar-pagos-salarios", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
-    <%= modal_window( window_id: "modal-window-agregar-pagos-salarios", link_to_id: "#link-to-agregar-pagos-salarios", url: cuotas_agregar_path( window_id: "modal-window-agregar-pagos-salarios") )%>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> generar cuotas".html_safe, "#", id: "link-to-agregar-pagos-cuotas", class: "btn btn-primary pull-right", style: "float:right;margin-left:10px;", onclick: "$('.modal').html('');return false;" %>
+    <%= modal_window( window_id: "modal-window-agregar-pagos-cuotas", link_to_id: "#link-to-agregar-pagos-cuotas", url: cuotas_agregar_path( window_id: "modal-window-agregar-pagos-cuotas") )%>
     
   </div>
 </div>
 
 <div style="clear:both;"></div>
  
-<div class="table-responsive" id="table-pagos-salarios">
+<div class="table-responsive" id="table-pagos-cuotas">
 
   <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
    
     <thead>
 
-      <%= form_tag cuotas_lista_path, remote: true, id: "form-buscar-pagos-salarios"  do  %>
+      <%= form_tag cuotas_lista_path, remote: true, id: "form-buscar-pagos-cuotas"  do  %>
 
         <tr>
 
@@ -27,7 +27,7 @@
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_cuotas_id, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
           
@@ -36,71 +36,63 @@
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_cuotas_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_fecha');"><i class="fa fa-times"></i></span>
+                <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
 
           <th>
-            <span>Mes<br/></span>
+            <span>Mes</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas, :mes_periodo_id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_mes_periodo_id');"><i class="fa fa-times"></i></span>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_mes_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
-            <span>Año<br/></span>
+            <span>Periodo Escolar</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_anho_periodo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_anho_periodo');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_cuotas, :periodo_escolar_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_periodo_escolar_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th>
-            <span>Sucursal<br/></span>
+            <span>Sucursal</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_cuotas, :hacienda_id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_hacienda_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_cuotas, :sucursal_id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_sucursal_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Nivel</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_cuotas, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_nivel_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Sala<br/></span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_cuotas, :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_sala_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Total Salario<br/></span>
+            <span>Total Cuotas</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_total_salario, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_total_salario');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_cuotas_total_cuotas, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_total_cuotas');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
           <th >
-            <span>Total Adelantos<br/></span>
+            <span>Total Cobradas</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_total_adelantos, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_total_adelantos');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Total Descuentos<br/></span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_total_descuentos, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_total_descuentos');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Total Rem. Extras<br/></span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_total_remuneraciones_extras, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_total_remuneraciones_extras');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Total Pagado<br/></span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_monto_total_pagado, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-salarios', '#form_buscar_cuotas_monto_total_pagado');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_cuotas_total_cobradas, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_total_cobradas');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -112,7 +104,7 @@
 
       </thead> 
 
-    <tbody id="pagos-salarios-lista"></tbody>
+    <tbody id="pagos-cuotas-lista"></tbody>
   
   </table>
 
@@ -124,13 +116,13 @@
 <script type="text/javascript">
 
   //---------------------------- RECUPERANDO DATOS ----------------------------//
-  $("#form-buscar-pagos-salarios").bind("submit", function () {
+  $("#form-buscar-pagos-cuotas").bind("submit", function () {
     
     var valido = true;
       
     if(valido){
     $(".nmb").html('');       
-    $("#pagos-salarios-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
+    $("#pagos-cuotas-lista").html("<%= escape_javascript("<tr><td colspan='9' style='text-align:center;'>#{image_tag('ajax-loader0.gif')}</td></tr>").html_safe %>")      
     }
 
     
@@ -139,15 +131,15 @@
  
   //---------------------------------------------------------------------------//
   //---------------------------- BUSCAR PERSONAS-------- -------------------------//
-  $("#table-pagos-salarios input, #table-pagos-salarios select").bind('change', function () {
+  $("#table-pagos-cuotas input, #table-pagos-cuotas select").bind('change', function () {
       $.ajaxQ.abortAll();
-      $("#form-buscar-pagos-salarios").submit();
+      $("#form-buscar-pagos-cuotas").submit();
 
   })
   //----------------------------------------------------------------------------//
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-  $("#form-buscar-pagos-salarios").submit();
+  $("#form-buscar-pagos-cuotas").submit();
   <% if params[:agregar] %>
     $("#link-to-agregar-detalle-debito").trigger('click');
   <% end %>
@@ -166,7 +158,7 @@
         cursor: pointer;
     }
 
-    #form-buscar-pagos-salarios table th { background:#e6e6e6;}
-    #form-buscar-pagos-salarios table th span.limpiar { background:#fff;}
+    #form-buscar-pagos-cuotas table th { background:#e6e6e6;}
+    #form-buscar-pagos-cuotas table th span.limpiar { background:#fff;}
 
 </style>
