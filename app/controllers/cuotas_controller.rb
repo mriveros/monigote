@@ -134,7 +134,22 @@ skip_before_action :verify_authenticity_token
           
           @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
           unless @cuota.present?
+            @cuota = Cuota.new
+            @cuota.fecha_generacion = Date.today
+            @cuota.mes_periodo_id = params[:mes_periodo][:id]
+            @cuota.perioo_escolar_id = params[:periodo_escolar][:id]
+            @cuota.matriculacion_id = m.id
+            if @cuota.save
+              matriculacion_detalle.each do |m|
 
+                cuota_detalle = CuotaDetalle.new
+                cuota_detalle.cuota_id = @cuota.id
+                cuota_detall.alumno_id = md.alumno_id
+                
+
+              end
+
+            end
 
           end
 
