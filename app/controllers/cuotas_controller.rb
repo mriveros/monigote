@@ -124,65 +124,53 @@ skip_before_action :verify_authenticity_token
     @valido = true
     @msg = ""
     @guardado_ok = false
+    @guardado_error = false
    
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @matriculaciones = Matriculacion.where('periodo_escolar_id = ?', params[:periodo_escolar][:id])
+    
     @matriculaciones.each do |m|
 
-        matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id).first
+        matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id)
+
         if matriculacion_detalle.count > 0
           
           @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
+          
           unless @cuota.present?
+
             @cuota = Cuota.new
             @cuota.fecha_generacion = Date.today
             @cuota.mes_periodo_id = params[:mes_periodo][:id]
             @cuota.perioo_escolar_id = params[:periodo_escolar][:id]
             @cuota.matriculacion_id = m.id
             if @cuota.save
+              
               matriculacion_detalle.each do |m|
 
                 cuota_detalle = CuotaDetalle.new
                 cuota_detalle.cuota_id = @cuota.id
                 cuota_detall.alumno_id = md.alumno_id
-                
+                precio = Precio.where('precio_id = ?', md.precio_id).first
+                cuota_detalle.monto_cuota = precio.monto
+                cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                if cuota_detalle.save
 
-              end
+                  @guardado_ok = true
+
+                else
+
+                  @guardado_error = true
+
+                end
+                
+              end #end each md
 
             end
 
           end
 
         end
-
-    end
-
-    
-    
-    if @cuota.present?
-
-      @valido = false
-      @msg += "La cuota ya fue generado."
-
-    end
-    
-    #verificar cantidad alumnos matriculados
-    unless total_hacienda.present?
-      
-      @valido = false
-      @msg += "No existen alumnos en la matriculación seleccionada."
-
-    end
-    
-    if @valido
-
-     
-      CuotaDetalle.transaction do    
-
-        
-          
-
-      end#end transaction
 
     end
   
