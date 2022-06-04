@@ -6,6 +6,6 @@ class PeriodoEscolar < ActiveRecord::Base
   attr_accessible :id, :anho_periodo, :created_at, :updated_at
  
   scope :orden_01, -> { order("id")}
-  scope :orden_periodo, -> { order("anho_periodo desc")}
+  scope :orden_periodo, -> { order("anho_periodo asc")}
 
 end
