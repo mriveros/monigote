@@ -185,25 +185,26 @@ skip_before_action :verify_authenticity_token
     valido = true
     @msg = ""
 
-    @pago_salario = Cuota.find(params[:id])
-    pago_salario_detalle = CuotaDetalle.where("pago_salario_id = ?", params[:id])
-    pago_salario_detalle.destroy_all
-    @pago_salario_elim = @pago_salario  
+    @cuota = Cuota.find(params[:id])
+    cuota_detalle = CuotaDetalle.where("cuota_id = ? and estado_pago_cuota_detalle_id in (?)", params[:id], [PARAMETRO[:estado_pago_cuota_detalle_pagado],PARAMETRO[:estado_pago_cuota_detalle_pago_parcial]])
+    
+    unless cuota_detalle.present?
+      
+      cuota_detalle.destroy_all
+      @cuota_elim = @cuota
 
-    @registro_gasto = RegistroGasto.where("pago_salario_id = ?", @pago_salario.id).first
-    @registro_gasto.destroy
+    end
 
     if valido
 
-      if @pago_salario.destroy
+      if @cuota.destroy
 
-        auditoria_nueva("eliminar pago de salario", "cuotas", @pago_salario_elim)
-
+        auditoria_nueva("eliminar cuota", "cuotas", @cuota_elim)
         @eliminado = true
 
       else
 
-        @msg = "ERROR: No se ha podido eliminar el Pago de Salarios."
+        @msg = "ERROR: No se ha podido eliminar la cuota. Ya cuenta con detalles pagados"
 
       end
 
