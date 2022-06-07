@@ -202,14 +202,17 @@ skip_before_action :verify_authenticity_token
         auditoria_nueva("eliminar cuota", "cuotas", @cuota_elim)
         @eliminado = true
 
-      else
-
-        @msg = "ERROR: No se ha podido eliminar la cuota. Ya cuenta con detalles pagados"
-
       end
 
     end
 
+    rescue Exception => exc  
+    # dispone el mensaje de error 
+    #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
+        @msg = "No se ha podido eliminar la cuota, ya cuenta con detalles pagados"
+        @eliminado = false
+      end       
         
     respond_to do |f|
 

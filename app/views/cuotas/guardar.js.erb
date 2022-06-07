@@ -1,16 +1,15 @@
 <% if @guardado_ok == true %>
  
   $("#<%= params[:window_id]%>").modal('hide');
-  $("#form_buscar_pagos_cuotas_id").val('<%=@pago_salario.id%>');
-  $("#form_buscar_pagos_cuotas_fecha").val('');
-  $("#form_buscar_pagos_cuotas_mes_periodo").val('');
-  $("#form_buscar_pagos_cuotas_anho_periodo").val('');
-  $("#form_buscar_pagos_cuotas_hacienda_id").val('');
-  $("#form_buscar_pagos_cuotas_total_salario").val('');
-  $("#form_buscar_pagos_cuotas_total_adelantos").val('');
-  $("#form_buscar_pagos_cuotas_total_descuentos").val('');
-  $("#form_buscar_pagos_cuotas_total_remuneraciones_extras").val('');
-  $("#form_buscar_pagos_cuotas_monto_total_pagado").val('');
+  $("#form_buscar_cuotas_id").val('<%=@cuota.id%>');
+  $("#form_buscar_cuotas_fecha").val('');
+  $("#form_buscar_cuotas_mes_periodo_id").val('');
+  $("#form_buscar_cuotas_periodo_escolar_id").val('');
+  $("#form_buscar_cuotas_sucursal_id").val('');
+  $("#form_buscar_cuotas_nivel_id").val('');
+  $("#form_buscar_cuotas_sala_id").val('');
+  $("#form_buscar_cuotas_total_cuotas").val('');
+  $("#form_buscar_cuotas_total_cobradas").val('');
 
   setTimeout( function(){ 
  
