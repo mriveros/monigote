@@ -49,8 +49,8 @@
           <div class="col-sm-1"></div><br />   
           <div class="col-sm-1"></div><br /> 
 
-          <div class="col-sm-4"><%= f.label :hacienda, "Hacienda".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :hacienda_id,  Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-4"><%= f.label :sucursal, "Sucursal".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :sucursal_id,  Sucursal.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />   
           <div class="col-sm-1"></div><br /> 
 

@@ -103,9 +103,9 @@
           </th>
 
           <th >
-              <span>Hacienda</span>
+              <span>Sucursal</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_personales, :hacienda_id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <%= collection_select :form_buscar_personales, :sucursal_id, Sucursal.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-personales', '#form_buscar_personales_hacienda_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
