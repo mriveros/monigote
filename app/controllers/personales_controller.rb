@@ -76,10 +76,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_personales][:hacienda_id].present?
+    if params[:form_buscar_personales][:sucursal_id].present?
 
-      cond << "hacienda_id = ?"
-      args << params[:form_buscar_personales][:hacienda_id]
+      cond << "sucursal_id = ?"
+      args << params[:form_buscar_personales][:sucursal_id]
 
     end
 
@@ -169,7 +169,7 @@ skip_before_action :verify_authenticity_token
       @personal.direccion = params[:personal][:direccion]
       @personal.telefono = params[:personal][:telefono]
       @personal.email = params[:personal][:email]
-      @personal.hacienda_id = params[:personal][:hacienda_id]
+      @personal.sucursal_id = params[:personal][:sucursal_id]
       @personal.estado_personal_id = params[:personal][:estado_personal_id]
       @personal.cargo_id = params[:personal][:cargo_id]
       @personal.observacion = params[:personal][:observacion]
@@ -250,7 +250,7 @@ skip_before_action :verify_authenticity_token
       @personal.direccion = params[:personal][:direccion]
       @personal.telefono = params[:personal][:telefono]
       @personal.email = params[:personal][:email]
-      @personal.hacienda_id = params[:personal][:hacienda_id]
+      @personal.sucursal_id = params[:personal][:sucursal_id]
       @personal.estado_personal_id = params[:personal][:estado_personal_id]
       @personal.cargo_id = params[:personal][:cargo_id]
       @personal.observacion = params[:personal][:observacion]
