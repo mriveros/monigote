@@ -5,7 +5,7 @@
     <div>
 
       <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
-        <h3 style="float:left;margin-top:5px;">Salarios Detalles</h3>
+        <h3 style="float:left;margin-top:5px;">Cuotas Detalles</h3>
        
       </div>
 
@@ -24,14 +24,12 @@
             <tr role="row">
               
               <th>ID</th>
-              <th>Nombre Personal</th>
-              <th>Apellido Personal</th>
-              <th>Cargo</th>
-              <th>Sueldo</th>
-              <th>Adelantos</th>
-              <th>Descuentos</th>
-              <th>Rem. Extras</th>
-              <th>Salario Percibido</th>
+              <th>Alumno</th>
+              <th>Cuota</th>
+              <th>Monto Cuota</th>
+              <th>Pago Parcial</th>
+              <th>Pago Pendiente</th>
+              <th>Estado</th>
               
             </tr>
             
@@ -39,20 +37,19 @@
        
           <tbody id="derivado-lacteo-detalle">
 
-            <% if @pago_salario_detalle.present? %>
+            <% if @cuota_detalle.present? %>
             
-              <% @pago_salario_detalle.each do |psd|%>
+              <% @cuota_detalle.each do |cd|%>
 
                 <tr>
-                  <td><%=psd.pago_salario_detalle_id %></td>
-                  <td><%=psd.nombre_personal%></td>
-                  <td><%=psd.apellido_personal %></td>
-                  <td><%=psd.cargo%></td>
-                  <td><%=psd.salario_base.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
-                  <td><%=psd.adelantos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
-                  <td><%=psd.descuentos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
-                  <td><%=psd.otras_remuneraciones.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
-                  <td><%=psd.salario_percibido.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=cd.cuota_detalle_id %></td>
+                  <td><%=cd.nombre_alumno%></td>
+                  <td><%=cd.cuota %></td>
+                  <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+                  <td><%=cd.pago_parcial.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=cd.pago_pendiente.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=cd.estado_pago_cuota_detalle%></td>
+               
 
                   <td style="width: 50px;text-align:right;">
                     
@@ -65,7 +62,7 @@
 
               <tr id="tab-paginacion">
 
-                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @pago_salario_detalle, :params => params %></div></td>
+                  <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate @cuota_detalle, :params => params %></div></td>
               </tr>
 
             <% else %>

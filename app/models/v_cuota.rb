@@ -6,7 +6,7 @@ class VCuota < ActiveRecord::Base
   attr_accessible :cuota_id, :fecha_generacion, :mes_periodo_id, :mes_periodo, :periodo_escolar_id, :anho_periodo, :nivel_id, :nivel, :sala_id, :sala, :sucursal_id, :sucursal, :total_cuotas, :created_at, :updated_at
   
   scope :orden_01, -> { order("cuota_id")}
-  scope :periodo_, -> { order("mes_periodo, anho_periodo DESC")}
+  scope :orden_periodo, -> { order("mes_periodo, anho_periodo DESC")}
 
   
 end

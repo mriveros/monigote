@@ -80,7 +80,7 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @cuotas =  VCuota.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @cuotas =  VCuota.orden_periodo.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuota.where(cond).count
       
     else
@@ -224,8 +224,8 @@ skip_before_action :verify_authenticity_token
 
   def cuota_detalle
 
-    @pago_salario = Cuota.where("id = ?", params[:pago_salario_id] ).first
-    @pago_salario_detalle = VCuotaDetalle.where("pago_salario_id = ?", params[:pago_salario_id]).paginate(per_page: 10, page: params[:page])
+    @cuota = Cuota.where("id = ?", params[:cuota_id] ).first
+    @cuota_detalle = VCuotaDetalle.where("cuota_id = ?", params[:cuota_id]).paginate(per_page: 10, page: params[:page])
 
 
     respond_to do |f|
