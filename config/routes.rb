@@ -29,6 +29,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get 'cuotas/lista_cuota_detalle'
   get 'cuotas/pagar_cuota_detalle'
   post 'cuotas/guardar_pago_cuota_detalle'
+  post 'cuotas/guardar_pago_cuota_detalle'
 
 #PERSONALES
   post 'personales/lista'
