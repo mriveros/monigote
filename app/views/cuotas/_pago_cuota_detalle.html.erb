@@ -9,7 +9,7 @@
       
     </div>
 
-    <%= form_for @cuota_detalle, remote: true, url: cuotas_pago_cuota_detalle_url, html: { id: "form-marcar-ganado-muerto" }, method: 'POST' do |f| %>
+    <%= form_for @cuota_detalle, remote: true, url: cuotas_pagar_cuota_detalle_url, html: { id: "form-marcar-ganado-muerto" }, method: 'POST' do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
       <%= hidden_field_tag :ganado_enfermo_id, @ganado_enfermo.id%>

@@ -236,4 +236,18 @@ skip_before_action :verify_authenticity_token
 
   end
 
+  def pagar_cuota_detalle
+
+    
+    @cuota_detalle = CuotaDetalle.where("id = ?", params[:cuota_detalle_id]).first
+    @cuota = Cuota.where("id = ?", @cuota_detalle.cuota_id ).first
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 end
