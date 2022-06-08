@@ -1,5 +1,4 @@
-<%= link_to icon_minus_sign, "#", id: "link-to-pago-cuota-detalle-#{cuota_id}", 
-class: 'btn btn-black btn-xs', 
+<%= link_to icon_confirmar, "#", id: "link-to-pago-cuota-detalle-#{cuota_detalle_id}", class: 'btn btn-success btn-xs', 
 title: 'Haga click aquí para pagar la cuota.', onclick: "$('.modal').html('');return false;" %>
-<%= modal_window( window_id: "modal-window-cambiar-estado-pago-#{cuota_id}", 
-link_to_id: "#link-to-cambiar-estado-pago-#{cuota_id}", url: cuotas_pago_cuota_detalle_path( window_id: "modal-window-cambiar-estado-pago-#{cuota_id}", cuota_id: cuota_id) )%>
+<%= modal_window( window_id: "modal-window-cambiar-estado-pago-#{cuota_detalle_id}", 
+link_to_id: "#link-to-cambiar-estado-pago-#{cuota_detalle_id}", url: cuotas_pagar_cuota_detalle_path( window_id: "modal-window-cambiar-estado-pago-#{cuota_detalle_id}", cuota_detalle_id: cuota_detalle_id) )%>
