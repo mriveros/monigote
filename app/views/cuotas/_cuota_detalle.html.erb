@@ -27,9 +27,10 @@
               <th>Alumno</th>
               <th>Cuota</th>
               <th>Monto Cuota</th>
-              <th>Pago Parcial</th>
-              <th>Pago Pendiente</th>
+              <th>Pago Cuota</th>
+              <th>Pendiente</th>
               <th>Número Comprobante</th>
+              <th>Fecha Pago</th>
               <th>Estado</th>
               
             </tr>
@@ -47,15 +48,18 @@
                   <td><%=cd.nombre_alumno%></td>
                   <td><%=cd.cuota %></td>
                   <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
-                  <td><%=cd.pago_parcial.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=cd.pago_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=cd.pago_pendiente.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=cd.numero_comprobante %></td>
+                  <td><%= cd.fecha_pago.strftime('%d/%m/%Y') if cd.fecha_pago.present?%></td>
                   <td><%=cd.estado_pago_cuota_detalle%></td>
+
                
 
                   <td style="width: 50px;text-align:right;">
                     
-                    
+                     <%= link_to_pago_cuota_detalle(cd.cuota_detalle_id) %>
+
                   </td> 
 
                 </tr>

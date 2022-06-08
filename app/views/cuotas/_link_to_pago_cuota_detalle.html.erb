@@ -1,0 +1,5 @@
+<%= link_to icon_minus_sign, "#", id: "link-to-pago-cuota-detalle-#{cuota_id}", 
+class: 'btn btn-black btn-xs', 
+title: 'Haga click aquí para pagar la cuota.', onclick: "$('.modal').html('');return false;" %>
+<%= modal_window( window_id: "modal-window-cambiar-estado-pago-#{cuota_id}", 
+link_to_id: "#link-to-cambiar-estado-pago-#{cuota_id}", url: cuotas_pago_cuota_detalle_path( window_id: "modal-window-cambiar-estado-pago-#{cuota_id}", cuota_id: cuota_id) )%>
