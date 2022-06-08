@@ -29,6 +29,7 @@
               <th>Monto Cuota</th>
               <th>Pago Parcial</th>
               <th>Pago Pendiente</th>
+              <th>Número Comprobante</th>
               <th>Estado</th>
               
             </tr>
@@ -48,6 +49,7 @@
                   <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
                   <td><%=cd.pago_parcial.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=cd.pago_pendiente.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=cd.numero_comprobante %></td>
                   <td><%=cd.estado_pago_cuota_detalle%></td>
                
 
