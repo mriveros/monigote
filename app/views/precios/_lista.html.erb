@@ -8,6 +8,7 @@
       <td><%= pre.codigo%></td>
       <td><%= pre.descripcion%></td>
       <td><%= pre.monto.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td><%= pre.nivel%></td>
       <td> <%= check_box_tag "predeterminado", nil, verificar_predeterminado(pre.id) %></td>
 
       <td style="width:120px;"> 
