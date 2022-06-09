@@ -250,4 +250,23 @@ skip_before_action :verify_authenticity_token
 
   end
 
+
+  def guardar_pago_cuota_detalle
+
+    @valido = true
+    @msg = ""
+    @guardado_ok = false
+
+    @cuota_detalle = CuotaDetalle.where("id = ?", params[:cuota_detalle_id]).first
+    @cuota_detalle.pago_cuota = 
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
 end
