@@ -1,0 +1,19 @@
+<% if @guardado_ok %>
+  
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide');
+    
+    $("#link-to-cuota-detalle-<%=params[:cuota_id]%>").trigger('click');
+    $("#link-to-cuota-detalle-<%=params[:cuota_id]%>").trigger('click');
+    
+    swal("Cuota pagada exitosamente!");
+
+  }, 1000);
+    
+
+<% else %>
+
+  swal('Error al guardar el pago de la cuota. <%=@msg%>');
+
+<% end %>
