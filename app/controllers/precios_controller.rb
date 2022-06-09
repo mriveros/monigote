@@ -39,6 +39,13 @@ before_filter :require_usuario
       args << params[:form_buscar_precios_monto]
 
     end
+    
+    if params[:form_buscar_precios][:nivel_id].present?
+
+	      cond << "nivel_id = ?"
+	      args << params[:form_buscar_precios][:nivel_id]
+
+	  end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
@@ -86,7 +93,7 @@ before_filter :require_usuario
     @precio.codigo = params[:precio][:codigo].upcase
     @precio.descripcion = params[:precio][:descripcion].upcase
     @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
-    
+    @precio.nivel_id = params[:precio][:nivel_id]
 
       if @precio.save
 
@@ -180,6 +187,7 @@ before_filter :require_usuario
       @precio.codigo = params[:precio][:codigo].upcase
       @precio.descripcion = params[:precio][:descripcion].upcase
       @precio.monto =  params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
+      @precio.nivel_id = params[:precio][:nivel_id]
      
 
       if @precio.save
