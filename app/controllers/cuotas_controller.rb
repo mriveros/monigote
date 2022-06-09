@@ -258,7 +258,16 @@ skip_before_action :verify_authenticity_token
     @guardado_ok = false
 
     @cuota_detalle = CuotaDetalle.where("id = ?", params[:cuota_detalle_id]).first
-    @cuota_detalle.pago_cuota = 
+    @cuota_detalle.pago_cuota = params[:monto_pago]
+    @cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pagado]
+    @cuota_detalle.fecha_pago = params[:fecha_pago]
+    @cuota_detalle.numero_comprobante = params[:numero_comprobante]
+    
+    if @cuota_detalle.save
+
+       @guardado_ok = true;
+
+    end
 
     respond_to do |f|
 
