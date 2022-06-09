@@ -51,12 +51,12 @@ before_filter :require_usuario
 
     if cond.size > 0
 
-      @precios =  Precio.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
+      @precios =  VPrecio.orden_01.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = Precio.where(cond).count
 
     else
 
-      @precios = Precio.orden_01.paginate(per_page: 10, page: params[:page])
+      @precios = VPrecio.orden_01.paginate(per_page: 10, page: params[:page])
       @total_encontrados = Precio.count
 
     end
