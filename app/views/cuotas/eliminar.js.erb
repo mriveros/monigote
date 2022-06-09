@@ -1,6 +1,6 @@
 <% if @eliminado %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-pago-cuota' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pagos-cuotas");
+  $("<div class='col-sm-12' id='msg-eliminar-cuota' style='color:#000;padding-top:5px;font-size:10px;background:#d6ffd6;border-radius:5px;text-align:center;'>Eliminado exitosamente.</div>").insertBefore("#table-pagos-cuotas");
   $("#form_buscar_cuotas_id").val('<%=@cuota_elim.id%>');
   $("#form_buscar_cuotas_fecha").val('');
   $("#form_buscar_cuotas_mes_periodo_id").val('');
@@ -10,23 +10,23 @@
   $("#form_buscar_cuotas_sala_id").val('');
   $("#form_buscar_cuotas_total_cuotas").val('');
   $("#form_buscar_cuotas_total_cobradas").val('');
-  
+  $("#form-buscar-pagos-cuotas").submit();
   
     setTimeout(function(){
 
-      $("#msg-eliminar-proveedores-ganados").remove();
+      $("#msg-eliminar-cuota").remove();
       
-      swal("Pago de Salarios","Registro de Pagos de Salarios eliminado exitosamente.", "success");
+      swal("Cuotas","Registro de Cuota eliminada exitosamente.", "success");
 
     }, 1000);
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-pago-cuota' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-pagos-cuotas");
+  $("<div class='col-sm-12' id='msg-eliminar-cuota' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al Eliminar. Intente más Tarde</div>").insertBefore("#table-pagos-cuotas");
   
   setTimeout(function(){ 
 
-  	$("#msg-eliminar-pago-cuota").remove(); 
+  	$("#msg-eliminar-cuota").remove(); 
 	 swal("Cuotas", "No se pudo eliminar la cuota generada. <%=@msg%>.", "error");
 
 	}, 1500);

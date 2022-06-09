@@ -118,6 +118,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
     @guardado_error = false
+    total_cuotas = 0
    
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @matriculaciones = Matriculacion.where('periodo_escolar_id = ?', params[:periodo_escolar][:id])
@@ -139,6 +140,7 @@ skip_before_action :verify_authenticity_token
               @cuota.mes_periodo_id = params[:mes_periodo][:id]
               @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
               @cuota.matriculacion_id = m.id
+              
               if @cuota.save
                 
                 matriculacion_detalle.each do |md|
@@ -149,8 +151,10 @@ skip_before_action :verify_authenticity_token
                   precio = Precio.where('id = ?', md.precio_id).first
                   cuota_detalle.monto_cuota = precio.monto
                   cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                  
                   if cuota_detalle.save
 
+                    total_cuotas = total_cuotas + cuota_detalle.monto_cuota
                     @guardado_ok = true
 
                   else
@@ -160,6 +164,9 @@ skip_before_action :verify_authenticity_token
                   end
                   
                 end #end each md
+                @cuota.total_cuotas = total_cuotas
+                @cuota.save
+
 
               end
 
@@ -262,9 +269,12 @@ skip_before_action :verify_authenticity_token
     @cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pagado]
     @cuota_detalle.fecha_pago = params[:fecha_pago]
     @cuota_detalle.numero_comprobante = params[:numero_comprobante]
-    
+
     if @cuota_detalle.save
 
+       @cuota = Cuota.where('id = ?', @cuota_detalle.cuota_id).first
+       @cuota.total_cobradas = CuotaDetalle.where("cuota_id = ?", @cuota_detalle.cuota_id).sum(:pago_cuota)
+       @cuota.save
        @guardado_ok = true;
 
     end
