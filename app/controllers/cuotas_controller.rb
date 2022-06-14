@@ -118,6 +118,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
     @guardado_error = false
+
     total_cuotas = 0
    
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
@@ -166,7 +167,7 @@ skip_before_action :verify_authenticity_token
                 end #end each md
                 @cuota.total_cuotas = total_cuotas
                 @cuota.save
-
+                total_cuotas = 0
 
               end
 
