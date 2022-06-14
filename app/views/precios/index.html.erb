@@ -68,6 +68,14 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_monto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
+          
+          <th >
+          <span>Nivel</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_precios, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_nivel_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
 
           <th style="width:15%;">
             <span>Predeterminado</span>
