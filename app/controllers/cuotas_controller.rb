@@ -275,7 +275,7 @@ skip_before_action :verify_authenticity_token
        @cuota = Cuota.where('id = ?', @cuota_detalle.cuota_id).first
        @cuota.total_cobradas = CuotaDetalle.where("cuota_id = ?", @cuota_detalle.cuota_id).sum(:pago_cuota)
        @cuota.save
-       @guardado_ok = true;
+     @guardado_ok = true;
 
     end
 

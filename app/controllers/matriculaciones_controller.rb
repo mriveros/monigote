@@ -187,6 +187,7 @@ class MatriculacionesController < ApplicationController
 
 	  def matriculacion_detalle
 
+	  	@matriculacion = Matriculacion.where('id = ?', params[:matriculacion_id]).first
 	  	@matriculacion_detalle = VMatriculacionDetalle.orden_fecha.where('matriculacion_id = ?', params[:matriculacion_id]).paginate(per_page: 10, page: params[:page])
 
 	  	respond_to do |f|
@@ -199,6 +200,7 @@ class MatriculacionesController < ApplicationController
 
 	  def agregar_matriculacion_detalle
 
+	  	@matriculacion = Matriculacion.find(params[:matriculacion_id])
 	    @matriculacion_detalle = MatriculacionDetalle.new
 
 	    respond_to do |f|

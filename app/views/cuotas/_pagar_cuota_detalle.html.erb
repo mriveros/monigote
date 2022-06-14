@@ -21,8 +21,8 @@
 
           <div class="col-sm-4"><%= label_tag :nil, "Fecha Pago".html_safe %></div>
           <div class="col-sm-7"> 
-            <div class='input-group' style="width:150px;float:left;margin-top:5px;">
-              <%= text_field_tag :fecha_pago,nil , class: 'form-control input-sm',value:"#{Date.today.strftime("%d/%m/%Y")}", style: "margin-top:0px;" %>
+            <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
+              <%= text_field_tag :fecha_pago, Date.today.strftime('%d/%m/%Y') , class: 'form-control input-sm', style: "margin-top:0px;"%>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
           </div>

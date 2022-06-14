@@ -6,6 +6,6 @@ class VPrecio < ActiveRecord::Base
   attr_accessible :id, :descripcion, :monto, :nivel_id, :nivel, :predeterminado
  
   scope :predeterminado, -> { order("predeterminado = 't' desc")}
-
+  scope :orden_01, -> { order("id")}
   
 end
