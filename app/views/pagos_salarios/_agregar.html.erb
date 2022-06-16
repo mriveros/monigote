@@ -23,16 +23,16 @@
           </div>    
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Hacienda #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :hacienda, :id, Hacienda.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Sucursal #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :sucursal, :id, Sucursal.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
           <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.year, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-7"><%= collection_select :anho_periodo, :id, PeriodoEscolar.orden_periodo.where('anho_periodo = ?', Date.today.year.to_s), :id, :anho_periodo, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
               
       </div>
@@ -74,9 +74,9 @@
       
       }
 
-      if($("#hacienda_id").val().length == 0){
+      if($("#sucursal_id").val().length == 0){
 
-        msg +="Debe ingresar una Hacienda.\n"
+        msg +="Debe ingresar una Sucursal.\n"
         valido = false
       
       }
