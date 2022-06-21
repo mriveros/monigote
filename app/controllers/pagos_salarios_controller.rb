@@ -129,7 +129,7 @@ skip_before_action :verify_authenticity_token
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @sucursal = Sucursal.where("id = ?", params[:sucursal][:id]).first
 
-    @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ? and sucursal_id = ? ", params[:mes_periodo][:id], params[:anho_periodo], params[:sucursal][:id]).first
+    @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ? and sucursal_id = ? ", params[:mes_periodo][:id], params[:periodo_escolar][:id], params[:sucursal][:id]).first
     
     if @pago_salario.present?
 
@@ -149,16 +149,16 @@ skip_before_action :verify_authenticity_token
     if @valido
 
       @total_salario = VPersonal.where("sucursal_id = ?", params[:sucursal][:id]).sum(:sueldo)
-      @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-      @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-      @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+      @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
+      @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
+      @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
       
       PagoSalarioDetalle.transaction do    
 
         @pago_salario = PagoSalario.new()
         @pago_salario.fecha = params[:fecha]
         @pago_salario.mes_periodo_id = params[:mes_periodo][:id]
-        @pago_salario.anho_periodo = params[:anho_periodo]
+        @pago_salario.anho_periodo = params[:periodo_escolar][:id]
         @pago_salario.sucursal_id = params[:sucursal][:id]
         @pago_salario.mes_periodo_id = params[:mes_periodo][:id]
         @pago_salario.total_salario = @total_salario
@@ -175,9 +175,9 @@ skip_before_action :verify_authenticity_token
             @personales_sucursal.each do |ph|
 
               @personal_salario = VPersonal.where("personal_id = ? and sucursal_id = ?", ph.id, params[:sucursal][:id]).first
-              @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
-              @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
-              @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+              @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
+              @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
+              @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
               @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
               @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido + @personal_sueldo_percibido
 
@@ -212,7 +212,7 @@ skip_before_action :verify_authenticity_token
             @registro_gastos.fecha = params[:fecha]
             @registro_gastos.gasto_id = PARAMETRO[:registro_gasto_pago_salario]
             @registro_gastos.monto = @pago_salario.monto_total_pagado
-            @registro_gastos.observacion = "PAGO DE SALARIOS #{@sucursal.descripcion}: #{@mes.descripcion}/#{params[:anho_periodo]}"
+            @registro_gastos.observacion = "PAGO DE SALARIOS #{@sucursal.descripcion}: #{@mes.descripcion}/#{params[:periodo_escolar][:id]}"
             @registro_gastos.pago_salario_id = @pago_salario.id
             @registro_gastos.save
 
