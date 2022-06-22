@@ -32,7 +32,7 @@
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Año Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
-          <div class="col-sm-7"><%= collection_select :anho_periodo, :id, PeriodoEscolar.orden_periodo.where('anho_periodo = ?', Date.today.year.to_s), :id, :anho_periodo, { include_blank: false}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= collection_select :periodo_escolar, :id, PeriodoEscolar.orden_periodo.where('anho_periodo = ?', Date.today.year.to_s), :id, :anho_periodo, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
               
       </div>
@@ -88,7 +88,7 @@
       
       }
 
-      if($("#anho_periodo_id").val().length == 0){
+      if($("#periodo_escolar_id").val().length == 0){
 
         msg +="Debe ingresar el Año.\n"
         valido = false
