@@ -52,6 +52,9 @@ development:
   estado_pago_cuota_detalle_pagado: 2
   estado_pago_cuota_detalle_pago_parcial: 3
 
+  #REGISTRO DE GASTOS
+  registro_gasto_pago_salario: 1
+
 production:
   
 
@@ -108,3 +111,5 @@ production:
   estado_pago_cuota_detalle_pagado: 2
   estado_pago_cuota_detalle_pago_parcial: 3
   
+  #REGISTRO DE GASTOS
+  registro_gasto_pago_salario: 1
