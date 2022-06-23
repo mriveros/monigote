@@ -23,16 +23,16 @@
           </div>    
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Personal #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Personal #{attr_requerido}".html_safe, id: "lbl-nombre-personal" %></div>
           <div class="col-sm-7"><%= collection_select :personal, :id, Personal.nombre_apellido, :id, :nombre_apellido, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
-           <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-parentezco" %></div>
+           <div class="col-sm-4"><%= label_tag nil, "Mes Periodo #{attr_requerido}".html_safe, id: "lbl-mes-periodo" %></div>
           <div class="col-sm-7"><%= collection_select :mes_periodo,:id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
-          <div class="col-sm-4"><%= label_tag :nil, "Año Periodo #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= text_field_tag :anho_periodo, Date.today.year, class: 'form-control input-sm',style:"text-transform:uppercase;", :maxlength=> 4, :readonly=> true %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Año Periodo #{attr_requerido}".html_safe, id: "lbl-periodo-escolar" %></div>
+          <div class="col-sm-7"><%= collection_select :periodo_escolar,:id, PeriodoEscolar.orden_periodo.where('anho_periodo = ?', Date.today.year.to_s), :id, :anho_periodo, { include_blank: false}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br /><br />
 
           <div class="col-sm-4"><%= label_tag :nil, "Monto #{attr_requerido}".html_safe %></div>
@@ -99,7 +99,7 @@
       
       }
 
-      if($("#anho_periodo").val().length == 0){
+      if($("#periodo_escolar_id").val().length == 0){
 
         msg +="Debe ingresar el año.\n"
         valido = false
