@@ -55,6 +55,9 @@ development:
   #REGISTRO DE GASTOS
   registro_gasto_pago_salario: 1
 
+  #ESTADOS PERSONALES
+  estado_personal_activo: 1
+
 production:
   
 
@@ -113,3 +116,6 @@ production:
   
   #REGISTRO DE GASTOS
   registro_gasto_pago_salario: 1
+
+  #ESTADOS PERSONALES
+  estado_personal_activo: 1
