@@ -47,10 +47,10 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
     	end
 
-    	if params[:form_buscar_pagos_remuneraciones_extras_anho_periodo].present?
+    	if params[:form_buscar_pagos_remuneraciones_extras_periodo_escolar_id].present?
 
-	      cond << "anho_periodo ilike ?"
-	      args << "%#{params[:form_buscar_pagos_remuneraciones_extras_anho_periodo]}%"
+	      cond << "periodo_escolar_id = ?"
+	      args << params[:form_buscar_pagos_remuneraciones_extras_periodo_escolar_id]
 
 	    end
 	    
@@ -114,7 +114,7 @@ class PagosRemuneracionesExtrasController < ApplicationController
 		    @pago_remuneracion_extra.fecha = params[:fecha]
 		    @pago_remuneracion_extra.personal_id = params[:personal][:id]
 		    @pago_remuneracion_extra.mes_periodo_id = params[:mes_periodo][:id]
-		    @pago_remuneracion_extra.anho_periodo = params[:anho_periodo]
+		    @pago_remuneracion_extra.periodo_escolar_id = params[:periodo_escolar_id]
 		    @pago_remuneracion_extra.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
 		    @pago_remuneracion_extra.observacion = params[:observacion]
 
@@ -122,21 +122,21 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 		    	auditoria_nueva("Registrar nuevo RemuneracionExtra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
 		        @guardado_ok = true
-		       	@pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id],params[:anho_periodo]).first
+		       	@pago_salario = PagoSalario.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id],params[:periodo_escolar_id]).first
 		        
 		        if @pago_salario.present?
 
-		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
-				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", params[:mes_periodo][:id], params[:anho_periodo]).sum(:monto)
+		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar_id]).sum(:monto)
+				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar_id]).sum(:monto)
+				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar_id]).sum(:monto)
 					
 					@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
 					@pago_salario_detalle.each do |psd|
 
 						@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
-			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
-			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
-			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:mes_periodo][:id],params[:anho_periodo]).sum(:monto).to_i
+			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar_id]).sum(:monto).to_i
+			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar_id]).sum(:monto).to_i
+			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar_id]).sum(:monto).to_i
 			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
 			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
@@ -188,21 +188,21 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 	        auditoria_nueva("Eliminar registro de RemuneracionExtra", "pagos_remuneraciones_extras", @pago_remuneracion_extra_elim)
 	        @eliminado = true
-	        @pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).first
+	        @pago_salario = PagoSalario.where("mes_periodo_id = ? and periodo_escolar_id = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).first
 		        
 		    if @pago_salario.present?
 
-		        @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto)
-				@total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto)
-				@total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto)
+		        @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and periodo_escolar_id = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto)
+				@total_descuentos = PagoDescuento.where("mes_periodo_id = ? and periodo_escolar_id = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto)
+				@total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and periodo_escolar_id = ?", @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto)
 					
 				@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
 				@pago_salario_detalle.each do |psd|
 
 					@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
-			        @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto).to_i
-			        @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto).to_i
-			        @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.anho_periodo).sum(:monto).to_i
+			        @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto).to_i
+			        @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto).to_i
+			        @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, @pago_remuneracion_extra_elim.mes_periodo_id, @pago_remuneracion_extra_elim.periodo_escolar_id).sum(:monto).to_i
 			        @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
 			        @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
@@ -265,7 +265,7 @@ class PagosRemuneracionesExtrasController < ApplicationController
 		    @pago_remuneracion_extra.fecha = params[:pago_remuneracion_extra][:fecha]
 		    @pago_remuneracion_extra.personal_id = params[:pago_remuneracion_extra][:personal_id]
 		    @pago_remuneracion_extra.mes_periodo_id = params[:pago_remuneracion_extra][:mes_periodo_id]
-		    @pago_remuneracion_extra.anho_periodo = params[:pago_remuneracion_extra][:anho_periodo]
+		    @pago_remuneracion_extra.periodo_escolar_id = params[:pago_remuneracion_extra][:periodo_escolar_id]
 		    @pago_remuneracion_extra.monto = params[:pago_remuneracion_extra][:monto].to_s.gsub(/[$.]/,'').to_i
 		    @pago_remuneracion_extra.observacion = params[:pago_remuneracion_extra][:observacion]
 
@@ -273,21 +273,21 @@ class PagosRemuneracionesExtrasController < ApplicationController
 
 		    	auditoria_nueva("Registrar nuevo Remuneracion Extra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
 		        @actualizado_ok = true
-		       	@pago_salario = PagoSalario.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).first
+		       	@pago_salario = PagoSalario.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).first
 		        
 		        if @pago_salario.present?
 
-		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto)
-				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and anho_periodo = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto)
-				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and anho_periodo = ?",params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto)
+		        	@total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto)
+				    @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto)
+				    @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and periodo_escolar_id = ?",params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto)
 					
 					@pago_salario_detalle = PagoSalarioDetalle.where("pago_salario_id = ?", @pago_salario.id)
 					@pago_salario_detalle.each do |psd|
 
 						@personal_salario = VPersonal.where("personal_id = ?", psd.personal_id).first
-			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?",psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto).to_i
-			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto).to_i
-			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and anho_periodo = ?", psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:anho_periodo]).sum(:monto).to_i
+			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto).to_i
+			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto).to_i
+			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:pago_remuneracion_extra][:mes_periodo_id], params[:pago_remuneracion_extra][:periodo_escolar_id]).sum(:monto).to_i
 			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
 			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
