@@ -7,5 +7,6 @@ class VMatriculacion < ActiveRecord::Base
  
   scope :orden_01, -> { order("matriculacion_id")}
   scope :orden_niveles, -> { order("nivel")}
+  scope :orden_fecha, -> { order("created_at desc")}
 
 end
