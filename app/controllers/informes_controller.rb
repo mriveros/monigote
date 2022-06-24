@@ -17,10 +17,10 @@ class InformesController < ApplicationController
 
     end
 
-    if params[:sucursal_id].present?
+    if params[:sucursal][:id].present?
 
       cond << "sucursal_id = ?"
-      args << params[:sucursal_id]
+      args << params[:sucursal][:id]
 
     end
 
@@ -38,10 +38,10 @@ class InformesController < ApplicationController
 
     end
 
-    if params[:estado_cobro][:id].present?
+    if params[:estado_pago_cuota_detalle][:id].present?
 
-      cond << "estado_cobro_id = ?"
-      args << params[:estado_cobro][:id]
+      cond << "estado_pago_cuota_detalle_id = ?"
+      args << params[:estado_pago_cuota_detalle][:id]
 
     end
 
@@ -66,11 +66,11 @@ class InformesController < ApplicationController
 
     if cond.size > 0
      
-      @cita =  VCita.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
+      @cita =  VCuotaDetalle.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
 
     else
 
-      @cita = VCita.orden_01.paginate(per_page: 10, page: params[:page])
+      @cita = VCuotaDetalle.orden_01.paginate(per_page: 10, page: params[:page])
 
     end
 
@@ -87,7 +87,7 @@ class InformesController < ApplicationController
   def generar_pdf
     
     
-   @cita =  VCita.where("cita_id in (?)", params[:cita_id]).orden_01.paginate(per_page: 10, page: params[:page])
+   @cita =  VCuotaDetalle.where("cita_id in (?)", params[:cita_id]).orden_01.paginate(per_page: 10, page: params[:page])
     
 
     respond_to do |f|
