@@ -20,49 +20,49 @@
 
       <div class="panel-body" style="background:#e6e6e6; ">
         
-        <div class="col-sm-4"><%= label_tag nil, "Paciente".html_safe %></div>
+        <div class="col-sm-4"><%= label_tag nil, "Alumno".html_safe %></div>
         <%= hidden_field_tag :paciente_id %>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :cita_paciente_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :alumno_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
 
-        <div class="col-sm-4"><%= label_tag :nil, "Profesional".html_safe %></div>
-        <%= hidden_field_tag :profesional_id %>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;" ><%= text_area_tag :cita_profesional_id, nil ,rows: 3,class: 'form-control input-sm'%></div>
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Sucursal".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :sucursal, :id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
         <div class="col-sm-1"></div><br />
 
 
         <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Tipo Consulta".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :tipo_consulta, :id, TipoConsulta.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-         <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Periodo Escolar".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :mes_periodo, :id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-1"></div><br />
 
 
         <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Estado Cita".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cita, :id, EstadoCita.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-         <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Mes Periodo".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :mes_periodo, :id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-1"></div><br />
 
 
         <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Estado Cobro".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_cobro, :id, EstadoCobro.order('id'), :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-         <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Estado Pago Cuota".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_pago_cuota_detalle, :id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-1"></div><br />
 
 
         <div class="col-sm-4"><%= label_tag :nil, "Desde la Fecha".html_safe %></div>
-          <div class='input-group date col-sm-4'>
-          <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          </div>
+        <div class='input-group date col-sm-4'>
+        <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
 
 
-         <div class="col-sm-1"></div><br />
+        <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Hasta la Fecha".html_safe %></div>
-          <div class='input-group date col-sm-4'>
-          <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm' %>
-          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-          </div>
+        <div class='input-group date col-sm-4'>
+        <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm' %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        </div>
         <div class="col-sm-1"></div><br /> 
        
 
@@ -89,15 +89,15 @@
 
   })
 
-  //OBTENER PACIENTE
-  $("#cita_paciente_id").bind('focus', function(){   
+  //OBTENER ALUMNO
+  $("#alumno_id").bind('focus', function(){   
 
     var personas = [];
-    $("#cita_paciente_id").val('');
+    $("#alumno_id").val('');
     $("#paciente_id").val('');
-    $("#cita_paciente_id").attr('readonly', false);
+    $("#alumno_id").attr('readonly', false);
 
-    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#cita_paciente_id").val()}, function(j){
+    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#alumno_id").val()}, function(j){
         
       var nombre_persona = "";
       var options = "<option value=''> -- Seleccione un Profesional -- </option>"
@@ -115,23 +115,23 @@
 
       }
 
-      $("#cita_paciente_id").html(options);
+      $("#alumno_id").html(options);
 
     })
 
-    $("#cita_paciente_id").autocomplete({
+    $("#alumno_id").autocomplete({
 
       minLength: 1,
       source: personas,
       focus: function( event, ui ) {
       
-        $("#cita_paciente_id" ).val( ui.item.label );
+        $("#alumno_id" ).val( ui.item.label );
         return false;
       },
       select: function( event, ui ) {
 
         var datos = ui.item.value.split(" - ");
-        $("#cita_paciente_id").val( ui.item.label );
+        $("#alumno_id").val( ui.item.label );
         $("#paciente_id").val(datos[0]);
         return false;
 
@@ -139,88 +139,10 @@
     })
 
   });
-
-  //OBTENER PROFESIONAL
-  $("#cita_profesional_id").bind('focus', function(){   
-
-    var personas = [];
-    $("#cita_profesional_id").val('');
-    $("#profesional_id").val('');
-    $("#cita_profesional_id").attr('readonly', false);
-
-    $.getJSON("<%= url_for(profesionales_buscar_profesional_path) %>", { nombre_profesional: $("#cita_profesional_id").val()}, function(j){
-        
-      var nombre_persona = "";
-      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
-
-      for (var i = 0; i < j.length; i++) {
-        
-        if(j[i].nombre_persona != nombre_persona ){
-          
-          personas.push( {value: j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
-          nombre_persona =j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
-
-          options += "<option value="+ j[i].profesional_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
-
-        }
-
-      }
-
-      $("#cita_profesional_id").html(options);
-
-    })
-
-    $("#cita_profesional_id").autocomplete({
-
-      minLength: 1,
-      source: personas,
-      focus: function( event, ui ) {
-      
-        $("#cita_profesional_id" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-
-        var datos = ui.item.value.split(" - ");
-        $("#cita_profesional_id").val( ui.item.label );
-        $("#profesional_id").val(datos[0]);
-        return false;
-      }
-    })
-
-  });
   
   //----------------------------INICIO -----------------------------------------//
   aplicar_datepicker();
-
-  $("#general").prop("checked", false);
-
-  $("#general").bind('change', function(){   
-
-    if ($("#general").prop("checked") == true)
-    {
-
-      $("#pertenece").prop("checked", false);
-      $("#cobrado").prop("checked", false);
-      $("#pertenece").prop("disabled", true);
-      $("#cobrado").prop("disabled", true);
-
-    }else
-    {
-      $("#pertenece").prop("checked", true);
-      $("#cobrado").prop("checked", true);
-      $("#pertenece").prop("disabled", false);
-      $("#cobrado").prop("disabled", false);
-
-    }
-   
-
-  });
-
-  
-  //----------------------------------------------------------------------------//
-
-
+ 
 </script>
 
 <style>

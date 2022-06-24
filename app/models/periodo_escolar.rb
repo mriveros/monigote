@@ -7,5 +7,6 @@ class PeriodoEscolar < ActiveRecord::Base
  
   scope :orden_01, -> { order("id")}
   scope :orden_periodo, -> { order("anho_periodo asc")}
+  scope :periodo_actual, -> { where("anho_periodo = ?", Date.today.year)}
 
 end
