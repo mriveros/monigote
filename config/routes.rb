@@ -134,6 +134,16 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   post 'pagos_salarios/guardar'
   get 'pagos_salarios/eliminar'
   get 'pagos_salarios/salario_detalle'
+
+  #ADELANTOS
+  post 'registros_gastos/lista'
+  get 'registros_gastos/lista'
+  get 'registros_gastos/agregar'
+  post 'registros_gastos/guardar'
+  get 'registros_gastos/eliminar'
+  get 'registros_gastos/editar'
+  post 'registros_gastos/actualizar'
+  get 'registros_gastos/index'
 #---------------------------------------FONOWARE------------------------------------------------------------------------    
   #CRONTAB
   get "crontab_ultron/index"

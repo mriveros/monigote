@@ -40,7 +40,7 @@
 
 					<li>
 
-						<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
+						<a class="dropdown-toggle " href="#" data-toggle="dropdown">Monigote<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 						<li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
                    
@@ -66,19 +66,25 @@
             <li><%= link_to "Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>  
 
 			<li>
+			<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
 
+            <ul class="dropdown-menu">
+              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li> 
+              <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
+            </ul>
+        	</li>
+
+        	<li>
            <a class="dropdown-toggle " href="#" data-toggle="dropdown">Salarios<b class="caret"></b></a>
 
             <ul class="dropdown-menu">
+              <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
 
               <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li> 
               <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li> 
-              <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
+              <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
               <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li> 
-              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>
-              <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li> 
-              <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
-
+              
             </ul>
 
           </li>
