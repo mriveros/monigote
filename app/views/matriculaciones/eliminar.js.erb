@@ -12,12 +12,20 @@
 
     	$("#msg-eliminar-matriculacion").remove(); 
     	$("#form-buscar-matriculaciones").submit(); 
-    }, 1500);
+    }, 2000);
    
     	swal("Eliminado Exitosamente.")
 
 <% else %>
 
-  $("<div class='col-sm-12' id='msg-eliminar-matriculacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al eliminar el Cargo. Intente más tarde.</div>").insertBefore("#table-matriculaciones");
+  $("<div class='col-sm-12' id='msg-eliminar-matriculacion' style='color:#000;padding-top:5px;font-size:10px;background: #f8dfdf;border-radius:5px;text-align:center;'>Error al eliminar La Matriculación. Intente más tarde.</div>").insertBefore("#table-matriculaciones");
   
+
+  setTimeout(function(){ 
+
+      $("#msg-eliminar-matriculacion").remove(); 
+      swal("<%=@msg%>")
+    
+    }, 2000);
+
 <% end %>

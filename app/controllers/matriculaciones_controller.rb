@@ -116,24 +116,33 @@ class MatriculacionesController < ApplicationController
 	  end
 
 
-	  def eliminar
+	def eliminar
 
-	    valido = true
-	    @msg = ""
-
-	    @matriculacion = Matriculacion.find(params[:id])
-		@matriculacion_elim = @matriculacion
+	  valido = true
+    @msg = ""
+	  
+	  @matriculacion = Matriculacion.find(params[:id])
+	  @matriculacion_elim = @matriculacion
 
 	    if valido
 
-	      	if @matriculacion.destroy
+	      if @matriculacion.destroy
 
-		        auditoria_nueva("eliminar matriculacion", "matriculaciones", @matriculacion)
-		        @eliminado = true
+		      auditoria_nueva("eliminar matriculacion", "matriculaciones", @matriculacion)
+		      @eliminado = true
 
-	    	end
-		end
-
+	   		end
+	
+			end
+			rescue Exception => exc  
+        # dispone el mensaje de error 
+        #puts "Aqui si muestra el error ".concat(exc.message)
+        if exc.present?        
+           
+          @msg = 'Esta matriculación ya cuenta con detalles'
+          @eliminado = false
+        
+        end
 	    respond_to do |f|
 
 	      f.js

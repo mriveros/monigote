@@ -80,12 +80,12 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @cuotas =  VCuota.orden_periodo.where(cond).paginate(per_page: 10, page: params[:page])
+      @cuotas =  VCuota.fecha.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuota.where(cond).count
       
     else
 
-      @cuotas = VCuota.orden_01.paginate(per_page: 10, page: params[:page])
+      @cuotas = VCuota.fecha.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuota.count
 
     end
