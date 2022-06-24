@@ -39,6 +39,13 @@ class MatriculacionesController < ApplicationController
 
 	    end
 
+	    if params[:form_buscar_matriculaciones][:sucursal_id].present?
+
+	      cond << "sucursal_id = ?"
+	      args << params[:form_buscar_matriculaciones][:sucursal_id]
+
+	    end
+
 	    if params[:form_buscar_matriculaciones][:estado_matriculacion_id].present?
 
 	      cond << "estado_matriculacion_id = ?"
@@ -93,9 +100,10 @@ class MatriculacionesController < ApplicationController
 
 	    @matriculacion = Matriculacion.new()
 
-	    @matriculacion.periodo_id = params[:matriculacion][:periodo_id]
+	    @matriculacion.periodo_escolar_id = params[:matriculacion][:periodo_escolar_id]
 	    @matriculacion.nivel_id = params[:matriculacion][:nivel_id]
 	    @matriculacion.sala_id = params[:matriculacion][:sala_id]
+	    @matriculacion.sucursal_id = params[:matriculacion][:sucursal_id]
 	    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
 	    
 	      if @matriculacion.save
@@ -174,8 +182,7 @@ class MatriculacionesController < ApplicationController
 	    if valido
 
 	      
-	    	@matriculacion.descripcion = params[:matriculacion][:descripcion].upcase
-	    	@matriculacion.sueldo = params[:matriculacion][:sueldo].to_s.gsub(/[$.]/,'').to_i
+	    	
 	      	
 	      	if @matriculacion.save
 
