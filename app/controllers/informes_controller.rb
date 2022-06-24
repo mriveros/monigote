@@ -10,31 +10,31 @@ class InformesController < ApplicationController
   	@informe = "informes"
   	@msg = "" 
     
-    if params[:paciente_id].present?
+    if params[:alumno_id].present?
 
-      cond << "paciente_id = ?"
-      args << params[:paciente_id]
-
-    end
-
-    if params[:profesional_id].present?
-
-      cond << "profesional_id = ?"
-      args << params[:profesional_id]
+      cond << "alumno_id = ?"
+      args << params[:alumno_id]
 
     end
 
-    if params[:tipo_consulta][:id].present?
+    if params[:sucursal_id].present?
 
-      cond << "tipo_consulta_id = ?"
-      args << params[:tipo_consulta][:id]
+      cond << "sucursal_id = ?"
+      args << params[:sucursal_id]
 
     end
 
-    if params[:estado_cita][:id].present?
+    if params[:periodo_escolar][:id].present?
 
-      cond << "estado_cita_id = ?"
-      args << params[:estado_cita][:id]
+      cond << "periodo_escolar_id = ?"
+      args << params[:periodo_escolar][:id]
+
+    end
+
+    if params[:mes_periodo][:id].present?
+
+      cond << "mes_periodo_id = ?"
+      args << params[:mes_periodo][:id]
 
     end
 
