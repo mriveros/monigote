@@ -24,6 +24,13 @@ class InformesController < ApplicationController
 
     end
 
+    if params[:nivel][:id].present?
+
+      cond << "nivel_id = ?"
+      args << params[:nivel][:id]
+
+    end
+
     if params[:periodo_escolar][:id].present?
 
       cond << "periodo_escolar_id = ?"
@@ -66,15 +73,15 @@ class InformesController < ApplicationController
 
     if cond.size > 0
      
-      @cita =  VCuotaDetalle.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
+      @cuota_detalle =  VCuotaDetalle.where(cond).orden_01.paginate(per_page: 10, page: params[:page])
 
     else
 
-      @cita = VCuotaDetalle.orden_01.paginate(per_page: 10, page: params[:page])
+      @cuota_detalle = VCuotaDetalle.orden_01.paginate(per_page: 10, page: params[:page])
 
     end
 
-    @parametros = { format: :pdf, cita_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], estado_cobro_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
+    @parametros = { format: :pdf, pago_cuota_detalle_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], estado_cobro_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
 
     respond_to do |f|
 

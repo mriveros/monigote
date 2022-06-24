@@ -31,6 +31,10 @@
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :sucursal, :id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
         <div class="col-sm-1"></div><br />
 
+        <div class="col-sm-1"></div><br />
+        <div class="col-sm-4"><%= label_tag :nil, "Nivel".html_safe %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :nivel, :id, Nivel.orden_descripcion, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Periodo Escolar".html_safe %></div>
