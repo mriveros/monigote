@@ -31,7 +31,14 @@
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-          
+          <th >
+          <span>Sucursal</span>
+            <div class="input-group input-group-sm">
+              <%= collection_select :form_buscar_matriculaciones, :sucursal_id, Sucursal.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-matriculaciones', '#form_buscar_matriculaciones_sucursal_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
           <th >
           <span>Periodo Escolar</span>
             <div class="input-group input-group-sm">
