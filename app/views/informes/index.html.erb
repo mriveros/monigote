@@ -23,7 +23,7 @@
       <div class="panel-body" style="background:#e6e6e6; ">
         
         <div class="col-sm-4"><%= label_tag nil, "Alumno".html_safe %></div>
-        <%= hidden_field_tag :paciente_id %>
+        <%= hidden_field_tag :v_alumno_id %>
         <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :alumno_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
         <br style="clear: both;"/>
 
@@ -40,7 +40,7 @@
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Periodo Escolar".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :mes_periodo, :id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :periodo_escolar, :id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
         <div class="col-sm-1"></div><br />
 
 
@@ -97,24 +97,24 @@
   //OBTENER ALUMNO
   $("#alumno_id").bind('focus', function(){   
 
-    var personas = [];
+    var alumnos = [];
+    $("#v_alumno_id").val('');
     $("#alumno_id").val('');
-    $("#paciente_id").val('');
     $("#alumno_id").attr('readonly', false);
 
     $.getJSON("<%= url_for(alumnos_buscar_alumno_path) %>", { alumno: $("#alumno_id").val()}, function(j){
         
-      var nombre_persona = "";
+      var nombre = "";
       var options = "<option value=''> -- Seleccione un Profesional -- </option>"
 
       for (var i = 0; i < j.length; i++) {
         
-        if(j[i].nombre_persona != nombre_persona ){
+        if(j[i].nombre != nombre ){
           
-          personas.push( {value: j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona });
-          nombre_persona =j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona ;
+          alumnos.push( {value: j[i].id +" - "+ j[i].nombres+" "+j[i].apellidos });
+          nombre =j[i].id +" - "+ j[i].nombre+" "+j[i].apellidos ;
 
-          options += "<option value="+ j[i].paciente_id +" - "+ j[i].nombre_persona+" "+j[i].apellido_persona + "</option>"
+          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" "+j[i].apellidos + "</option>"
 
         }
 
@@ -127,7 +127,8 @@
     $("#alumno_id").autocomplete({
 
       minLength: 1,
-      source: personas,
+      source: alumnos,
+
       focus: function( event, ui ) {
       
         $("#alumno_id" ).val( ui.item.label );
@@ -137,7 +138,7 @@
 
         var datos = ui.item.value.split(" - ");
         $("#alumno_id").val( ui.item.label );
-        $("#paciente_id").val(datos[0]);
+        $("#v_alumno_id").val(datos[0]);
         return false;
 
       }

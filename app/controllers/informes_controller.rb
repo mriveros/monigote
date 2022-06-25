@@ -10,10 +10,10 @@ class InformesController < ApplicationController
   	@informe = "informes"
   	@msg = "" 
     
-    if params[:alumno_id].present?
+    if params[:v_alumno_id].present?
 
       cond << "alumno_id = ?"
-      args << params[:alumno_id]
+      args << params[:v_alumno_id]
 
     end
 
@@ -81,7 +81,7 @@ class InformesController < ApplicationController
 
     end
 
-    @parametros = { format: :pdf, pago_cuota_detalle_id: @cita.map(&:cita_id), paciente_id: params[:paciente_id], profesional_id: params[:profesional_id], tipo_consulta_id: params[:tipo_consulta][:id], estado_cita_id: params[:estado_cita][:id], estado_cobro_id: params[:estado_cobro][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
+    @parametros = { format: :pdf, pago_cuota_detalle_id: @cuota_detalle.map(&:cuota_detalle_id), alumno_id: params[:v_alumno_id], sucursal_id: params[:sucursal][:id], nivel_id: params[:nivel][:id], periodo_escolar_id: params[:periodo_escolar][:id], mes_periodo_id: params[:mes_periodo][:id], estado_pago_cuota_detalle_id: params[:estado_pago_cuota_detalle][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
 
     respond_to do |f|
 
