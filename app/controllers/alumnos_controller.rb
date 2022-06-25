@@ -223,7 +223,7 @@ skip_before_action :verify_authenticity_token
     respond_to do |f|
       
       f.html
-      f.json { render :json => @personas }
+      f.json { render :json => @alumnos }
     
     end
     

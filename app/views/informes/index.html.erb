@@ -1,6 +1,7 @@
 
 <%= javascript_include_tag "sweetalert.min" %>
 <%= stylesheet_link_tag "sweetalert" %>
+
 <div>
 
   <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
@@ -9,7 +10,8 @@
 
 </div>
 
-<div style="clear:both;"></div>
+
+  
  
 
 <%= form_for "informes", remote: true, url: informes_indexa_url, html: { id: "form-informes-produccion" }, method: 'GET' do |f| %>
@@ -33,7 +35,7 @@
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Nivel".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :nivel, :id, Nivel.orden_descripcion, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :nivel, :id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
         <div class="col-sm-1"></div><br />
 
         <div class="col-sm-1"></div><br />
@@ -82,7 +84,6 @@
     </div>  
 
   </div>  
-
 <%end%>
 
 <script type="text/javascript">
@@ -101,7 +102,7 @@
     $("#paciente_id").val('');
     $("#alumno_id").attr('readonly', false);
 
-    $.getJSON("<%= url_for(pacientes_buscar_paciente_cita_path) %>", { nombre_paciente: $("#alumno_id").val()}, function(j){
+    $.getJSON("<%= url_for(alumnos_buscar_alumno_path) %>", { alumno: $("#alumno_id").val()}, function(j){
         
       var nombre_persona = "";
       var options = "<option value=''> -- Seleccione un Profesional -- </option>"
@@ -160,8 +161,10 @@
     #start-tour{
         cursor: pointer;
     }
-
     #form-buscar-informes table th { background:#e6e6e6;}
     #form-buscar-informes table th span.limpiar { background:#fff;}
+    #form-buscar-informes label, #form-buscar-informes input[type='text'] { float:left; margin-top:5px;}
+    #form-buscar-informes br {clear:both; }
+    #form-buscar-informes label { width:200px;}
 
 </style>
