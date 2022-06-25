@@ -218,7 +218,7 @@ skip_before_action :verify_authenticity_token
 
   def buscar_alumno
     
-    @alumnos = Alumno.where("nombre ilike ?", "%#{params[:alumno]}%")
+    @alumnos = Alumno.where("nombres ilike ?", "%#{params[:alumno]}%")
 
     respond_to do |f|
       
