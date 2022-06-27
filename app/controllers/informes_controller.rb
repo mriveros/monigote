@@ -54,16 +54,16 @@ class InformesController < ApplicationController
 
     if params[:fecha_desde].present? && params[:fecha_hasta].present? 
 
-      cond << "fecha_cita >= '#{params[:fecha_desde]}' and fecha_cita <= '#{params[:fecha_hasta]}'" 
+      cond << "fecha_cuota >= '#{params[:fecha_desde]}' and fecha_cuota <= '#{params[:fecha_hasta]}'" 
 
     elsif params[:fecha_desde].present?
       
-      cond << "fecha_cita >= ?"
+      cond << "fecha_cuota >= ?"
       args << params[:fecha_desde]
 
     elsif params[:fecha_hasta].present?
       
-      cond << "fecha_cita <= ?"
+      cond << "fecha_cuota <= ?"
       args << params[:fecha_hasta]
 
     end
@@ -94,18 +94,18 @@ class InformesController < ApplicationController
   def generar_pdf
     
     
-   @cita =  VCuotaDetalle.where("cita_id in (?)", params[:cita_id]).orden_01.paginate(per_page: 10, page: params[:page])
+   @cuota =  VCuotaDetalle.where("cuota_id in (?)", params[:cuota_id]).orden_01.paginate(per_page: 10, page: params[:page])
     
 
     respond_to do |f|
      
       f.pdf do
 
-          render  :pdf => "planilla_resumen_cita_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
-                  :template => 'informes/planilla_reporte_cita.pdf.erb',
+          render  :pdf => "planilla_resumen_cuotas_#{Time.now.strftime("%Y_%m_%d__%H_%M")}",
+                  :template => 'informes/planilla_reporte_cuotas.pdf.erb',
                   :layout => 'pdf.html',
-                  :header => {:html => { :template => "informes/cabecera_planilla_resumen_cita.pdf.erb" ,
-                  :locals   => { :cita => @cita }}},
+                  :header => {:html => { :template => "informes/cabecera_planilla_resumen_cuotas.pdf.erb" ,
+                  :locals   => { :cuota => @cuota }}},
                   :margin => {:top => 65,                         # default 10 (mm)
                   :bottom => 11,
                   :left => 3,
