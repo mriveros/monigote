@@ -4,10 +4,10 @@
   
     <p style="font-size: 14px; text-align: center; font-family: times new roman">
     
-      Sistema de gestión para Especialidades - Monigote<br />
-      <label style="font-size: 18px;">RESUMEN DE CITAS</label>
+      Sistema de gestión para Centros  - Monigote<br />
+      <label style="font-size: 18px;">RESUMEN CUOTAS</label>
       <br />
-      <label style="font-size: 15px;">Lic. Ma Lourdes Benitez</label>
+      <label style="font-size: 15px;">Resumen</label>
       <br />
       <label style="font-size: 15px;"></label>
     </p>
@@ -40,60 +40,38 @@
 
     </tr>
     
-    <%if params[:paciente_id].present?%>
-      <% @paciente = VPaciente.where("paciente_id = ?", params[:paciente_id]).first %>
+    <%if params[:alumno_id].present?%>
+      <% @alumno = VAlumno.where("alumno_id = ?", params[:alumno_id]).first %>
       <tr>
         
-        <th width="20%">Paciente:</th>
-        <td width="40%"><%=@paciente.nombre_persona%> <%=@paciente.apellido_persona%></td>
+        <th width="20%">Alumno:</th>
+        <td width="40%"><%=@alumno.nombre%> <%=@alumno.apellido%></td>
 
       </tr>
 
     <%end%>
 
-     <%if params[:profesional_id].present?%>
-      <% @profesional = VProfesional.where("profesional_id = ?", params[:profesional_id]).first %>
-      <tr>
-        
-        <th width="20%">Profesional:</th>
-        <td width="40%"><%=@profesional.nombre_persona%> <%=@profesional.apellido_persona%></td>
 
-      </tr>
-
-    <%end%>
-
-    <%if params[:tipo_consulta_id].present?%>
-      <% @tipo_consulta = TipoConsulta.where("id = ?", params[:tipo_consulta_id]).first %>
+    <%if params[:nivel_id].present?%>
+      <% @nivel = Nivel.where("id = ?", params[:nivel_id]).first %>
       <tr>
       
-        <th width="20%">Tipo Consulta:</th>
-        <td width="40%"><%=@tipo_consulta.descripcion%></td>
+        <th width="20%">Nivel:</th>
+        <td width="40%"><%=@nivel.descripcion%></td>
 
       </tr>
     <%end%>
 
     
-    <%if params[:estado_cobro_id].present?%>
-      <% @estado_cobro = EstadoCobro.where("id = ?", params[:estado_cobro_id]).first %>
+    <%if params[:estado_pago_cuota_detalle_id].present?%>
+      <% @estado_pago_cuota = EstadoPagoCuotaDetalle.where("id = ?", params[:estado_pago_cuota_detalle_id]).first %>
       <tr>
       
         <th width="20%">Estado Cobro:</th>
-        <td width="40%"><%=@estado_cobro.descripcion%></td>
+        <td width="40%"><%=@estado_pago_cuota.descripcion%></td>
 
       </tr>
     <%end%>
-
-    <%if params[:estado_cita_id].present?%>
-      <% @estado_cita = EstadoCita.where("id = ?", params[:estado_cita_id]).first %>
-      <tr>
-      
-        <th width="20%">Estado Cita:</th>
-        <td width="40%"><%=@estado_cita.descripcion%></td>
-
-      </tr>
-    <%end%>
-
-
     
   </table>
 <br/>
