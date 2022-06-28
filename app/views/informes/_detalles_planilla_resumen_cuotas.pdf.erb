@@ -6,11 +6,10 @@
    		<th>ID Detalle</th>
       <th>Fecha Generación</th>
       <th>Fecha Pago</th>
+      <th>Comprobante</th>
       <th>Alumno</th>
       <th>Monto Cuota</th>
       <th>Estado Cuota</th>
-      <th>Estado cuota</th>
-      
 
   </tr>
 
@@ -21,7 +20,9 @@
   	<tr>
 
  		 	<td><%= cuota_detalle.cuota_detalle_id%></td>
-      <td><%= cuota_detalle.fecha_pago.strftime('%m/%d/%Y') %></td>
+      <td><%= cuota_detalle.fecha_generacion.strftime('%m/%d/%Y') if cuota_detalle.fecha_generacion.present?%></td>
+      <td><%= cuota_detalle.fecha_pago.strftime('%m/%d/%Y') if cuota_detalle.fecha_pago.present?%></td>
+      <td><%= cuota_detalle.numero_comprobante%></td>
       <td><%= cuota_detalle.nombre_alumno%></td>
       <td><%= cuota_detalle.pago_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
       <td><%= cuota_detalle.estado_pago_cuota_detalle%></td>
