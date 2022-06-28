@@ -81,7 +81,7 @@ class InformesController < ApplicationController
 
     end
 
-    @parametros = { format: :pdf, pago_cuota_detalle_id: @cuota_detalle.map(&:cuota_detalle_id), alumno_id: params[:v_alumno_id], sucursal_id: params[:sucursal][:id], nivel_id: params[:nivel][:id], periodo_escolar_id: params[:periodo_escolar][:id], mes_periodo_id: params[:mes_periodo][:id], estado_pago_cuota_detalle_id: params[:estado_pago_cuota_detalle][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
+    @parametros = { format: :pdf, cuota_detalle_id: @cuota_detalle.map(&:cuota_detalle_id), alumno_id: params[:v_alumno_id], sucursal_id: params[:sucursal][:id], nivel_id: params[:nivel][:id], periodo_escolar_id: params[:periodo_escolar][:id], mes_periodo_id: params[:mes_periodo][:id], estado_pago_cuota_detalle_id: params[:estado_pago_cuota_detalle][:id], fecha_desde: params[:fecha_desde], fecha_hasta: params[:fecha_hasta] }
 
     respond_to do |f|
 
@@ -94,7 +94,7 @@ class InformesController < ApplicationController
   def generar_pdf
     
     
-   @cuota =  VCuotaDetalle.where("cuota_id in (?)", params[:cuota_id]).orden_01.paginate(per_page: 10, page: params[:page])
+   @cuota_detalle =  VCuotaDetalle.where("cuota_detalle_id in (?)", params[:cuota_detalle_id]).orden_01.paginate(per_page: 10, page: params[:page])
     
 
     respond_to do |f|
@@ -105,7 +105,7 @@ class InformesController < ApplicationController
                   :template => 'informes/planilla_reporte_cuotas.pdf.erb',
                   :layout => 'pdf.html',
                   :header => {:html => { :template => "informes/cabecera_planilla_resumen_cuotas.pdf.erb" ,
-                  :locals   => { :cuota => @cuota }}},
+                  :locals   => { :cuota => @cuota_detalle }}},
                   :margin => {:top => 65,                         # default 10 (mm)
                   :bottom => 11,
                   :left => 3,
