@@ -1,3 +1,7 @@
+<%if params[:sucursal_id].present?%>
+      <% @sucursal = Sucursal.where("id = ?", params[:sucursal_id]).first %>
+<%end%>      
+
 <div style="width: 100%; text-align: center; margin-top:10px;">
  
     <%#= wicked_pdf_image_tag 'escudo.png', :size => "48x40" %>
@@ -7,7 +11,11 @@
       Sistema de gestión para Centros  - Monigote<br />
       <label style="font-size: 18px;">RESUMEN CUOTAS</label>
       <br />
+      <%if @sucursal.present?%>
+      <label style="font-size: 15px;"><%=@sucursal.descripcion%></label>
+      <%else%>
       <label style="font-size: 15px;">Resumen</label>
+      <%end%>
       <br />
       <label style="font-size: 15px;"></label>
     </p>
