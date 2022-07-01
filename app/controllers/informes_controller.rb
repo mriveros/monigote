@@ -54,16 +54,16 @@ class InformesController < ApplicationController
 
     if params[:fecha_desde].present? && params[:fecha_hasta].present? 
 
-      cond << "fecha_cuota >= '#{params[:fecha_desde]}' and fecha_cuota <= '#{params[:fecha_hasta]}'" 
+      cond << "fecha_generacion >= '#{params[:fecha_desde]}' and fecha_generacion <= '#{params[:fecha_hasta]}'" 
 
     elsif params[:fecha_desde].present?
       
-      cond << "fecha_cuota >= ?"
+      cond << "fecha_generacion >= ?"
       args << params[:fecha_desde]
 
     elsif params[:fecha_hasta].present?
       
-      cond << "fecha_cuota <= ?"
+      cond << "fecha_generacion <= ?"
       args << params[:fecha_hasta]
 
     end
