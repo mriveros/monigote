@@ -11,13 +11,13 @@
       
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h5 class="panel-title">Citas</h5>
+          <h5 class="panel-title">Alumnos</h5>
         </div>
         <div class="panel-body">
           <div class="row">
 
-           <a href="<%= url_for(citas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ver Citas <%#=@citas_dia.size%></a><br /><br />
-           <a href="<%= url_for(citas_index_path(agregar:true))%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Crear Citas</a>
+           <a href="<%= url_for(alumnos_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ver Alumnos <%#=@citas_dia.size%></a><br />
+           <a href="<%= url_for(alumnos_index_path(agregar:true))%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Agregar Alumno</a>
          
           </div>
         </div>
@@ -29,12 +29,12 @@
 
         <div class="panel panel-primary">
         <div class="panel-heading">
-          <h5 class="panel-title">Pacientes</h5>
+          <h5 class="panel-title">Salarios</h5>
         </div>
         <div class="panel-body">
           <div class="row">
-            <a href="<%= url_for(pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ir a Pacientes</a><br /><br />
-            <a href="<%= url_for(pacientes_index_path(agregar: true))%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Agregar Paciente</a><br />
+            <a href="<%= url_for(pagos_salarios_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ir a Salarios</a><br />
+            <a href="<%= url_for(pagos_salarios_index_path(agregar: true))%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Generar Salario</a><br />
 
           </div>
         </div>
@@ -53,12 +53,14 @@
       
       <div class="panel panel-info">
         <div class="panel-heading">
-          <h5 class="panel-title">Historiales</h5>
+          <h5 class="panel-title">Cuotas</h5>
         </div>
         <div class="panel-body">
           <div class="row">
             <p></p>
-            <a href="<%= url_for(historiales_pacientes_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ir a Historiales</a><br /><br />
+            <a href="<%= url_for(cuotas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Ir a Cuotas</a><br />
+            <a href="<%= url_for(cuotas_index_path(agregar: true))%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Generar Cuotas</a><br />
+            <a href="<%= url_for(cuotas_index_path())%>"class="btn btn-primary btn-xs" target="_blank" style="margin-left:10px;">Cobrar Cuotas Pendientes</a><br />
           </div>
         </div>
       </div>
