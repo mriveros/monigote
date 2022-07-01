@@ -24,8 +24,8 @@
  		 	<td><%= cuota_detalle.cuota_detalle_id%></td>
       <td><%= cuota_detalle.mes_periodo + "/" + cuota_detalle.anho_periodo%></td>
       <td><%= cuota_detalle.nivel%></td>
-      <td><%= cuota_detalle.fecha_generacion.strftime('%m/%d/%Y') if cuota_detalle.fecha_generacion.present?%></td>
-      <td><%= cuota_detalle.fecha_pago.strftime('%m/%d/%Y') if cuota_detalle.fecha_pago.present?%></td>
+      <td><%= cuota_detalle.fecha_generacion.strftime('%d/%m/%Y') if cuota_detalle.fecha_generacion.present?%></td>
+      <td><%= cuota_detalle.fecha_pago.strftime('%d/%m/%Y') if cuota_detalle.fecha_pago.present?%></td>
       <td><%= cuota_detalle.numero_comprobante%></td>
       <td><%= cuota_detalle.nombre_alumno%></td>
       <td><%= cuota_detalle.pago_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
