@@ -42,6 +42,7 @@
 
 						<a class="dropdown-toggle " href="#" data-toggle="dropdown">Monigote<b class="caret"></b></a>
 						<ul class="dropdown-menu">
+						<li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li> 
 						<li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
                    
 				        <li><%= link_to "Alumnos",alumnos_index_path if acceso_permitido("alumnos.index") %></li> 
@@ -69,7 +70,7 @@
 			<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
 
             <ul class="dropdown-menu">
-              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li> 
+              
               <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
             </ul>
         	</li>
@@ -78,8 +79,6 @@
            <a class="dropdown-toggle " href="#" data-toggle="dropdown">Salarios<b class="caret"></b></a>
 
             <ul class="dropdown-menu">
-              <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
-
               <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li> 
               <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li> 
               <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
@@ -91,7 +90,7 @@
 
 			<li>
 
-				<li><%= link_to "Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
+				
 
 			</li>
 
@@ -118,9 +117,7 @@
 			</ul> 
 
 		</li>
-
-		    <li> <%= link_to "Informaciones", index_url %> </li>
-    
+    		<li><%= link_to "Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
 	  	<% end %>
 
 		<li><%= link_to "Contactos", contactos_url, :id => "tab-contacto", :class => ('active current' if current_page?(contactos_path)), :title => "Ir al Formulario de Contactos" %></li>
