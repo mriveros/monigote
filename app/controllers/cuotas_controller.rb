@@ -289,4 +289,47 @@ skip_before_action :verify_authenticity_token
   end
 
 
+  def index
+
+  end
+
+  def lista_cuotas_detalles
+
+    cond = []
+    args = []
+
+    if params[:form_buscar_cuotas_detalles_id].present?
+
+      cond << "cuota_detalle_id = ?"
+      args << params[:form_buscar_cuotas_detalles_id]
+
+    end
+
+    
+
+    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
+
+    if cond.size > 0
+
+      @cuotas_detalles =  VCuotaDetalle.fecha.where(cond).paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCuotaDetalle.where(cond).count
+      
+    else
+
+      @cuotas_detalles = VCuotaDetalle.fecha.paginate(per_page: 10, page: params[:page])
+      @total_encontrados = VCuotaDetalle.count
+
+    end
+
+    @total_registros = VCuotaDetalle.count
+
+    respond_to do |f|
+      
+      f.js
+      
+    end
+
+  end
+
+
 end
