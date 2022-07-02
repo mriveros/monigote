@@ -311,12 +311,12 @@ skip_before_action :verify_authenticity_token
 
     if cond.size > 0
 
-      @cuotas_detalles =  VCuotaDetalle.fecha.where(cond).paginate(per_page: 10, page: params[:page])
+      @cuotas_detalles =  VCuotaDetalle.cuotas_detalles_pendientes.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuotaDetalle.where(cond).count
       
     else
 
-      @cuotas_detalles = VCuotaDetalle.fecha.paginate(per_page: 10, page: params[:page])
+      @cuotas_detalles = VCuotaDetalle.cuotas_detalles_pendientes.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuotaDetalle.count
 
     end
