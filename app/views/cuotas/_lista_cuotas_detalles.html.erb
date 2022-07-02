@@ -1,25 +1,21 @@
-<% if cuotas.present? %>
+<% if cuotas_detalles.present? %>
 
-  <% cuotas.each do |ps| %>
+  <% cuotas_detalles.each do |cd| %>
 
     <tr>
 
-      <td><%= ps.cuota_id %></td>
-      <td><%= ps.fecha_generacion.strftime('%d/%m/%Y')%></td>
-      <td><%= ps.mes_periodo %></td>
-      <td><%= ps.periodo_escolar %></td>
-      <td><%= ps.sucursal %></td>
-      <td><%= ps.nivel %></td>
-      <td><%= ps.sala %></td>
-      <td><%= ps.total_cuotas.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
-      <td><%= ps.total_cobradas.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td><%= cd.cuota_detalle_id %></td>
+      <td><%= cd.fecha_generacion.strftime('%d/%m/%Y')%></td>
+      <td><%= cd.nombre_alumno %></td>
+      <td><%= cd.cuota %></td>
+      <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+      <td><%=cd.pago_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+      <td><%=cd.numero_comprobante %></td>
+      <td><%=cd.estado_pago_cuota_detalle%></td>
       
       <td>
 
-      <%= link_to_cuota_detalle(ps.cuota_id) %>
-      
-      <%= link_to icon_eliminar,"#", onclick: "eliminar_registro(#{ps.cuota_id});return false;", class: "btn btn-danger btn-xs", id: "btn-eliminar-pago-salario", title: 'Haga click para eliminar la cuota Generada'  %>
-       
+      <%#= link_to_cuota_detalle(ps.cuota_id) %> 
          
        </td>
 
@@ -34,7 +30,7 @@
 
 <tr id="tab-paginacion">
 
-    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cuotas, :params => params %></div></td>
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate cuotas_detalles, :params => params %></div></td>
 </tr>
 
 <tr>
@@ -59,37 +55,6 @@
 
 <script type="text/javascript">
 
-  function eliminar_registro(cuota_id) {
-
-    swal({
-      title: "Confirmar",
-      text: "Al confirmar se eliminará permanentemente de la lista de Cuotas Generadas.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonClass: "btn-confirm",
-      confirmButtonText: "Confirmar",
-      cancelButtonText: "Cancelar",
-      closeOnConfirm: true,
-      closeOnCancel: true
-    },
-    function(isConfirm) {
-      if (isConfirm) {
-
-        $.ajax({
-          url: "<%= url_for(cuotas_eliminar_path) %>",
-          data: {id: cuota_id},
-          dataType: 'script'
-        });
-
-      } else{
-
-        return false;
-
-      }
-
-    });
-
-
-  }
+  
 
 </script>

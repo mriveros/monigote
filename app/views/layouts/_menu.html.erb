@@ -72,7 +72,7 @@
             <li><%= link_to "Matriculaciones",matriculaciones_index_path if acceso_permitido("matriculaciones.index") %></li>
 
             <li><%= link_to "Gestión Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>  
-            <li><%= link_to "Pagos Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>
+            <li><%= link_to "Pagos Cuotas", cuotas_index_detalles_path if acceso_permitido("cuotas.index") %></li>
 			
 
 			<li>

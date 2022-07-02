@@ -35,6 +35,15 @@
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
+         
+         <th style="width:120px;">
+            <span>Alumno<br/> <em style="font-size: 7px;"> Ej: Juan Gonzalez</em></span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cuotas_detalles_alumno, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas, '#form_buscar_cuotas_detalles_alumno');"><i class="fa fa-times"></i></span>
+            </div>
+            <em class="nmb"></em>
+          </th>
 
           <th>
             <span>Mes</span>
@@ -73,22 +82,6 @@
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas_detalles, :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_sala_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Total Cuotas</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_detalles_total_cuotas, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_total_cuotas');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-
-          <th >
-            <span>Total Cobradas</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_detalles_total_cobradas, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_total_cobradas');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
