@@ -114,10 +114,10 @@ class PagosRemuneracionesExtrasController < ApplicationController
 		    @pago_remuneracion_extra.fecha = params[:fecha]
 		    @pago_remuneracion_extra.personal_id = params[:personal][:id]
 		    @pago_remuneracion_extra.mes_periodo_id = params[:mes_periodo][:id]
-		    @pago_remuneracion_extra.periodo_escolar_id = params[:periodo_escolar_id]
+		    @pago_remuneracion_extra.periodo_escolar_id = params[:periodo_escolar][:id]
 		    @pago_remuneracion_extra.monto = params[:monto].to_s.gsub(/[$.]/,'').to_i
 		    @pago_remuneracion_extra.observacion = params[:observacion]
-
+ 
 		    if @pago_remuneracion_extra.save
 
 		    	auditoria_nueva("Registrar nuevo RemuneracionExtra", "pagos_remuneraciones_extras", @pago_remuneracion_extra)
