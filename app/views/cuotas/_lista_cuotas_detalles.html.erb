@@ -6,12 +6,14 @@
 
       <td><%= cd.cuota_detalle_id %></td>
       <td><%= cd.fecha_generacion.strftime('%d/%m/%Y')%></td>
+      <td><%=cd.ci_alumno%></td>
       <td><%= cd.nombre_alumno %></td>
       <td><%= cd.cuota %></td>
+      <td><%= cd.anho_periodo %></td>
       <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
-      <td><%=cd.pago_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
-      <td><%=cd.numero_comprobante %></td>
-      <td><%=cd.estado_pago_cuota_detalle%></td>
+      <td><%=cd.sucursal  %></td>
+      <td><%=cd.nivel %></td>
+      <td><%=cd.sala%></td>
       
       <td>
 
