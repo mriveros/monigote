@@ -28,15 +28,23 @@
           </th>
           
           <th>
-            <div><%= label_tag nil, "Fecha".html_safe %></div>
+            <div><%= label_tag nil, "Fecha Genecación Cuota".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_cuotas_detalles_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                 <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_fecha');"><i class="fa fa-times"></i></span>
               </div>
          </th>
+
+         <th>
+            <span>CI Alumno</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cuotas_detalles_ci_alumno, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_ci_alumno');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
          
-         <th style="width:120px;">
+         <th>
             <span>Alumno<br/> <em style="font-size: 7px;"> Ej: Juan Gonzalez</em></span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_cuotas_detalles_alumno, nil, :class => 'form-control', :placeholder => "" %>
@@ -58,6 +66,14 @@
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas_detalles, :periodo_escolar_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_periodo_escolar_id');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th>
+            <span>Monto</span>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_cuotas_detalles_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_monto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
