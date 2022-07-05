@@ -305,7 +305,68 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    
+    if params[:form_buscar_cuotas_detalles_fecha].present?
+
+      cond << "fecha_generacion = ?"
+      args << params[:form_buscar_cuotas_detalles_fecha]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles_ci_alumno].present?
+
+      cond << "ci_alumno = ?"
+      args << params[:form_buscar_cuotas_detalles_ci_alumno]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles_alumno].present?
+
+      cond << "alumno = ?"
+      args << params[:form_buscar_cuotas_detalles_alumno]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles][:mes_periodo_id].present?
+
+      cond << "mes_periodo_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:mes_periodo_id]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles][:periodo_escolar_id].present?
+
+      cond << "periodo_escolar_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:periodo_escolar_id]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles][:nivel_id].present?
+
+      cond << "nivel_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:nivel_id]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles][:sala_id].present?
+
+      cond << "sala_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:sala_id]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles][:sucursal_id].present?
+
+      cond << "sucursal_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:sucursal_id]
+
+    end
+
+    if params[:form_buscar_cuotas_detalles_monto].present?
+
+      cond << "monto = ?"
+      args << params[:form_buscar_cuotas_detalles_monto]
+
+    end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
