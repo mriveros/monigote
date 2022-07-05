@@ -28,7 +28,7 @@
           </th>
           
           <th>
-            <div><%= label_tag nil, "Fecha Genecación Cuota".html_safe %></div>
+            <div><%= label_tag nil, "Fecha Generación Cuota".html_safe %></div>
               <div class='input-group date'>
                 <%= text_field_tag :form_buscar_cuotas_detalles_fecha, nil, class: 'form-control input-sm' %>
                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
@@ -44,62 +44,66 @@
             </div>
           </th>
          
-         <th>
+        <th>
             <span>Alumno<br/> <em style="font-size: 7px;"> Ej: Juan Gonzalez</em></span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_cuotas_detalles_alumno, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas, '#form_buscar_cuotas_detalles_alumno');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
-          </th>
+        </th>
 
-          <th>
+        <th>
             <span>Mes</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas_detalles, :mes_periodo_id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_mes_periodo_id');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+        </th>
 
-          <th>
+        <th>
             <span>Periodo Escolar</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas_detalles, :periodo_escolar_id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_periodo_escolar_id');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+        </th>
 
           <th>
-            <span>Monto</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_detalles_monto, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_monto');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+          <span>Nivel</span>
+          <div class="input-group input-group-sm">
+            <%= collection_select :form_buscar_cuotas_detalles, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+            <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_nivel_id');"><i class="fa fa-times"></i></span>
+          </div>
+        </th>
 
-          <th>
+        <th>
+          <span>Sala<br/></span>
+          <div class="input-group input-group-sm">
+            <%= collection_select :form_buscar_cuotas_detalles, :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+            <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_sala_id');"><i class="fa fa-times"></i></span>
+          </div>
+        </th>
+
+        <th>
             <span>Sucursal</span>
             <div class="input-group input-group-sm">
               <%= collection_select :form_buscar_cuotas_detalles, :sucursal_id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_sucursal_id');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+        </th>
 
-          <th>
-            <span>Nivel</span>
+        <th>
+            <span>Monto</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_cuotas_detalles, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_nivel_id');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_cuotas_detalles_monto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_monto');"><i class="fa fa-times"></i></span>
             </div>
-          </th>
+        </th>
 
-          <th>
-            <span>Sala<br/></span>
-            <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_cuotas_detalles, :sala_id, Sala.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas', '#form_buscar_cuotas_detalles_sala_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
+          
+
+         
 
           <th></th>
 

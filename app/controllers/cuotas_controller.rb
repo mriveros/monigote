@@ -13,7 +13,7 @@ skip_before_action :verify_authenticity_token
     args = []
 
     if params[:form_buscar_cuotas_id].present?
-
+ 
       cond << "cuota_id = ?"
       args << params[:form_buscar_cuotas_id]
 
