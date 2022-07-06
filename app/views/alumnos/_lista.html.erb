@@ -10,8 +10,8 @@
       <td><%= p.ci %></td>
       <td><%= p.fecha_nacimiento.strftime("%d/%m/%Y") if p.fecha_nacimiento.present?%></td>
       <td><%= p.direccion%></td>
-      <td><%= p.telefono%></td>
-      <td><%= p.telefono%></td>
+      <td><%= p.telefono_contacto%></td>
+      <td><%= p.email_contacto%></td>
       <td><%= alumno_avatar(p, class: 'media-object img-circle', style: 'width:50px;height:50px;', value: 'M' ) %></td>
       
       <td style="width:120px;">
