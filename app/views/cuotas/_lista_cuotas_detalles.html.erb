@@ -14,10 +14,15 @@
       <td><%=cd.sala%></td>
       <td><%=cd.sucursal  %></td>
       <td><%=cd.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse %></td>
+      <td><%=cd.estado_pago_cuota_detalle  %></td>
     
       <td>
 
-      <%#= link_to_cuota_detalle(ps.cuota_id) %> 
+      <%if cd.estado_pago_cuota_detalle_id == PARAMETRO[:estado_pago_cuota_detalle_pendiente]%>
+                     
+          <%= link_to_pago_cuota_detalle(cd.cuota_detalle_id) %>
+
+      <%end%>
          
       </td>
 
