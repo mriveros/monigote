@@ -319,10 +319,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_cuotas_detalles_alumno].present?
-
-      cond << "alumno = ?"
-      args << params[:form_buscar_cuotas_detalles_alumno]
+    if params[:form_buscar_cuotas_detalles_nombre_alumno].present?
+ 
+      cond << "nombre_alumno ilike ?"
+      args << "%#{params[:form_buscar_cuotas_detalles_nombre_alumno]}%"
 
     end
 
@@ -361,10 +361,10 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_cuotas_detalles_monto].present?
+    if params[:form_buscar_cuotas_detalles_monto_cuota].present?
 
-      cond << "monto = ?"
-      args << params[:form_buscar_cuotas_detalles_monto]
+      cond << "monto_cuota = ?"
+      args << params[:form_buscar_cuotas_detalles_monto_cuota]
 
     end
 
