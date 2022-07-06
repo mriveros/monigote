@@ -368,16 +368,23 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    if params[:form_buscar_cuotas_detalles][:estado_pago_cuota_detalle_id].present?
+
+      cond << "estado_pago_cuota_detalle_id = ?"
+      args << params[:form_buscar_cuotas_detalles][:estado_pago_cuota_detalle_id]
+
+    end
+
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
     if cond.size > 0
 
-      @cuotas_detalles =  VCuotaDetalle.cuotas_detalles_pendientes.where(cond).paginate(per_page: 10, page: params[:page])
+      @cuotas_detalles =  VCuotaDetalle.where(cond).paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuotaDetalle.where(cond).count
       
     else
 
-      @cuotas_detalles = VCuotaDetalle.cuotas_detalles_pendientes.paginate(per_page: 10, page: params[:page])
+      @cuotas_detalles = VCuotaDetalle.paginate(per_page: 10, page: params[:page])
       @total_encontrados = VCuotaDetalle.count
 
     end

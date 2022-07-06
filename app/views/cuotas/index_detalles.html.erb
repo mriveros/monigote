@@ -69,7 +69,7 @@
             </div>
         </th>
 
-          <th>
+        <th>
           <span>Nivel</span>
           <div class="input-group input-group-sm">
             <%= collection_select :form_buscar_cuotas_detalles, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
@@ -99,7 +99,15 @@
               <%= text_field_tag :form_buscar_cuotas_detalles_monto_cuota, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles', '#form_buscar_cuotas_detalles_monto_cuota');"><i class="fa fa-times"></i></span>
             </div>
-        </th>       
+        </th> 
+
+        <th>
+          <span>Estado Cobro</span>
+          <div class="input-group input-group-sm">
+            <%= collection_select :form_buscar_cuotas_detalles, :estado_pago_cuota_detalle_id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: false, default: 1}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+            <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles', '#form_buscar_cuotas_detalles_estado_pago_cuota_detalle_id');"><i class="fa fa-times"></i></span>
+          </div>
+        </th>      
 
         <th></th>
 
