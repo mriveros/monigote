@@ -77,10 +77,18 @@
           </th>
 
           <th >
-            <span>Teléfono<br/>
+            <span>Teléfono Contacto<br/>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_alumnos_telefono, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alumnos', '#form_buscar_alumnos_telefono');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_alumnos_telefono_contacto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alumnos', '#form_buscar_alumnos_telefono_contacto');"><i class="fa fa-times"></i></span>
+            </div>
+          </th>
+
+          <th >
+            <span>Email Contacto<br/>
+            <div class="input-group input-group-sm">
+              <%= text_field_tag :form_buscar_alumnos_email_contacto, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-alumnos', '#form_buscar_alumnos_email_contacto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
