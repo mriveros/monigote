@@ -47,8 +47,8 @@
         <th>
             <span>Alumno<br/> <em style="font-size: 7px;"> Ej: Juan Gonzalez</em></span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_detalles_alumno, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles, '#form_buscar_cuotas_detalles_alumno');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_cuotas_detalles_nombre_alumno, nil, :class => 'form-control', :placeholder => "" %>
+            <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles','#form_buscar_cuotas_detalles_nombre_alumno');"><i class="fa fa-times"></i></span>
             </div>
             <em class="nmb"></em>
         </th>
@@ -96,8 +96,8 @@
         <th>
             <span>Monto</span>
             <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_cuotas_detalles_monto, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles', '#form_buscar_cuotas_detalles_monto');"><i class="fa fa-times"></i></span>
+              <%= text_field_tag :form_buscar_cuotas_detalles_monto_cuota, nil, :class => 'form-control', :placeholder => "" %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-pagos-cuotas-detalles', '#form_buscar_cuotas_detalles_monto_cuota');"><i class="fa fa-times"></i></span>
             </div>
         </th>       
 
