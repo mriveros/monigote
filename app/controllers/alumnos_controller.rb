@@ -113,6 +113,7 @@ skip_before_action :verify_authenticity_token
       @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
       @alumno.direccion = params[:direccion].upcase
       @alumno.telefono = params[:telefono]
+      @alumno.email = params[:email]
       
 
         if @alumno.save
@@ -191,7 +192,7 @@ skip_before_action :verify_authenticity_token
       @alumno.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
       @alumno.direccion = params[:alumno][:direccion].upcase
       @alumno.telefono = params[:alumno][:telefono]
-
+      @alumno.email = params[:alumno][:email]
       if @alumno.save
 
         auditoria_despues(@alumno, auditoria_id)
