@@ -52,11 +52,11 @@
           <div class="col-sm-7"><%= f.text_field :direccion, class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Telefono Contacto".html_safe, id: "lbl-telefono" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Telefono Contacto #{attr_requerido}".html_safe, id: "lbl-telefono" %></div>
           <div class="col-sm-7"><%= f.text_field :telefono, class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Email Contacto".html_safe, id: "lbl-email" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Email Contacto #{attr_requerido}".html_safe, id: "lbl-email" %></div>
           <div class="col-sm-7"><%= f.text_field :email, class: 'form-control input-sm'%></div>
           <div class="col-sm-1"></div><br />
           
@@ -141,6 +141,20 @@ $("#btn-guardar-alumno").bind('click', function () {
       if($("#alumno_direccion").val().length == 0){
 
         msg +="Debe ingrear una dirección.\n"
+        valido = false
+      
+      }
+
+      if($("#alumno_telefono").val().length == 0){
+
+        msg +="Debe ingrear un numero de teléfono del contacto.\n"
+        valido = false
+      
+      }
+
+      if($("#alumno_email").val().length == 0){
+
+        msg +="Debe ingrear un email de contacto.\n"
         valido = false
       
       }
