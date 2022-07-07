@@ -215,4 +215,3 @@ class NotificacionesPersonasController < ApplicationController
 	    
 
 end
-Footer
