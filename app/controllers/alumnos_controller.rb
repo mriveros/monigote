@@ -54,10 +54,17 @@ skip_before_action :verify_authenticity_token
 
     end
 
-    if params[:form_buscar_alumnos_telefono].present?
+    if params[:form_buscar_alumnos_telefono_contacto].present?
 
-      cond << "telefono ilike ?"
-      args << "%#{params[:form_buscar_alumnos_telefono]}%"
+      cond << "telefono_contacto ilike ?"
+      args << "%#{params[:form_buscar_alumnos_telefono_contacto]}%"
+
+    end
+
+    if params[:form_buscar_alumnos_email_contacto].present?
+
+      cond << "email_contacto ilike ?"
+      args << "%#{params[:form_buscar_alumnos_email_contacto]}%"
 
     end
 

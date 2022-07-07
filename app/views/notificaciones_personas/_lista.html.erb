@@ -1,0 +1,58 @@
+<% if notificaciones_personas.present? %>
+
+  <% notificaciones_personas.each do |nu| %>
+
+    <tr>
+
+      <td ><%= nu.notificacion_persona_id %></td>
+      <td ><%= nu.descripcion%></td>
+      <td ><%= nu.nombre_persona.upcase%></td>
+      <td ><%= nu.apellido_persona.upcase%></td>
+      <td ><%= nu.email%></td>
+      <%if nu.estado == true%>
+      
+        <td ><%= 'Activo' %></td>
+
+      <%else%>
+      
+        <td ><%= 'Inactivo' %></td>
+
+      <%end%>
+
+      <td >
+        
+        <%= link_to_editar_notificacion_persona(nu) %>
+
+        <%= link_to icon_eliminar, notificaciones_personas_eliminar_path(id: nu.notificacion_persona_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la Notificación a la Persona.', data: { confirm: "Está seguro de eliminar la Notificación?"} %>
+         
+       </td>
+
+      </td>
+
+    </tr>
+
+  <% end %>
+
+<tr id="tab-paginacion">
+
+    <td colspan="12" style="text-align:center;"><div class="flickr_pagination"><%= ajax_will_paginate notificaciones_personas, :params => params %></div></td>
+</tr>
+
+<tr>
+    <td colspan="12">
+      Cantidad de registros encontrados: <%= @total_encontrados %> 
+    </td>
+</tr>
+
+ 
+
+<% else %>
+
+  <tr>
+
+    <td colspan="12"><p class='none-result'>No se han encontrado resultados.</p></td>
+
+  </tr>
+
+
+<% end %>
