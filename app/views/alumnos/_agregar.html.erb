@@ -52,12 +52,12 @@
           <div class="col-sm-7"><%= text_field_tag :direccion, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Telefono Contacto".html_safe, id: "lbl-telefono" %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Telefono Contacto #{attr_requerido}".html_safe, id: "lbl-telefono" %></div>
           <div class="col-sm-7"><%= text_field_tag :telefono, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= label_tag nil, "Email Contacto".html_safe, id: "lbl-email" %></div>
-          <div class="col-sm-7"><%= text_field_tag :email, nil, class: 'form-control input-sm', readonly: true %></div>
+          <div class="col-sm-4"><%= label_tag nil, "Email Contacto#{attr_requerido}".html_safe, id: "lbl-email" %></div>
+          <div class="col-sm-7"><%= text_field_tag :email, nil, class: 'form-control input-sm' %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-md-4"><%= f.label nil, "Adjunto #{attr_requerido}".html_safe, id: "lbl-imagen" %></div>
@@ -153,6 +153,20 @@
       if($("#direccion").val().length == 0){
 
         msg +="Debe ingrear una dirección.\n"
+        valido = false
+      
+      }
+
+      if($("#telefono").val().length == 0){
+
+        msg +="Debe ingrear un número de teléfono.\n"
+        valido = false
+      
+      }
+
+      if($("#email").val().length == 0){
+
+        msg +="Debe ingrear un mail de contacto.\n"
         valido = false
       
       }
