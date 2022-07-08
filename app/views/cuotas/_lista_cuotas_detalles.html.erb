@@ -21,6 +21,7 @@
       <%if cd.estado_pago_cuota_detalle_id == PARAMETRO[:estado_pago_cuota_detalle_pendiente]%>
                      
           <%= link_to_pago_cuota_detalle(cd.cuota_detalle_id) %>
+          <%= link_to_notificar_cuota_detalle_pendiente(cd.cuota_detalle_id) %>
 
       <%end%>
          

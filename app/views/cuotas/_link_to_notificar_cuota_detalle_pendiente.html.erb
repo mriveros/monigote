@@ -2,4 +2,4 @@
 title: 'Haga click aquí para notificar al tutor la cuota Pendiente de Pago.', onclick: "$('.modal').html('');return false;" %>
 
 <%= modal_window( window_id: "modal-window-notificar-cuota-detalle-pendiente#{cuota_detalle_id}", 
-link_to_id: "#link-to-notificar-cuota-detalle-pendiente-#{cuota_detalle_id}", url: cuotas_pagar_cuota_detalle_path( window_id: "modal-window-notificar-cuota-detalle-pendiente#{cuota_detalle_id}", cuota_detalle_id: cuota_detalle_id) )%>
+link_to_id: "#link-to-notificar-cuota-detalle-pendiente-#{cuota_detalle_id}", url: cuotas_notificar_cuota_pendiente_path( window_id: "modal-window-notificar-cuota-detalle-pendiente#{cuota_detalle_id}", cuota_detalle_id: cuota_detalle_id) )%>
