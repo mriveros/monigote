@@ -402,10 +402,10 @@ skip_before_action :verify_authenticity_token
 
   def notificar_cuota_pendiente
 
-        subject = 'Aviso de Pago de Cuotas.'
+        subject = 'Aviso de Cuotas Pendiente de Pago.'
         texto = 'Monigote informa: cuenta con una cuota pendiente de pago.'
         modulo = 'Ganados Enfermos'
-        NotificarUsuario.enviar_notificacion(current_usuario.mail, subject, texto, @cuota_detalle.id).deliver
+        NotificarUsuario.enviar_notificacion(current_usuario.mail, subject, texto, params[:cuota_detalle_id]).deliver
 
   end
 
