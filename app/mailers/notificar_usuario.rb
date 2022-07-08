@@ -49,7 +49,7 @@ class NotificarUsuario < ActionMailer::Base
     @subject = subject
     @destinatario = destinatario
     @texto_principal = texto
-    @otro_texto = objeto_id
+    @objeto_id = objeto_id
 
     if (@email)
       #from =>"info.monigote@gmail.com" 
