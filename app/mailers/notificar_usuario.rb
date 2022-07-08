@@ -44,14 +44,12 @@ class NotificarUsuario < ActionMailer::Base
 
   end
 
-  def enviar_notificacion(destinatario, subject ,texto, otro_texto)
-
-    
+  def enviar_notificacion(destinatario, subject ,texto, objeto_id)
     
     @subject = subject
     @destinatario = destinatario
     @texto_principal = texto
-    @otro_texto = otro_texto
+    @otro_texto = objeto_id
 
     if (@email)
       #from =>"info.monigote@gmail.com" 
