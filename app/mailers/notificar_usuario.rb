@@ -1,17 +1,20 @@
 class NotificarUsuario < ActionMailer::Base
   
-  default from: "kantytransportadora@gmail.com"
+  default from: "info.monigote@gmail.com"
 
   def test_email(user_id, adjuntos)
 
     @datos_adjuntos = adjuntos
+
     @user = Usuario.find_by_id user_id
 
     if (@user)
 
       to = @user.email
-      mail(:to => to, :subject => "Aviso para cobro de producciones", :from => "kantytransportadora@gmail.com") 
+      mail(:to => to, :subject => "Aviso Monigote", :from => "info.monigote@gmail.com") 
+
     end
+
   end
 
   def email(usuario, password)
@@ -19,7 +22,7 @@ class NotificarUsuario < ActionMailer::Base
     @usuario = usuario
     @password = password
 
-    mail(to: @usuario.email, subject: "ULTRON: Nuevo Usuario")
+    mail(to: @usuario.email, subject: "Monigote: Nuevo Usuario")
 
   end
 
@@ -28,7 +31,7 @@ class NotificarUsuario < ActionMailer::Base
     @usuario = usuario
     @password = password
 
-    mail(to: @usuario.email, subject: "ULTRON: Nuevo Usuario")
+    mail(to: @usuario.email, subject: "Monigote: Nuevo Usuario")
 
   end
 
@@ -37,7 +40,24 @@ class NotificarUsuario < ActionMailer::Base
     @usuario = usuario
     @password = password
 
-    mail(to: @usuario.email, subject: "ULTRON: Recuperar Contraseña")
+    mail(to: @usuario.email, subject: "Monigote: Recuperar Contraseña")
+
+  end
+
+  def enviar_notificacion(destinatario, subject ,texto, otro_texto)
+
+    
+    
+    @subject = subject
+    @destinatario = destinatario
+    @texto_principal = texto
+    @otro_texto = otro_texto
+
+    if (@email)
+      #from =>"info.monigote@gmail.com" 
+      mail(:to => @destinatario, :subject => @subject, :from => "smarthub.py@gmail.com") 
+    
+    end
 
   end
 
