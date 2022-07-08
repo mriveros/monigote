@@ -149,6 +149,10 @@ module ApplicationHelper
      " <span class='glyphicon glyphicon-print'></span>".html_safe
   end
 
+  def icon_send
+     " <span class='glyphicon glyphicon-send'></span>".html_safe
+  end
+
 
   def linked_combo(nombre, args)
     args[:url] ||= ""
