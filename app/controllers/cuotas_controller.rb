@@ -405,10 +405,10 @@ skip_before_action :verify_authenticity_token
     @cuota_detalle = CuotaDetalle.where('id = ?', params[:cuota_detalle_id]).first
     alumno = Alumno.where('id = ?', @cuota_detalle.alumno_id).first
 
-    subject = 'Aviso de Cuotas Pendiente de Pago.'
-    texto = 'Monigote informa: cuenta con una cuota pendiente de pago.'
+    @subject = 'Aviso de Cuotas Pendiente de Pago.'
+    @texto = 'Monigote informa: cuenta con una cuota pendiente de pago.'
     
-    NotificarUsuario.enviar_notificacion(alumno.email, subject, texto, params[:cuota_detalle_id]).deliver
+    NotificarUsuario.enviar_notificacion(alumno.email, @subject, @texto, params[:cuota_detalle_id]).deliver
 
   end
 
