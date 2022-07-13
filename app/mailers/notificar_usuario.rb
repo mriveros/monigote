@@ -50,8 +50,8 @@ class NotificarUsuario < ActionMailer::Base
     @destinatario = destinatario
     @texto_principal = texto
     @objeto_id = objeto_id
-
-    if (@email)
+    puts @objeto_id
+    if (@destinatario)
       
       mail(:to => @destinatario, :subject => @subject, :from => "smarthub.py@gmail.com") 
     

@@ -407,7 +407,7 @@ skip_before_action :verify_authenticity_token
 
     @subject = 'Aviso de Cuotas Pendiente de Pago.'
     @texto = 'Monigote informa: cuenta con una cuota pendiente de pago.'
-    
+    puts '################DEBUG!'
     NotificarUsuario.enviar_notificacion(alumno.email, @subject, @texto, params[:cuota_detalle_id]).deliver
 
   end
