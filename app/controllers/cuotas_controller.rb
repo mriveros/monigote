@@ -124,61 +124,70 @@ skip_before_action :verify_authenticity_token
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @matriculaciones = Matriculacion.where('periodo_escolar_id = ?', params[:periodo_escolar][:id])
     
-    CuotaDetalle.transaction do   
+    cuota = Cuota.where('mes_periodo_id = ? and periodo_escolar_id = ?',params[:mes_periodo][:id],params[:periodo_escolar][:id]).first
+    unless cuota.present?
 
-      @matriculaciones.each do |m|
+      CuotaDetalle.transaction do   
 
-          matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id)
+        @matriculaciones.each do |m|
 
-          if matriculacion_detalle.count > 0
-            
-            @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
-            
-            unless @cuota.present?
+            matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ?', m.id)
 
-              @cuota = Cuota.new
-              @cuota.fecha_generacion = Date.today
-              @cuota.mes_periodo_id = params[:mes_periodo][:id]
-              @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
-              @cuota.matriculacion_id = m.id
+            if matriculacion_detalle.count > 0
               
-              if @cuota.save
+              @cuota = Cuota.where("mes_periodo_id = ? and periodo_escolar_id = ? and matriculacion_id = ?",params[:mes_periodo][:id], params[:periodo_escolar][:id], m.id).first
+              
+              unless @cuota.present?
+
+                @cuota = Cuota.new
+                @cuota.fecha_generacion = Date.today
+                @cuota.mes_periodo_id = params[:mes_periodo][:id]
+                @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
+                @cuota.matriculacion_id = m.id
                 
-                matriculacion_detalle.each do |md|
-
-                  cuota_detalle = CuotaDetalle.new
-                  cuota_detalle.cuota_id = @cuota.id
-                  cuota_detalle.alumno_id = md.alumno_id
-                  precio = Precio.where('id = ?', md.precio_id).first
-                  cuota_detalle.monto_cuota = precio.monto
-                  cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                if @cuota.save
                   
-                  if cuota_detalle.save
+                  matriculacion_detalle.each do |md|
 
-                    total_cuotas = total_cuotas + cuota_detalle.monto_cuota
-                    @guardado_ok = true
+                    cuota_detalle = CuotaDetalle.new
+                    cuota_detalle.cuota_id = @cuota.id
+                    cuota_detalle.alumno_id = md.alumno_id
+                    precio = Precio.where('id = ?', md.precio_id).first
+                    cuota_detalle.monto_cuota = precio.monto
+                    cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                    
+                    if cuota_detalle.save
 
-                  else
+                      total_cuotas = total_cuotas + cuota_detalle.monto_cuota
+                      @guardado_ok = true
 
-                    @guardado_error = true
+                    else
 
-                  end
-                  
-                end #end each md
-                @cuota.total_cuotas = total_cuotas
-                @cuota.save
-                total_cuotas = 0
+                      @guardado_error = true
+
+                    end
+                    
+                  end #end each md
+                  @cuota.total_cuotas = total_cuotas
+                  @cuota.save
+                  total_cuotas = 0
+
+                end
 
               end
 
             end
 
-          end
+        end
 
-      end
-
-    end #end TRANSACTION
-  
+      end #end TRANSACTION
+    
+    else
+      
+      @guardado_ok = false
+      @msg= 'La cuota del mes y periodo escolar ya ha sido generada.'
+      
+    end
     respond_to do |f|
       
         f.js

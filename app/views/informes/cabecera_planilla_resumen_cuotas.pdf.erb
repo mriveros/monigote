@@ -8,13 +8,13 @@
   
     <p style="font-size: 14px; text-align: center; font-family: times new roman">
     
-      Sistema de gestión para Centros  - Monigote<br />
+      Sistema de gestión para Centros Educativos y Guarderías  - Monigote<br />
       <label style="font-size: 18px;">RESUMEN CUOTAS</label>
       <br />
       <%if @sucursal.present?%>
       <label style="font-size: 15px;"><%=@sucursal.descripcion%></label>
       <%else%>
-      <label style="font-size: 15px;">Resumen</label>
+      <label style="font-size: 15px;">Resumen Cuota</label>
       <%end%>
       <br />
       <label style="font-size: 15px;"></label>
@@ -51,9 +51,7 @@
     <%if params[:alumno_id].present?%>
       <% @alumno = VAlumno.where("alumno_id = ?", params[:alumno_id]).first %>
       <tr>
-        
-        <th width="20%">Alumno:</th>
-        <td width="40%"><%=@alumno.nombre%> <%=@alumno.apellido%></td>
+        <td width="40%">Alumno/a: <%= @alumno.nombres%> <%=@alumno.apellidos%></td>
 
       </tr>
 
@@ -63,9 +61,7 @@
     <%if params[:nivel_id].present?%>
       <% @nivel = Nivel.where("id = ?", params[:nivel_id]).first %>
       <tr>
-      
-        <th width="20%">Nivel:</th>
-        <td width="40%"><%=@nivel.descripcion%></td>
+        <td width="40%">Nivel: <%=@nivel.descripcion%></td>
 
       </tr>
     <%end%>
@@ -74,9 +70,7 @@
     <%if params[:estado_pago_cuota_detalle_id].present?%>
       <% @estado_pago_cuota = EstadoPagoCuotaDetalle.where("id = ?", params[:estado_pago_cuota_detalle_id]).first %>
       <tr>
-      
-        <th width="20%">Estado Cobro:</th>
-        <td width="40%"><%=@estado_pago_cuota.descripcion%></td>
+        <td width="40%">Estado Cobro: <%=@estado_pago_cuota.descripcion%></td>
 
       </tr>
     <%end%>
