@@ -1,8 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even){background-color: #f2f2f2}
+
+    th {
+      background-color: #04AA6D;
+      color: white;
+    }
+    </style>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-   <%=@objeto_id%></p>
+   <% @cuota_detalle = VCuotaDetalle.where('cuota_detalle_id = ?', @objeto_id).first %></p>
   </head>
   <body>
   <h3>Monigote Informa.</h3>
@@ -10,17 +28,31 @@
       <p><bold> <%= @texto_principal%> </bold> </p>
     
      <br />
+      <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+        <thead>
+              
+          <tr role="row">
 
-     
-
-  
+              <th>Alumno</th>
+              <th>Cuota</th>
+              <th>Monto Cuota</th>
+              <th>Estado</th>
+              
+            </tr>
+            <tr>
+              <td><%=@cuota_detalle.nombre_alumno%></td>
+              <td><%=@cuota_detalle.cuota%></td>
+              <td><%=@cuota_detalle.monto_cuota.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse%></td>
+              <td><%=@cuota_detalle.estado_pago_cuota_detalle%></td>
+            </tr>  
 
      <br />
     </p>
   
     <p>
       Ante cualquier duda contactá con nuestro servicio de Atención al Cliente
-      en el Teléfono: 0981234234 o a la dirección de email:monigote@gmail.com.py<br /> 
+      en el Teléfono: 0981234234 o a la dirección de email: monigote@gmail.com<br /> 
     </p>
     
   </body>
