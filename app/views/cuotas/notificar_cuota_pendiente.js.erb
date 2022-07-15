@@ -1,0 +1,17 @@
+<% if @enviado == true %>
+
+  setTimeout( function(){ 
+ 
+    swal("Cuotas","Notificación enviada exitosamente!", "success");
+
+    }, 1000);
+
+<% else %>
+  
+  setTimeout( function(){ 
+
+    swal("Cuotas", "No fue posible enviar la notificación","error");
+
+  }, 1000);
+
+<% end %>
