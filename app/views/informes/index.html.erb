@@ -52,7 +52,7 @@
 
         <div class="col-sm-1"></div><br />
         <div class="col-sm-4"><%= label_tag :nil, "Estado Pago Cuota".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_pago_cuota_detalle, :id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
+        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_pago_cuota_detalle, :id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: false}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
         <div class="col-sm-1"></div><br />
 
 
