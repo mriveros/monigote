@@ -98,22 +98,29 @@ class MatriculacionesController < ApplicationController
 	    valido = true
 	    @msg = ""
 
-	    @matriculacion = Matriculacion.new()
+	    @matriculacion = Matriculacion.where('periodo_escolar_id = ? and nivel_id = ? and sala_id = ? and sucursal_id = ?',params[:matriculacion][:periodo_escolar_id], params[:matriculacion][:nivel_id], params[:matriculacion][:sala_id], params[:matriculacion][:sucursal_id]).first
+	    unless @matriculacion.present?
+		    
+		    @matriculacion = Matriculacion.new()
+		    @matriculacion.periodo_escolar_id = params[:matriculacion][:periodo_escolar_id]
+		    @matriculacion.nivel_id = params[:matriculacion][:nivel_id]
+		    @matriculacion.sala_id = params[:matriculacion][:sala_id]
+		    @matriculacion.sucursal_id = params[:matriculacion][:sucursal_id]
+		    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
+		    
+		      if @matriculacion.save
 
-	    @matriculacion.periodo_escolar_id = params[:matriculacion][:periodo_escolar_id]
-	    @matriculacion.nivel_id = params[:matriculacion][:nivel_id]
-	    @matriculacion.sala_id = params[:matriculacion][:sala_id]
-	    @matriculacion.sucursal_id = params[:matriculacion][:sucursal_id]
-	    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
-	    
-	      if @matriculacion.save
+		        auditoria_nueva("registrar matriculacion", "matriculaciones", @matriculacion)
+		       
+		        @matriculacion_ok = true
+		       
 
-	        auditoria_nueva("registrar matriculacion", "matriculaciones", @matriculacion)
-	       
-	        @matriculacion_ok = true
-	       
+		      end
+		  else
 
-	      end              
+		  	@msg = 'Esta matriculación ya existe'
+
+		  end              
 	               
 	    respond_to do |f|
 
