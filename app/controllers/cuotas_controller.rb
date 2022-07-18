@@ -289,6 +289,17 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    #ENVIAR NOTIFICACION DE PAGO
+    @enviado = false
+    alumno = Alumno.where('id = ?', @cuota_detalle.alumno_id).first
+    @subject = 'Aviso de Pago de Cuota.'
+    @texto = 'Pago de cuota procesado exitosamente.'
+    if alumno.email.present?
+      
+      NotificarUsuario.enviar_notificacion(alumno.email, @subject, @texto, params[:cuota_detalle_id]).deliver
+
+    end
+
     respond_to do |f|
 
       f.js
@@ -429,6 +440,5 @@ skip_before_action :verify_authenticity_token
     end
 
   end
-
 
 end
