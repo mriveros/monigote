@@ -156,7 +156,7 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
   get "jurisdicciones/index"
   get "jurisdicciones/buscar_juridisccion_oferta" 
 
-  #JURISDICCIONES
+  #INFORMES
   get "informes/index"
   get "informes/indexa"
   get "informes/generar_pdf"
