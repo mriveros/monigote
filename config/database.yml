@@ -47,6 +47,6 @@ DB_AUDITORIAS:
   <<: *default
   database: monigote_auditoria
   username: postgres
-  password: database#production#pg
-  host: 192.168.0.55
+  password: postgres
+  host: localhost
   port: 5432
