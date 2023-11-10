@@ -6,7 +6,7 @@
     <div class="modal-header" style="background:#e6e6e6;">
           
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h4 class="modal-title" id="myModalLabel">Agregar Alumno al matriculacion</h4>
+      <h4 class="modal-title" id="myModalLabel">Agregar Alumno</h4>
       
     </div>
 
@@ -37,8 +37,12 @@
           <div class="col-sm-7"><%= text_field_tag :apellidos, nil, class: 'form-control input-sm', readonly: true %></div>
           <div class="col-sm-1"></div><br />
 
-          <div class="col-sm-4"><%= f.label :costo_matriculacion, "Costo Matriculación #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-4"><%= f.label :costo_matriculacion, "Monto Cuota #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.collection_select :precio_id, VPrecio.where('nivel_id =?',@matriculacion.nivel_id), :id, :descripcion_monto, { include_blank: false}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-4"><%= f.label :precio_matricula, "Monto Matricula #{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= text_field_tag :monto_matricula, nil, onkeyup:' formatear_numero(this)',class: 'form-control input-sm', style: "width:220px;" %></div>
           <div class="col-sm-1"></div><br />
           
           <div class="col-sm-4"><%= f.label :fecha, "Fecha Matriculación#{attr_requerido}".html_safe %></div>

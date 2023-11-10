@@ -239,9 +239,12 @@ class MatriculacionesController < ApplicationController
 	    valido = true
 	    @msg = ""
 	    @matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ? and alumno_id = ? ', params[:matriculacion_id],params[:alumno_id]).first
+	    
 	    if @matriculacion_detalle.present?
+
 	    	valido = false
 	    	@msg = 'El alumno ya se encuentra matriculado.'
+
 	    end
 
 	    if valido
@@ -252,15 +255,16 @@ class MatriculacionesController < ApplicationController
 		    @matriculacion_detalle.precio_id = params[:matriculacion_detalle][:precio_id]
 		    @matriculacion_detalle.fecha_matriculacion = params[:fecha_matriculacion]
 		    @matriculacion_detalle.estado_matriculacion_detalle_id = PARAMETRO[:estado_matriculacion_detalle_activo]
+		    @matriculacion_detalle.monto_matricula = params[:monto_matricula].to_s.gsub(/[$.]/,'').to_i
 		    
-		      if @matriculacion_detalle.save
+		    if @matriculacion_detalle.save
 
-		        auditoria_nueva("registrar matriculacion detalle", "matriculaciones_detalles", @matriculacion_detalle)
-		       
-		        @matriculacion_ok = true
+		      auditoria_nueva("registrar matriculacion detalle", "matriculaciones_detalles", @matriculacion_detalle)   
+		      @matriculacion_ok = true
 		       
 
-		      end              
+		    end
+
 	    end
 
 	    respond_to do |f|
