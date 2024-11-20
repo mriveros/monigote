@@ -4,7 +4,8 @@ class Alumno < ActiveRecord::Base
   self.primary_key="id"
   extend Dragonfly::Model
   include Avatarable
-
+  validates_property :format, of: :photo, in: ['jpeg', 'jpg', 'png', 'gif'], message: "solo se permiten imágenes (JPEG, PNG o GIF)"
+  
   dragonfly_accessor :photo
 
   attr_accessible :id, :nombres, :apellidos, :ci, :direccion, :telefono, :fecha_nacimiento

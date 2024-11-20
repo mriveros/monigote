@@ -15,7 +15,6 @@
       <td><%= p.correo_electronico%></td>
       <td style="text-align:center;width:150px;">
       <%= link_to_editar_persona(p) %>
-      <%= link_to_unificar_persona(p) %>
       <%= link_to icon_eliminar, personas_eliminar_path(id: p.id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar la persona', data: { confirm: "Está seguro de eliminar la persona ?"} %> 
       </td>
 
