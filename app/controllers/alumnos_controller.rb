@@ -121,35 +121,15 @@ skip_before_action :verify_authenticity_token
       @alumno.direccion = params[:direccion].upcase
       @alumno.telefono = params[:telefono]
       @alumno.email = params[:email]
-      
+      if params[:alumno][:photo].present?
+        @alumno.photo = params[:alumno][:photo]
+      end
 
         if @alumno.save
 
           auditoria_nueva("registrar alumno", "alumnos", @alumno)
           @guardado_ok = true
-          @persona = Persona.where('documento_persona = ?', params[:ci]).first
-          
-          unless @persona.present?
 
-            @persona = Persona.new
-            @persona.nombre_persona = params[:nombres].upcase
-            @persona.apellido_persona = params[:apellidos].upcase
-            @persona.documento_persona = params[:ci]
-            @persona.tipo_documento_id = params[:persona][:tipo_documento_id]
-            @persona.nacionalidad_id = params[:persona][:nacionalidad_id]
-            @persona.fecha_nacimiento = params[:alumno][:fecha_nacimiento]
-            @persona.direccion = params[:direccion].upcase
-            @persona.telefono = params[:telefono]
-            @persona.celular = params[:telefono]
-            #sexo por defecto no especificado
-            @persona.genero_id = 3 
-            if @persona.save
-              @guardado_ok = true
-               auditoria_nueva("registrar persona", "personas", @persona)
-            end
-
-          end
-         
         end 
  
     end
@@ -200,6 +180,11 @@ skip_before_action :verify_authenticity_token
       @alumno.direccion = params[:alumno][:direccion].upcase
       @alumno.telefono = params[:alumno][:telefono]
       @alumno.email = params[:alumno][:email]
+      if params[:alumno][:photo].present?
+        @alumno.photo = params[:alumno][:photo]
+      end
+
+
       if @alumno.save
 
         auditoria_despues(@alumno, auditoria_id)
