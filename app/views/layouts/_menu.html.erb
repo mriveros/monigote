@@ -1,159 +1,101 @@
 <!-- Navigation -->
 <nav class="navbar-principal">
-	
-	<!-- BEGIN MENU NEW -->
+  <!-- BEGIN MENU -->
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Menu</span>
+        <span class="fa fa-lg fa-bars"></span>
+      </button>
+      <%= link_to "Monigote", index_url, title: "Ir al Inicio", class: 'navbar-brand' %>
+    </div>
 
-<div class="navbar-principal">
-	
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <% if current_usuario.present? %>
+          <!-- Configuraciones Dropdown -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
+              <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index") %></li>
+              <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+              <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
+              <li><%= link_to "Tipos Caracteristicas", tipos_caracteristicas_index_path if acceso_permitido("tipos_caracteristicas.index") %></li>
+              <li><%= link_to "Informaciones", informaciones_index_path if acceso_permitido("informaciones.index") %></li>
+              <li><%= link_to "Alumnos", alumnos_index_path if acceso_permitido("alumnos.index") %></li>
+              <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
+              <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
+              <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>
+              <li><%= link_to "Precios Niveles", precios_index_path if acceso_permitido("precios.index") %></li>
+              <li><%= link_to "Tutores", tutores_index_path if acceso_permitido("tutores.index") %></li>
+            </ul>
+          </li>
 
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle " data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Menu</span>
-						<span class="fa fa-lg fa-bars"></span>
-                        
-                    </button>
-					<!--<a class="navbar-brand" href="#">RUE</a>-->
-					<%= link_to "Monigote", index_url, :title => "Ir al Inicio", :class => 'navbar-brand' %>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-						
-					<% if current_usuario.present? %>
-						<li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuraciones <b class="caret"></b></a>
+          <!-- Módulos Dropdown -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Matriculaciones", matriculaciones_index_path if acceso_permitido("matriculaciones.index") %></li>
+              <li><%= link_to "Gestión Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>
+              <li><%= link_to "Pagos Cuotas", cuotas_index_detalles_path if acceso_permitido("cuotas.index") %></li>
+            </ul>
+          </li>
 
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Controladores", controladores_index_path if acceso_permitido("controladores.index") %></li>
-                  <li><%= link_to "Roles", roles_index_path if acceso_permitido("roles.index")%></li>
-                  <li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-                  <li><%= link_to "Usuarios", usuarios_index_path if acceso_permitido("usuarios.index") %></li>
-				  <li><%= link_to "Tipos Caracteristicas", tipos_caracteristicas_index_path if acceso_permitido("tipos_caracteristicas.index") %></li>
-				  <li><%= link_to "Informaciones", informaciones_index_path if acceso_permitido("informaciones.index")%></li>
-
-                </ul>
-                </li>
-				<li>
-				    <a href="#" class="dropdown-toggle" data-toggle="dropdown" >Módulos <b class="caret"></b></a>
-
-					<ul class="dropdown-menu">
-					<li>
-					<a class="dropdown-toggle " href="#" data-toggle="dropdown">Administración<b class="caret"></b></a>
-
-            		<ul class="dropdown-menu">
-              
-		              <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
-		              <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li> 
-		              <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li> 
-		              <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
-		              <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li> 
-		            </ul>
-		        	</li>
-
-					<li>
-
-
-						<a class="dropdown-toggle " href="#" data-toggle="dropdown">Monigote<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-						<li><%= link_to "Alumnos",alumnos_index_path if acceso_permitido("alumnos.index") %></li> 
-						<li><%= link_to "Personas", personas_index_path if acceso_permitido("personas.index") %></li>
-				        <li><%= link_to "Personales", personales_index_path if acceso_permitido("personales.index") %></li>
-				        <li><%= link_to "Puestos de Trabajo/Cargos", cargos_index_path if acceso_permitido("cargos.index") %></li>
-				        <li><%= link_to "Precios Niveles", precios_index_path if acceso_permitido("precios.index") %></li> 
-				        <li><%= link_to "Tutores", tutores_index_path if acceso_permitido("tutores.index") %></li> 
-				        
-												 
-       
-						</ul>
-							 
-						</li>
- 	
-
-            <li><%= link_to "Matriculaciones",matriculaciones_index_path if acceso_permitido("matriculaciones.index") %></li>
-
-            <li><%= link_to "Gestión Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>  
-            <li><%= link_to "Pagos Cuotas", cuotas_index_detalles_path if acceso_permitido("cuotas.index") %></li>
-			
-
-			<li>
-
-			</li>
-
-						<li>
-							
-							<ul class="dropdown-menu">
-								
-								<li>
-								   
-									<ul class="dropdown-menu">
-									   
-									</ul>
-								
-								</li>
-								
-								
-							      
-							</ul>
-				 		
-				 			</li>
-
-				
-					 
-			</ul> 
-
-		</li>
-    		<li><%= link_to "Reportes", informes_index_path if acceso_permitido("informes.index")%></li>
-	  	<% end %>
-
-		<li><%= link_to "Contactos", contactos_url, :id => "tab-contacto", :class => ('active current' if current_page?(contactos_path)), :title => "Ir al Formulario de Contactos" %></li>
-			
-        </ul>
-					
-		<!-- BEGIN MENU RIGTH-->
-		    <ul class="nav navbar-nav navbar-right">
-
-			   <% if current_usuario.present? %>
-
-			        <li>
-
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" >Conectado como <%= "<span style='font-size:10px;'>(#{current_usuario.perfil_actual.rol.descripcion})</span>".html_safe %><b class="caret"></b></a>
-
-					<% if current_usuario_perfiles.present? %>
-
-					   <ul class="dropdown-menu">
-
-						<% current_usuario_perfiles.each do |p| %>
-
-					   <li><%= link_to "Cambiar a #{p.rol.descripcion}", usuarios_cambiar_perfil_actual_path( perfil_id: p.id ), remote: true %></li>
-
-				        <% end %>
-
-						</ul>
-
-					 <% end %>
-
-					</li>
-						<li><%= link_to "Mi Cuenta <em style='color:silver;font-size:12px;'></em> <span class='glyphicon glyphicon-edit'></span>".html_safe, usuarios_mi_cuenta_path, :title => "Ver mi Perfil", id: "tab-mi-cuenta" %></li>
-						<li><%= link_to "Salir <span class='glyphicon glyphicon-off'></span>".html_safe, logout_url, :title => "Cerrar Sesión", id: "tab-cerrar-sesion" %></li>
-					<% else %>
-
-						<li><%= link_to "Crear mi Cuenta <span class='glyphicon glyphicon-pencil'></span>".html_safe, principal_agregar_usuario_path, :title => "Crear mi Cuenta", id: "tab-registrarme" %></li>
-						<li><%= link_to "Iniciar Sesi&oacute;n <span class='glyphicon glyphicon-user'></span>".html_safe, login_url, :title => "Iniciar Sesión", id: "tab-iniciar-sesion" %></li>
-					<% end %>
-
-					<li>
-
-					 
-					
- 
-                </div>
-            </div>
-        </div>
-
-<!-- END MENU NEW -->
+           <!-- Módulos Dropdown -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <!-- Administración Submenu -->
+                  <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
+                  <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li>
+                  <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li>
+                  <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
+                  <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li>
+            </ul>
+          </li>
 
 
+          <!-- Reportes -->
+          <li><%= link_to "Reportes", informes_index_path if acceso_permitido("informes.index") %></li>
+        <% end %>
+
+        <!-- Contactos -->
+        <li>
+          <%= link_to "Contactos", contactos_url, id: "tab-contacto", class: ('active current' if current_page?(contactos_path)), title: "Ir al Formulario de Contactos" %>
+        </li>
+      </ul>
+
+      <!-- Right-side Menu -->
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_usuario.present? %>
+          <!-- Perfil y Sesión -->
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Conectado como <%= "<span style='font-size:10px;'>(#{current_usuario.perfil_actual.rol.descripcion})</span>".html_safe %>
+              <b class="caret"></b>
+            </a>
+            <% if current_usuario_perfiles.present? %>
+              <ul class="dropdown-menu">
+                <% current_usuario_perfiles.each do |p| %>
+                  <li><%= link_to "Cambiar a #{p.rol.descripcion}", usuarios_cambiar_perfil_actual_path(perfil_id: p.id), remote: true %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+
+          <li><%= link_to "Mi Cuenta <span class='glyphicon glyphicon-edit'></span>".html_safe, usuarios_mi_cuenta_path, title: "Ver mi Perfil", id: "tab-mi-cuenta" %></li>
+          <li><%= link_to "Salir <span class='glyphicon glyphicon-off'></span>".html_safe, logout_url, title: "Cerrar Sesión", id: "tab-cerrar-sesion" %></li>
+        <% else %>
+          <!-- Sin Usuario -->
+          <li><%= link_to "Crear mi Cuenta <span class='glyphicon glyphicon-pencil'></span>".html_safe, principal_agregar_usuario_path, title: "Crear mi Cuenta", id: "tab-registrarme" %></li>
+          <li><%= link_to "Iniciar Sesión <span class='glyphicon glyphicon-user'></span>".html_safe, login_url, title: "Iniciar Sesión", id: "tab-iniciar-sesion" %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </nav>
+
 
 <style type="text/css">
  
@@ -181,7 +123,7 @@ header nav.navbar-principal a:not(.navbar-brand):hover, header nav.navbar-princi
 header nav.navbar-principal a {
     color: #fff;
     font-family: Arial, ​sans-serif;
-    font-size: 1.1em;
+    font-size: 1.3em;
 }
 
 .navbar-right .dropdown-menu li a .caret {
@@ -195,17 +137,15 @@ header nav.navbar-principal a {
     border-right: 4px solid transparent;
 }
 
-@media (min-width: 767px) {
-    .navbar-nav .dropdown-menu .caret {
-        transform: rotate(-90deg);
+/* Ajustes en dispositivos pequeños */
+@media (max-width: 767px) {
+    .navbar-principal .navbar-nav > li > a {
+        padding: 12px 10px; /* Ajustar espacio en móviles */
+        font-size: 1.1em; /* Texto más grande */
     }
-
-	/*.navbar-nav .navbar-right .dropdown-menu .caret {
-        transform: rotate(-180deg);
-    }*/
-	
-	
 }
+
+
 
 
 
