@@ -38,7 +38,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to "Matriculaciones", matriculaciones_index_path if acceso_permitido("matriculaciones.index") %></li>
               <li><%= link_to "Gestión Cuotas", cuotas_index_path if acceso_permitido("cuotas.index") %></li>
-              <li><%= link_to "Pagos Cuotas", cuotas_index_detalles_path if acceso_permitido("cuotas.index") %></li>
+              <li><%= link_to "Gestion Cobros de Cuotas", cuotas_index_detalles_path if acceso_permitido("cuotas.index") %></li>
             </ul>
           </li>
 
@@ -47,11 +47,11 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <!-- Administración Submenu -->
-                  <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
-                  <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li>
-                  <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li>
-                  <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
-                  <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li>
+                <li><%= link_to "Adelantos", pagos_adelantos_index_path if acceso_permitido("pagos_adelantos.index") %></li>
+                <li><%= link_to "Descuentos", pagos_descuentos_index_path if acceso_permitido("pagos_descuentos.index") %></li>
+                <li><%= link_to "Remuneraciones Extras", pagos_remuneraciones_extras_index_path if acceso_permitido("pagos_remuneraciones_extras.index") %></li>
+                <li><%= link_to "Registro de Gastos", registros_gastos_index_path if acceso_permitido("registros_gastos.index") %></li>
+                <li><%= link_to "Pagos Salarios", pagos_salarios_index_path if acceso_permitido("pagos_salarios.index") %></li>
             </ul>
           </li>
 

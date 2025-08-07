@@ -213,9 +213,9 @@ skip_before_action :verify_authenticity_token
     @msg = ""
 
     @cuota = Cuota.find(params[:id])
-    cuota_detalle = CuotaDetalle.where("cuota_id = ? and estado_pago_cuota_detalle_id in (?)", params[:id], [PARAMETRO[:estado_pago_cuota_detalle_pagado],PARAMETRO[:estado_pago_cuota_detalle_pago_parcial]])
+    cuota_detalle = CuotaDetalle.where("cuota_id = ? and estado_pago_cuota_detalle_id = ?", params[:id], PARAMETRO[:estado_pago_cuota_detalle_pendiente])
     
-    unless cuota_detalle.present?
+    if cuota_detalle.present?
       
       cuota_detalle.destroy_all
       @cuota_elim = @cuota
