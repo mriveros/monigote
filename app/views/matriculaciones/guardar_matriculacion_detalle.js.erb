@@ -11,7 +11,10 @@
     
 
 <% else %>
+  setTimeout(function(){ 
 
-  swal('Error al guardar la matriculación. <%=@msg%>');
+    swal('Error al guardar la matriculación: <%=@msg%>');
+    
+  }, 1000);
 
 <% end %>

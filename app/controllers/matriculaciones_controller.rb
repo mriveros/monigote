@@ -236,10 +236,12 @@ class MatriculacionesController < ApplicationController
 
 	  def guardar_matriculacion_detalle
 
+	  	@matriculacion_ok = false
 	    valido = true
-	    @msg = ""
+	    @msg = ''
+
 	    @matriculacion_detalle = MatriculacionDetalle.where('matriculacion_id = ? and alumno_id = ? ', params[:matriculacion_id],params[:alumno_id]).first
-	    
+	    	
 	    if @matriculacion_detalle.present?
 
 	    	valido = false

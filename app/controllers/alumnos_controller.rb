@@ -114,6 +114,8 @@ skip_before_action :verify_authenticity_token
     if @valido
       
       @alumno = Alumno.new()
+      @alumno.nacionalidad_id = params[:alumno][:nacionalidad_id]
+      @alumno.tipo_documento_id = params[:alumno][:tipo_documento_id]
       @alumno.nombres = params[:nombres].upcase
       @alumno.apellidos = params[:apellidos].upcase
       @alumno.ci = params[:ci]
@@ -172,7 +174,8 @@ skip_before_action :verify_authenticity_token
     auditoria_id = auditoria_antes("actualizar alumno", "alumnos", @alumno)
 
     if valido
-
+      @alumno.nacionalidad_id = params[:alumno][:nacionalidad_id]
+      @alumno.tipo_documento_id = params[:alumno][:tipo_documento_id]
       @alumno.nombres = params[:alumno][:nombres].upcase
       @alumno.apellidos = params[:alumno][:apellidos].upcase
       @alumno.ci = params[:alumno][:ci]
@@ -286,6 +289,72 @@ skip_before_action :verify_authenticity_token
 
     respond_to do |f|
       f.json { render :json => @alumno.first}
+    end
+
+  end
+
+
+  def alumno_detalle
+
+    @alumno_detalle = AlumnoDetalle.where('alumno_id = ?', params[:alumno_id]).first
+
+    unless @alumno_detalle.present?
+    
+      @alumno_detalle = AlumnoDetalle.new()
+    
+    end
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_alumno_detalle
+
+    @guardado_ok =  false
+
+    @alumno_detalle = AlumnoDetalle.where('alumno_id = ?', params[:alumno_id]).first
+    
+    unless @alumno_detalle.present?
+    
+      @alumno_detalle = AlumnoDetalle.new()
+      
+    end
+    
+    @alumno_detalle.alumno_id = params[:alumno_id]
+    @alumno_detalle.antecedentes_personales = params[:alumno_detalle][:antecedentes_personales]
+    @alumno_detalle.antecedentes_familiares = params[:alumno_detalle][:antecedentes_familiares]
+    @alumno_detalle.antecedentes_otros = params[:alumno_detalle][:antecedentes_otros]
+    @alumno_detalle.transtornos = params[:alumno_detalle][:transtornos]
+    
+    if params[:alumno_detalle][:transtornos].to_i == 1
+      @alumno_detalle.transtorno_especificar = params[:alumno_detalle][:transtorno_especificar]
+    else
+      @alumno_detalle.transtorno_especificar = ''
+    end
+
+    @alumno_detalle.enfermedad = params[:alumno_detalle][:enfermedad]
+    if params[:alumno_detalle][:enfermedad].to_i == 1
+      @alumno_detalle.enfermedad_especificar = params[:alumno_detalle][:enfermedad_especificar]
+    else
+      @alumno_detalle.enfermedad_especificar = ''
+    end
+    @alumno_detalle.medicamento = params[:alumno_detalle][:medicamento]
+    @alumno_detalle.medicamento_especificar = params[:alumno_detalle][:medicamento_especificar]
+    @alumno_detalle.observacion = params[:alumno_detalle][:observacion]
+    if @alumno_detalle.save
+      
+      @guardado_ok =  true
+
+    end
+
+    respond_to do |f|
+
+      f.js
+
     end
 
   end

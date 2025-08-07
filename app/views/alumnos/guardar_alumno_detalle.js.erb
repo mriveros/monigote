@@ -1,0 +1,16 @@
+  <% if @guardado_ok %>
+    
+ setTimeout(function(){ 
+    
+  $("#link-to-alumno-detalle-<%= params[:alumno_id]%>").trigger('click');
+  $("#link-to-alumno-detalle-<%=params[:alumno_id]%>").trigger('click');
+  swal("Los detalles de alumnos se guardaron exitosamente!");
+
+  }, 1000);
+    
+ 
+<% else %>
+
+  swal('Error al guardar los detalles. Intente más tarde');
+
+<% end %>

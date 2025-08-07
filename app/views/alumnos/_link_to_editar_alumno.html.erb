@@ -1,4 +1,4 @@
 
-<%= link_to icon_editar, "#", id: "link-to-editar-alumno-#{alumno_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del alumno.', onclick: "$('.modal').html('');return false;" %>
+<%= link_to (icon_editar + "Editar").html_safe, "#", id: "link-to-editar-alumno-#{alumno_id}", class: 'btn btn-warning btn-xs', title: 'Haga click para editar datos del alumno.', onclick: "$('.modal').html('');return false;" %>
 <%= modal_window( window_id: "modal-window-editar-alumno", link_to_id: "#link-to-editar-alumno-#{alumno_id}", url: alumnos_editar_path( window_id: "modal-window-editar-alumno", alumno_id: alumno_id) )%>
 
