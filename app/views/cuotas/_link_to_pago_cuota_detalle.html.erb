@@ -1,4 +1,4 @@
-<%= link_to icon_confirmar, "#", id: "link-to-pago-cuota-detalle-#{cuota_detalle_id}", class: 'btn btn-success btn-xs', 
+<%= link_to (icon_confirmar + "Registrar Pago" ).html_safe, "#", id: "link-to-pago-cuota-detalle-#{cuota_detalle_id}", class: 'btn btn-success btn-xs', 
 title: 'Haga click aquí para pagar la cuota.', onclick: "$('.modal').html('');return false;" %>
 
 <%= modal_window( window_id: "modal-window-cambiar-estado-pago-#{cuota_detalle_id}", 
