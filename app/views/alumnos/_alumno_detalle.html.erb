@@ -1,0 +1,119 @@
+<td colspan="12" align="center" style="background: #e6e6e6;">
+
+  <div class="panel panel-default">
+
+    <div class="panel-heading" align="center">
+      <div align="center" style="border-bottom: 2px dashed #b6b6b6; margin-bottom:5px; padding:0px;">
+        <h3>Detalles del Alumno</h3>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="table-responsive" id="table-alumno-detalle">
+
+        <%= form_for @alumno_detalle, remote: true, url: alumnos_guardar_alumno_detalle_url, html: { id: "form-datos-detalle-alumno" }, method: 'POST' do |f| %>
+
+           <%= hidden_field_tag :alumno_id, params[:alumno_id] %>
+          <table class="table table-bordered table-hover table-striped display dataTable">
+            <thead>
+              <tr role="row">
+                <th style="width:33%;">Antecedentes</th>
+                <th style="width:33%;">Datos Clínicos</th>
+                <th style="width:34%;">Otros Datos</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <!-- ANTECEDENTES -->
+                <td>
+                  <div class="col-sm-12">
+                    <%= f.label :antecedentes_personales, "Antecedentes Personales" %>
+                    <%= f.text_area :antecedentes_personales, class: 'form-control input-sm', maxlength: "255", rows: 3 %>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <%= f.label :antecedentes_familiares, "Antecedentes Familiares" %>
+                    <%= f.text_area :antecedentes_familiares, class: 'form-control input-sm', maxlength: "255", rows: 3 %>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <%= f.label :antecedentes_otros, "Otros Antecedentes" %>
+                    <%= f.text_area :antecedentes_otros, class: 'form-control input-sm', maxlength: "255", rows: 3 %>
+                  </div>
+                </td>
+
+                <!-- DATOS CLÍNICOS -->
+                <td>
+                  <div class="col-sm-12">
+                    <%= f.label :transtornos, "Trastornos" %><br/>
+                   <%= f.check_box :transtornos, {}, '1', '0' %>
+                  </div>
+
+                  <div class="col-sm-12" id="div_transtornos" hidden>
+                    <%= f.label :transtorno_especificar, "Especificar Trastornos" %>
+                    <%= f.text_field :transtorno_especificar, class: 'form-control input-sm' %>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <%= f.label :enfermedad, "Enfermedad" %><br/>
+                    <%= f.check_box :enfermedad, {}, '1', '0' %>
+                  </div>
+
+                  <div class="col-sm-12" id="div_enfermedad" hidden>
+                    <%= f.label :enfermedad_especificar, "Especificar Enfermedad" %>
+                    <%= f.text_field :enfermedad_especificar, class: 'form-control input-sm' %>
+                  </div>
+
+                </td>
+
+                <!-- OTROS DATOS -->
+                <td>
+                  <div class="col-sm-12">
+                    <%= f.label :medicamento, "Medicamentos" %>
+                    <%= f.text_area :medicamento, class: 'form-control input-sm' %>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <%= f.label :observacion, "Observación" %>
+                    <%= f.text_area :observacion, class: 'form-control input-sm' %>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="modal-footer-center" style="background:#e6e6e6;">
+            <%= f.submit "Guardar Datos", class: "btn btn-primary", id: "btn-actualizar-datos-alumno" %>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+
+</td>
+
+<script>
+  const transtornos = document.getElementById('alumno_detalle_transtornos');
+  const divTranstornos = document.getElementById('div_transtornos');
+
+  const enfermedad = document.getElementById('alumno_detalle_enfermedad');
+  const divEnfermedad = document.getElementById('div_enfermedad');
+
+  if (transtornos && divTranstornos) {
+    divTranstornos.style.display = transtornos.checked ? 'block' : 'none';
+    transtornos.addEventListener('change', () => {
+      divTranstornos.style.display = transtornos.checked ? 'block' : 'none';
+    });
+  }
+
+  if (enfermedad && divEnfermedad) {
+    divEnfermedad.style.display = enfermedad.checked ? 'block' : 'none';
+    enfermedad.addEventListener('change', () => {
+      divEnfermedad.style.display = enfermedad.checked ? 'block' : 'none';
+    });
+  }
+</script>

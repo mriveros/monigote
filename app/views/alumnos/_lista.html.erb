@@ -16,9 +16,9 @@
       
       <td style="width:120px;">
         
-        <%= link_to_editar_alumno(p.alumno_id) %>
-        
-        <%= link_to icon_eliminar, alumnos_eliminar_path(alumno_id: p.alumno_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el alumno', data: { confirm: "Está seguro de eliminar el alumno?"} %>
+        <%= link_to_editar_alumno(p.alumno_id) %><br>
+        <%=link_to_alumno_detalle(p.alumno_id) %><br>
+        <%= link_to (icon_eliminar + "Eliminar").html_safe, alumnos_eliminar_path(alumno_id: p.alumno_id), remote: true, class: "btn btn-danger btn-xs", title: 'Haga click para eliminar el alumno', data: { confirm: "Está seguro de eliminar el alumno?"} %>
       
        </td> 
 

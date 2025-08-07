@@ -21,11 +21,11 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= f.collection_select  :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
@@ -97,15 +97,15 @@
   
   setTimeout(function(){ 
     $("#persona_documento").focus();
-    $("#persona_tipo_documento_id").val(1);
-    $("#persona_nacionalidad_id").val(1);
+    $("#alumno_tipo_documento_id").val(1);
+    $("#alumno_nacionalidad_id").val(1);
   }, 1000);
 
   $("#ci").bind("keydown", function(e){
       
     if(e.keyCode == 13 || e.keyCode == 9){
 
-    buscar_persona_v2($("#persona_tipo_documento_id").val(), $("#persona_nacionalidad_id").val(), $("#ci").val(),"<%= url_for(alumnos_buscar_persona_path ) %>");
+    buscar_persona_v2($("#alumno_tipo_documento_id").val(), $("#alumno_nacionalidad_id").val(), $("#ci").val(),"<%= url_for(alumnos_buscar_persona_path ) %>");
       return false;
     }
   })
@@ -115,14 +115,14 @@
       valido = true
       msg = ""
 
-      if($("#persona_tipo_documento_id").val().length == 0){
+      if($("#alumno_tipo_documento_id").val().length == 0){
 
         msg +="Debe seleccionar el tipo de documento.\n"
         valido = false
       
       }
 
-       if($("#persona_nacionalidad_id").val().length == 0){
+       if($("#alumno_nacionalidad_id").val().length == 0){
 
         msg +="Debe seleccionar una nacionalidad.\n"
         valido = false

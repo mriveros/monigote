@@ -21,11 +21,11 @@
         <div class="panel-body">
 
           <div class="col-sm-4"><%= label_tag nil, "Tipo de Documento #{attr_requerido}".html_safe, id: "lbl-tipo-documento-persona" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= f.collection_select :tipo_documento_id,  TipoDocumento.habilitados.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "Nacionalidad #{attr_requerido}".html_safe, id: "lbl-nacionalidad" %></div>
-          <div class="col-sm-7"><%= collection_select :persona, :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
+          <div class="col-sm-7"><%= f.collection_select  :nacionalidad_id, Nacionalidad.ordenado_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm'} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= label_tag nil, "N° Documento #{attr_requerido}".html_safe, id: "lbl-documento" %></div>
@@ -43,7 +43,10 @@
           <div class="col-sm-4"><%= f.label :fecha_nacimiento, "Fecha de Nacimiento #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"> 
             <div class='input-group date' style="width:150px;float:left;margin-top:5px;">
-              <%= f.text_field :fecha_nacimiento, class: 'form-control input-sm', style: "margin-top:0px;" %>
+            <%= f.text_field :fecha_nacimiento,
+                class: 'form-control input-sm',
+                style: "margin-top:0px;",
+                value: (f.object.fecha_nacimiento ? f.object.fecha_nacimiento.strftime('%d/%m/%Y') : '') %>
               <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
             </div>
           </div>
@@ -92,9 +95,9 @@
   aplicar_datepicker2();
 
   setTimeout(function(){ 
-    $("#persona_documento").focus();
-    $("#persona_tipo_documento_id").val(1);
-    $("#persona_nacionalidad_id").val(1);
+    $("#alumno_ci").focus();
+    $("#alumno_tipo_documento_id").val(1);
+    $("#alumnp_nacionalidad_id").val(1);
   }, 1000);
 
 $("#btn-guardar-alumno").bind('click', function () {
@@ -102,14 +105,14 @@ $("#btn-guardar-alumno").bind('click', function () {
       valido = true
       msg = ""
 
-      if($("#persona_tipo_documento_id").val().length == 0){
+      if($("#alumno_tipo_documento_id").val().length == 0){
 
         msg +="Debe seleccionar el tipo de documento.\n"
         valido = false
       
       }
 
-       if($("#persona_nacionalidad_id").val().length == 0){
+       if($("#alumno_nacionalidad_id").val().length == 0){
 
         msg +="Debe seleccionar una nacionalidad.\n"
         valido = false

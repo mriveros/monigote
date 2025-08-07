@@ -13,5 +13,12 @@ module AlumnosHelper
       image_tag alumno.photo.thumb('150x150#').url, options
     end
   end
+
+  def link_to_alumno_detalle(alumno_id)
+
+    render partial: 'link_to_alumno_detalle', locals: { alumno_id: alumno_id}
+
+  end
+
   
 end
