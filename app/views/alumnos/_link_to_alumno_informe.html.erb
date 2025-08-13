@@ -1,0 +1,29 @@
+<%= link_to (icon_detalles + "Informes FonoWare").html_safe, "#", id: "link-to-alumno-informe-#{alumno_id}", class: 'btn btn-success btn-xs', title: 'Haga click para ver informes fonoaudiológicos del alumno', onclick: "$('.modal').html('');return false;" %>
+
+<script type="text/javascript">
+
+  $("#link-to-alumno-informe-<%= alumno_id %>").bind('click', function(){
+
+    var contenido = $.trim($("#alumno-informe-<%= alumno_id %>").html());
+
+    $(".alumno-informe").html('');
+
+    if(contenido.length == 0){
+
+    $(this).parent().parent().after("<tr id='alumno-informe-<%= alumno_id %>' class='alumno-informe'><td colspan='4' style='text-align:center;'><i class='fa fa-refresh fa-spin'></i> Cargando...</td></tr>")
+
+      $.ajax({
+
+        type: 'GET',
+        url: '<%= url_for(alumnos_alumno_informe_path) %>',  
+        data: { alumno_id: <%= alumno_id %>},
+        dataType: 'script'
+        
+      })
+
+    }
+    
+    return false;
+  })
+
+</script>
