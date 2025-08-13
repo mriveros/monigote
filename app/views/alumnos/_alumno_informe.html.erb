@@ -1,0 +1,67 @@
+<td colspan="12" style="background: #e6e6e6; ">
+
+  <div style="background: #e6e6e6; margin:15px;padding:15px;border-radius:10px;">
+
+    <div>
+
+      <div class="col-sm-12" style="border-bottom: 2px dashed #b6b6b6;margin-bottom:5px;padding:0px;">
+        <h3 style="float:left;margin-top:5px;">Informes Fonoaudiológicos - FonoWare</h3>
+      </div>
+
+    </div> 
+
+    <div style="clear:both;"></div>
+   
+    <div class="panel-body">
+      
+      <div class="table-responsive" id="table-alumnos-informes">
+          
+        <table class="table table-bordered table-hover table-striped display dataTable" aria-describedby="example_info">
+            
+          <thead>
+              
+            <tr role="row">
+              
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Tipo documento</th>
+              <th>Adjunto</th>
+              <th>Observaci&oacute;n</th>
+              
+            </tr>
+            
+          </thead>
+       
+          <tbody id="alumnos-informes">
+
+            <% if @alumno_informe.present? %>
+
+              <% @alumno_informe.each do |ai| %>
+
+                <tr>
+
+                  <td><%= ai.id %></td>
+                  <td><%= ai.fecha.strftime('%d/%m/%Y') if ai.fecha.present? %></td>
+                  <td><%= ai.tipo_resolucion %></td>
+                  <td><%= link_descargar_data(ai.id) %></td>
+                  <td><%= ai.observacion%></td>
+
+                </tr>
+
+              <% end %>
+
+               <% end %>
+
+                
+          </tbody>
+              
+        </table>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+</td>
+

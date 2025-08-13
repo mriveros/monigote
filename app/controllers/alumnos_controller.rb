@@ -359,4 +359,20 @@ skip_before_action :verify_authenticity_token
 
   end
 
+  def alumno_informe
+
+    alumno = Alumno.where('id = ?', params["alumno_id"]).first
+    if alumno.present?
+    
+      @alumno_informe = AlumnoInforme.where('numero_documento = ?', alumno.ci).paginate(per_page: 10, page: params[:page])
+    
+    end
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
 end
