@@ -17,14 +17,6 @@ before_filter :require_usuario
 
     end
 
-     if params[:form_buscar_precios_codigo].present?
-
-      cond << "codigo = ?"
-      args << params[:form_buscar_precios_codigo]
-
-    end    
-
-
     if params[:form_buscar_precios_descripcion].present?
 
       cond << "descripcion ilike ?"
@@ -32,20 +24,12 @@ before_filter :require_usuario
 
     end
 
-
     if params[:form_buscar_precios_monto].present?
 
       cond << "monto = ?"
       args << params[:form_buscar_precios_monto]
 
     end
-    
-    if params[:form_buscar_precios][:nivel_id].present?
-
-	      cond << "nivel_id = ?"
-	      args << params[:form_buscar_precios][:nivel_id]
-
-	  end
 
     cond = cond.join(" and ").lines.to_a + args if cond.size > 0
 
@@ -88,12 +72,19 @@ before_filter :require_usuario
     valido = true
     @msg = ""
     @precio_ok = false
+    @precio = Precio.where('descripcion = ? and turno_id =?',params[:precio][:descripcion].upcase, params[:precio][:turno_id]).first
 
-    @precio = Precio.new()
-    @precio.codigo = params[:precio][:codigo].upcase
-    @precio.descripcion = params[:precio][:descripcion].upcase
-    @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
-    @precio.nivel_id = params[:precio][:nivel_id]
+    if @precio.present?
+      @msg = "Esta descripción y precio de turno ya existe."
+      valido = false
+    end
+
+    if valido
+    
+      @precio = Precio.new()
+      @precio.descripcion = params[:precio][:descripcion].upcase
+      @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
+      @precio.turno_id = params[:precio][:turno_id]
 
       if @precio.save
 
@@ -102,14 +93,16 @@ before_filter :require_usuario
         @precio_ok = true
        
 
-      end 
+      end
+
+    end 
   
       rescue Exception => exc  
         # dispone el mensaje de error 
         #puts "Aqui si muestra el error ".concat(exc.message)
         if exc.present?        
         @excep = exc.message.split(':')    
-        @msg = @excep[3].concat(" "+@excep[4].to_s)
+        @msg = @excep.to_s
       
       end                
                
@@ -184,11 +177,9 @@ before_filter :require_usuario
 
     if valido
 
-      @precio.codigo = params[:precio][:codigo].upcase
       @precio.descripcion = params[:precio][:descripcion].upcase
       @precio.monto =  params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
-      @precio.nivel_id = params[:precio][:nivel_id]
-     
+      @precio.turno_id = params[:precio][:turno_id]
 
       if @precio.save
 

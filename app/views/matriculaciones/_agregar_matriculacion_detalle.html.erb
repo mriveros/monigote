@@ -38,7 +38,7 @@
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :costo_matriculacion, "Monto Cuota #{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :precio_id, VPrecio.where('nivel_id =?',@matriculacion.nivel_id), :id, :descripcion_monto, { include_blank: false}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-7"><%= f.collection_select :precio_id, VPrecio.where('turno_id = ?',@matriculacion.turno_id), :id, :descripcion_monto, { include_blank: false}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
 
           <div class="col-sm-4"><%= f.label :precio_matricula, "Monto Matricula #{attr_requerido}".html_safe %></div>

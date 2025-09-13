@@ -23,19 +23,11 @@
 
         <tr>
 
-          <th style="width:15%;">
+          <th style="width:10%;">
             <span>ID</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_precios_id, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_id');"><i class="fa fa-times"></i></span>
-            </div>
-          </th>
-          
-           <th style="width:15%;">
-            <span>Código Precio</span>
-            <div class="input-group input-group-sm">
-              <%= text_field_tag :form_buscar_precios_codigo, nil, :class => 'form-control', :placeholder => "" %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_codigo');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 
@@ -61,19 +53,19 @@
           </th>
 
 
-          <th style="width:20%;">
+          <th style="width:10%;">
             <span>Monto</span>
             <div class="input-group input-group-sm">
               <%= text_field_tag :form_buscar_precios_monto, nil, :class => 'form-control', :placeholder => "" %>
               <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_monto');"><i class="fa fa-times"></i></span>
             </div>
           </th>
-          
-          <th >
-          <span>Nivel</span>
+
+          <th style="width:10%;">
+           <span >Turno</span>
             <div class="input-group input-group-sm">
-              <%= collection_select :form_buscar_precios, :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
-              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_nivel_id');"><i class="fa fa-times"></i></span>
+              <%= collection_select :form_buscar_precios, :turno_id, Turno.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %>
+              <span class="input-group-addon limpiar" onclick="quitar_filtro('#form-buscar-precios', '#form_buscar_precios_turno_id');"><i class="fa fa-times"></i></span>
             </div>
           </th>
 

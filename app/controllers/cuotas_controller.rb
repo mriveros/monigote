@@ -127,7 +127,6 @@ skip_before_action :verify_authenticity_token
     if @matriculaciones.present?
 
       cuota = Cuota.where('mes_periodo_id = ? and periodo_escolar_id = ?',params[:mes_periodo][:id],params[:periodo_escolar][:id]).first
-      unless cuota.present?
 
         CuotaDetalle.transaction do   
 
@@ -145,37 +144,47 @@ skip_before_action :verify_authenticity_token
                   @cuota.fecha_generacion = Date.today
                   @cuota.mes_periodo_id = params[:mes_periodo][:id]
                   @cuota.periodo_escolar_id = params[:periodo_escolar][:id]
-                  @cuota.matriculacion_id = m.id
-                  
+                  @cuota.matriculacion_id = m.id         
                   if @cuota.save
-                    
                     matriculacion_detalle.each do |md|
-
                       cuota_detalle = CuotaDetalle.new
                       cuota_detalle.cuota_id = @cuota.id
                       cuota_detalle.alumno_id = md.alumno_id
                       precio = Precio.where('id = ?', md.precio_id).first
                       cuota_detalle.monto_cuota = precio.monto
                       cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
-                      
                       if cuota_detalle.save
-
                         total_cuotas = total_cuotas + cuota_detalle.monto_cuota
                         @guardado_ok = true
-
                       else
-
                         @guardado_error = true
-
                       end
-                      
                     end #end each md
                     @cuota.total_cuotas = total_cuotas
                     @cuota.save
                     total_cuotas = 0
-
                   end
-
+                else
+                  matriculacion_detalle.each do |md|
+                    cuota_detalle = CuotaDetalle.where('cuota_id =  ? and alumno_id = ?', @cuota.id, md.alumno_id).first
+                    unless cuota_detalle.present?
+                      cuota_detalle = CuotaDetalle.new
+                      cuota_detalle.cuota_id = @cuota.id
+                      cuota_detalle.alumno_id = md.alumno_id
+                      precio = Precio.where('id = ?', md.precio_id).first
+                      cuota_detalle.monto_cuota = precio.monto
+                      cuota_detalle.estado_pago_cuota_detalle_id = PARAMETRO[:estado_pago_cuota_detalle_pendiente]
+                      if cuota_detalle.save
+                        total_cuotas = total_cuotas + cuota_detalle.monto_cuota
+                        @guardado_ok = true
+                      else
+                        @guardado_error = true
+                      end
+                    end
+                  end #end each md
+                  @cuota.total_cuotas = total_cuotas
+                  @cuota.save
+                  total_cuotas = 0
                 end
 
               end
@@ -183,13 +192,6 @@ skip_before_action :verify_authenticity_token
           end
 
         end #end TRANSACTION
-      
-      else
-        
-        @guardado_ok = false
-        @msg= 'La cuota del mes y periodo escolar ya ha sido generada.'
-        
-      end
     
     else
 

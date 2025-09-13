@@ -53,6 +53,13 @@ class MatriculacionesController < ApplicationController
 
 	    end
 
+	    if params[:form_buscar_matriculaciones][:turno_id].present?
+
+	      cond << "turno_id = ?"
+	      args << params[:form_buscar_matriculaciones][:turno_id]
+
+	    end
+
 
 
 	    cond = cond.join(" and ").lines.to_a + args if cond.size > 0
@@ -107,6 +114,7 @@ class MatriculacionesController < ApplicationController
 		    @matriculacion.sala_id = params[:matriculacion][:sala_id]
 		    @matriculacion.sucursal_id = params[:matriculacion][:sucursal_id]
 		    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
+		    @matriculacion.turno_id = params[:matriculacion][:turno_id]
 		    
 		      if @matriculacion.save
 
@@ -187,10 +195,13 @@ class MatriculacionesController < ApplicationController
 	    auditoria_id = auditoria_antes("actualizar matriculacion", "matriculaciones", @matriculacion)
 
 	    if valido
+	      	@matriculacion.periodo_escolar_id = params[:matriculacion][:periodo_escolar_id]
+			    @matriculacion.nivel_id = params[:matriculacion][:nivel_id]
+			    @matriculacion.sala_id = params[:matriculacion][:sala_id]
+			    @matriculacion.sucursal_id = params[:matriculacion][:sucursal_id]
+			    @matriculacion.estado_matriculacion_id = params[:matriculacion][:estado_matriculacion_id]
+			    @matriculacion.turno_id = params[:matriculacion][:turno_id]
 
-	      
-	    	
-	      	
 	      	if @matriculacion.save
 
 	      		auditoria_despues(@matriculacion, auditoria_id)

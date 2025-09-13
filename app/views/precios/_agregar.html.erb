@@ -18,10 +18,6 @@
 
         <div class="panel-body">
 
-          <div class="col-sm-4"><%= f.label :codigo, "Código Precio #{attr_requerido}".html_safe %></div>
-           <div class="col-sm-7"><%= f.text_field :codigo, class: 'form-control input-sm',style:"text-transform:uppercase;", maxlength: "6" %></div>
-          <div class="col-sm-1"></div><br />
-
            <div class="col-sm-4"><%= f.label :descripcion, "Descripción #{attr_requerido}".html_safe %></div>
           <div class="col-sm-7"><%= f.text_field :descripcion, class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />  
@@ -30,8 +26,8 @@
           <div class="col-sm-7"><%= f.text_field :monto, :onkeyup=>' formatear_numero(this)', class: 'form-control input-sm',style:"text-transform:uppercase;" %></div>
           <div class="col-sm-1"></div><br />
               
-          <div class="col-sm-4"><%= f.label :nivel_id, "Nivel#{attr_requerido}".html_safe %></div>
-          <div class="col-sm-7"><%= f.collection_select :nivel_id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
+          <div class="col-sm-4"><%= f.label :turno_id, "Turno#{attr_requerido}".html_safe %></div>
+          <div class="col-sm-7"><%= f.collection_select :turno_id, Turno.orden_descripcion, :id, :descripcion, { include_blank: true}, {class: 'form-control input-sm', style: "width:220px;"} %></div>
           <div class="col-sm-1"></div><br />
        
       </div>
