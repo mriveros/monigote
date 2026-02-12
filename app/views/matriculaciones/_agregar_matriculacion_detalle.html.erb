@@ -10,7 +10,7 @@
       
     </div>
 
-    <%= form_for @matriculacion_detalle, remote: true, url: matriculaciones_guardar_matriculacion_detalle_url, html: { id: "form-agregar-matriculacion-detalle" } do |f| %>
+    <%= form_for @matriculacion_detalle, remote: true, url: matriculaciones_guardar_matriculacion_detalle_url, html: { id: "form-agregar-matriculacion-detalle",  autocomplete: "off" } do |f| %>
 
       <%= hidden_field_tag :window_id, params[:window_id]%>
 
@@ -109,6 +109,13 @@
        if($("#ci").val().length == 0){
 
         msg +="El número de documento no puede estar vacío \n"
+        valido = false
+      
+      }
+
+      if($("#fecha_matriculacion").val().length == 0){
+
+        msg +="La fecha de matriculación no puede estar vacío \n"
         valido = false
       
       }

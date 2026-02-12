@@ -1,0 +1,21 @@
+  <% if @guardado_ok %>
+    
+ setTimeout(function(){ 
+    
+  $("#link-to-alumno-informe-<%= params[:alumno_id]%>").trigger('click');
+  $("#link-to-alumno-informe-<%=params[:alumno_id]%>").trigger('click');
+
+
+  }, 1000);
+    
+  setTimeout(function(){ 
+    
+    $("#<%= params[:window_id]%>").modal('hide');
+     swal("El informe del alumno se ha guardado exitosamente!");
+  }, 2000);
+
+<% else %>
+
+  swal('Error al guardar el informe. Intente más tarde');
+
+<% end %>

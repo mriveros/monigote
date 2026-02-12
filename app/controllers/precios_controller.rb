@@ -72,10 +72,10 @@ before_filter :require_usuario
     valido = true
     @msg = ""
     @precio_ok = false
-    @precio = Precio.where('descripcion = ? and turno_id =?',params[:precio][:descripcion].upcase, params[:precio][:turno_id]).first
+    @precio = Precio.where('descripcion = ? and turno_id =? and periodo_escolar_id = ?',params[:precio][:descripcion].upcase, params[:precio][:turno_id], params[:precio][:periodo_escolar_id]).first
 
     if @precio.present?
-      @msg = "Esta descripción y precio de turno ya existe."
+      @msg = "Precio ya existe."
       valido = false
     end
 
@@ -85,6 +85,7 @@ before_filter :require_usuario
       @precio.descripcion = params[:precio][:descripcion].upcase
       @precio.monto = params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
       @precio.turno_id = params[:precio][:turno_id]
+      @precio.periodo_escolar_id = params[:precio][:periodo_escolar_id]
 
       if @precio.save
 
@@ -180,6 +181,7 @@ before_filter :require_usuario
       @precio.descripcion = params[:precio][:descripcion].upcase
       @precio.monto =  params[:precio][:monto].to_s.gsub(/[$.]/,'').to_i
       @precio.turno_id = params[:precio][:turno_id]
+      @precio.periodo_escolar_id = params[:precio][:periodo_escolar_id]
 
       if @precio.save
 
@@ -189,13 +191,13 @@ before_filter :require_usuario
       end
 
     end
-        rescue Exception => exc  
-        # dispone el mensaje de error 
-        #puts "Aqui si muestra el error ".concat(exc.message)
-        if exc.present?        
+      rescue Exception => exc  
+      # dispone el mensaje de error 
+      #puts "Aqui si muestra el error ".concat(exc.message)
+      if exc.present?        
         @excep = exc.message.split(':')    
         @msg = @excep[3].concat(" "+@excep[4])
-        end                
+      end                
         
     respond_to do |f|
 

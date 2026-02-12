@@ -110,8 +110,6 @@ skip_before_action :verify_authenticity_token
 
   def lista_citas
 
-    puts "DEBUG//////////////////"
-    puts params[:form_buscar_citas_paciente_id]
     @citas = VCita.orden_fecha_cita.where("paciente_id = ?", params[:form_buscar_citas_paciente_id]).paginate(per_page: 10, page: params[:page])
     @total_encontrados = VCita.count
 

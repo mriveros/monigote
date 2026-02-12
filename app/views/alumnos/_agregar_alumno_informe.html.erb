@@ -1,0 +1,100 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+
+    <div class="modal-header" style="background:#e6e6e6;">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h4 class="modal-title">Agregar Informe</h4>
+    </div>
+
+    <%= form_for @alumno_informe,
+        remote: true,
+        url: alumnos_guardar_alumno_informe_url,
+        html: { id: "form-agregar-informe", multipart: true, autocomplete: 'off' },
+        method: :post do |f| %>
+
+      <%= hidden_field_tag :window_id, params[:window_id] %>
+      <%= f.hidden_field :numero_documento, value: @alumno.ci %>
+
+      <div class="modal-body">
+        <div class="panel-body">
+
+          <!-- Fecha -->
+          <div class="col-sm-4">
+            <%= f.label :fecha, "Fecha #{attr_requerido}".html_safe %>
+          </div>
+          <div class="col-sm-7">
+            <%= f.date_field :fecha, class: "form-control input-sm datepicker"%>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          <!-- Tipo informe -->
+          <div class="col-sm-4">
+            <%= f.label :tipo_resolucion, "Tipo de informe #{attr_requerido}".html_safe %>
+          </div>
+          <div class="col-sm-7">
+            <%= f.select :tipo_resolucion,
+                  [
+                    ["Informe Fonoaudiológico", "Informe Fonoaudiológico"],
+                    ["Informe Médico", "Informe Médico"],
+                    ["Otros", "Otros"]
+                  ],
+                  { include_blank: "-- Seleccione --" },
+                  class: "form-control input-sm" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          <!-- Observación -->
+          <div class="col-sm-4">
+            <%= f.label :observacion, "Observación #{attr_requerido}".html_safe %>
+          </div>
+          <div class="col-sm-7">
+            <%= f.text_area :observacion, rows: 4, class: "form-control input-sm" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          <!-- Archivo -->
+          <div class="col-sm-4">
+            <%= f.label :data, "Archivo adjunto" %>
+          </div>
+          <div class="col-sm-7">
+            <%= f.file_field :data, class: "form-control input-sm" %>
+          </div>
+          <div class="col-sm-1"></div><br />
+
+          <div class="col-sm-1"></div><br />
+
+        </div>
+      </div>
+
+      <div class="modal-footer" style="background:#e6e6e6;">
+        <%= link_to "<span class='glyphicon glyphicon-remove'></span> Cerrar".html_safe,
+              "#",
+              class: "btn btn-default",
+              onclick: "$('##{params[:window_id]}').modal('hide');" %>
+
+        <%= f.submit "Guardar", class: "btn btn-primary", id: "btn-guardar-informe" %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+<style type="text/css">
+  #form-agregar-informe label,
+#form-agregar-informe input,
+#form-agregar-informe textarea {
+  float: left;
+  margin-top: 5px;
+}
+
+#form-agregar-informe br {
+  clear: both;
+}
+
+#form-agregar-informe label {
+  width: 200px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+</style>

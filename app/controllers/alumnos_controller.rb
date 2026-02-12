@@ -327,6 +327,7 @@ skip_before_action :verify_authenticity_token
     @alumno_detalle.alumno_id = params[:alumno_id]
     @alumno_detalle.antecedentes_personales = params[:alumno_detalle][:antecedentes_personales]
     @alumno_detalle.antecedentes_familiares = params[:alumno_detalle][:antecedentes_familiares]
+    @alumno_detalle.medicamento_especificar = params[:alumno_detalle][:medicamento]
     @alumno_detalle.antecedentes_otros = params[:alumno_detalle][:antecedentes_otros]
     @alumno_detalle.transtornos = params[:alumno_detalle][:transtornos]
     
@@ -361,10 +362,10 @@ skip_before_action :verify_authenticity_token
 
   def alumno_informe
 
-    alumno = Alumno.where('id = ?', params["alumno_id"]).first
-    if alumno.present?
+    @alumno = Alumno.where('id = ?', params["alumno_id"]).first
+    if @alumno.present?
     
-      @alumno_informe = AlumnoInforme.where('numero_documento = ?', alumno.ci).paginate(per_page: 10, page: params[:page])
+      @alumno_informe = AlumnoInforme.where('numero_documento = ?', @alumno.ci).paginate(per_page: 10, page: params[:page])
     
     end
     respond_to do |f|
@@ -374,5 +375,51 @@ skip_before_action :verify_authenticity_token
     end
 
   end
+
+  def agregar_alumno_informe
+    
+    @alumno_informe = AlumnoInforme.new()
+    @alumno = Alumno.where('id = ?', params["alumno_id"]).first
+    
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def guardar_alumno_informe
+    
+    @guardado_ok = false
+    @alumno = Alumno.where('id = ?', params["alumno_id"]).first
+    @alumno_informe = AlumnoInforme.new()
+    @alumno_informe.numero_documento = params[:alumno_informe][:numero_documento]
+    @alumno_informe.tipo_resolucion = params[:alumno_informe][:tipo_resolucion]
+    @alumno_informe.observacion = params[:alumno_informe][:observacion]
+    @alumno_informe.fecha = params[:alumno_informe][:fecha]
+    @alumno_informe.data = params[:alumno_informe][:data]
+    if @alumno_informe.save
+      @guardado_ok = true
+    end
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+  def eliminar_alumno_informe
+
+    respond_to do |f|
+
+      f.js
+
+    end
+
+  end
+
+
 
 end
