@@ -1,3 +1,5 @@
+<%= javascript_include_tag "sweetalert.min" %>
+<%= stylesheet_link_tag "sweetalert" %>
 <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6; margin-bottom: 15px; padding: 0;">
   <h3 style="float:left; margin-top:5px;">Reportes</h3>
 </div>
@@ -46,6 +48,143 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="col-sm-12" id="panel-morosidad" style="border-bottom: 2px solid #b6b6b6; margin-top: 10px; margin-bottom: 15px; padding: 0;">
+  <h3 style="float:left; margin-top:5px;">Panel de Morosidad</h3>
+</div>
+
+<div class="row" style="margin-top: 10px;">
+  <%= form_tag informes_index_path(anchor: "panel-morosidad"), method: :get, id: "form-panel-morosidad" do %>
+    <div class="col-sm-2">
+      <label>Fecha desde</label>
+      <div class="input-group date">
+        <%= text_field_tag :morosidad_fecha_desde, @morosidad_filtros[:fecha_desde], class: "form-control input-sm", autocomplete: "off" %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <label>Fecha hasta</label>
+      <div class="input-group date">
+        <%= text_field_tag :morosidad_fecha_hasta, @morosidad_filtros[:fecha_hasta], class: "form-control input-sm", autocomplete: "off" %>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <label>Sucursal</label>
+      <%= select_tag :morosidad_sucursal_id, options_from_collection_for_select(Sucursal.orden_01, :id, :descripcion, @morosidad_filtros[:sucursal_id]), include_blank: true, class: "form-control input-sm" %>
+    </div>
+    <div class="col-sm-2">
+      <label>Nivel</label>
+      <%= select_tag :morosidad_nivel_id, options_from_collection_for_select(Nivel.orden_descripcion, :id, :descripcion, @morosidad_filtros[:nivel_id]), include_blank: true, class: "form-control input-sm" %>
+    </div>
+    <div class="col-sm-2">
+      <label>Alumno o CI</label>
+      <%= text_field_tag :morosidad_alumno, @morosidad_filtros[:alumno], class: "form-control input-sm" %>
+    </div>
+    <div class="col-sm-2" style="margin-top: 24px;">
+      <%= submit_tag "Filtrar", class: "btn btn-primary btn-sm" %>
+      <%= link_to "Limpiar", informes_index_path(anchor: "panel-morosidad"), class: "btn btn-default btn-sm" %>
+    </div>
+  <% end %>
+</div>
+
+<div class="row" style="margin-top: 15px;">
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Casos pendientes</strong>
+        <h4 style="margin:6px 0 0 0;"><%= @morosidad_total_casos %></h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <strong>Total pendiente</strong>
+        <h4 style="margin:6px 0 0 0;">Gs. <%= number_with_delimiter(@morosidad_total_pendiente.to_i, delimiter: ".") %></h4>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="panel panel-warning">
+      <div class="panel-body">
+        <strong>0 a 30 días</strong>
+        <h5 style="margin:6px 0 0 0;">Gs. <%= number_with_delimiter(@morosidad_0_30.to_i, delimiter: ".") %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="panel panel-danger">
+      <div class="panel-body">
+        <strong>31 a 60 días</strong>
+        <h5 style="margin:6px 0 0 0;">Gs. <%= number_with_delimiter(@morosidad_31_60.to_i, delimiter: ".") %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="panel panel-danger">
+      <div class="panel-body">
+        <strong>61+ días</strong>
+        <h5 style="margin:6px 0 0 0;">Gs. <%= number_with_delimiter(@morosidad_61_mas.to_i, delimiter: ".") %></h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-small-font table-bordered table-striped" style="font-size:11px;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha cuota</th>
+        <th>Días mora</th>
+        <th>Alumno</th>
+        <th>CI</th>
+        <th>Sucursal</th>
+        <th>Nivel / Sala</th>
+        <th>Periodo</th>
+        <th>Pendiente</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @cuotas_morosas.present? %>
+        <% @cuotas_morosas.each do |detalle| %>
+          <% dias_mora = detalle.fecha_generacion.present? ? (Date.current - detalle.fecha_generacion.to_date).to_i : 0 %>
+          <tr>
+            <td><%= detalle.cuota_detalle_id %></td>
+            <td><%= detalle.fecha_generacion.present? ? detalle.fecha_generacion.strftime("%d/%m/%Y") : "-" %></td>
+            <td><%= dias_mora %></td>
+            <td><%= detalle.nombre_alumno %></td>
+            <td><%= detalle.ci_alumno %></td>
+            <td><%= detalle.sucursal %></td>
+            <td><%= "#{detalle.nivel} / #{detalle.sala}" %></td>
+            <td><%= "#{detalle.mes_periodo} / #{detalle.periodo_escolar_id}" %></td>
+            <td>Gs. <%= number_with_delimiter(detalle.monto_pendiente.to_i, delimiter: ".") %></td>
+            <td>
+              <%= link_to "Notificar", cuotas_notificar_cuota_pendiente_path(cuota_detalle_id: detalle.cuota_detalle_id), remote: true, class: "btn btn-xs btn-warning" %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="10" style="text-align:center;">No se encontraron cuotas pendientes con los filtros seleccionados.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div style="text-align: right;">
+  <%= will_paginate @cuotas_morosas, param_name: :morosidad_page, params: {
+    morosidad_fecha_desde: @morosidad_filtros[:fecha_desde],
+    morosidad_fecha_hasta: @morosidad_filtros[:fecha_hasta],
+    morosidad_sucursal_id: @morosidad_filtros[:sucursal_id],
+    morosidad_nivel_id: @morosidad_filtros[:nivel_id],
+    morosidad_alumno: @morosidad_filtros[:alumno],
+    anchor: "panel-morosidad"
+  } %>
 </div>
 
 <div class="modal fade" id="modal-reporte-general" tabindex="-1" role="dialog" aria-labelledby="titulo-modal-reporte-general">

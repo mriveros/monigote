@@ -3,6 +3,7 @@ class InformesController < ApplicationController
   #before_filter :require_usuario
 
   def index
+    cargar_panel_morosidad
   end
 
   def index_gastos
@@ -168,6 +169,69 @@ class InformesController < ApplicationController
   end
 
   private
+
+  def cargar_panel_morosidad
+    @morosidad_filtros = {
+      fecha_desde: params[:morosidad_fecha_desde],
+      fecha_hasta: params[:morosidad_fecha_hasta],
+      sucursal_id: params[:morosidad_sucursal_id],
+      nivel_id: params[:morosidad_nivel_id],
+      alumno: params[:morosidad_alumno]
+    }
+
+    scope = VCuotaDetalle.where("estado_pago_cuota_detalle_id = ?", PARAMETRO[:estado_pago_cuota_detalle_pendiente])
+
+    if @morosidad_filtros[:fecha_desde].present?
+      fecha_desde = parsear_fecha(@morosidad_filtros[:fecha_desde])
+      scope = scope.where("fecha_generacion >= ?", fecha_desde) if fecha_desde.present?
+    end
+
+    if @morosidad_filtros[:fecha_hasta].present?
+      fecha_hasta = parsear_fecha(@morosidad_filtros[:fecha_hasta])
+      scope = scope.where("fecha_generacion <= ?", fecha_hasta) if fecha_hasta.present?
+    end
+
+    if @morosidad_filtros[:sucursal_id].present?
+      scope = scope.where("sucursal_id = ?", @morosidad_filtros[:sucursal_id])
+    end
+
+    if @morosidad_filtros[:nivel_id].present?
+      scope = scope.where("nivel_id = ?", @morosidad_filtros[:nivel_id])
+    end
+
+    if @morosidad_filtros[:alumno].present?
+      termino = "%#{@morosidad_filtros[:alumno].to_s.strip}%"
+      scope = scope.where("nombre_alumno ilike ? OR ci_alumno::text ilike ?", termino, termino)
+    end
+
+    @morosidad_total_casos = scope.count
+    pendiente_sql = "COALESCE(monto_cuota, 0) - COALESCE(pago_cuota, 0)"
+    @morosidad_total_pendiente = scope.sum(pendiente_sql)
+
+    @morosidad_0_30 = 0
+    @morosidad_31_60 = 0
+    @morosidad_61_mas = 0
+
+    scope.select("cuota_detalle_id, fecha_generacion, #{pendiente_sql} AS monto_pendiente").find_each(batch_size: 500) do |detalle|
+      next unless detalle.fecha_generacion.present?
+
+      dias = (Date.current - detalle.fecha_generacion.to_date).to_i
+      monto = detalle.monto_pendiente.to_f
+
+      if dias <= 30
+        @morosidad_0_30 += monto
+      elsif dias <= 60
+        @morosidad_31_60 += monto
+      else
+        @morosidad_61_mas += monto
+      end
+    end
+
+    @cuotas_morosas = scope.
+      select("v_cuotas_detalles.*, #{pendiente_sql} AS monto_pendiente").
+      order("fecha_generacion ASC, cuota_detalle_id ASC").
+      paginate(per_page: 15, page: params[:morosidad_page])
+  end
 
   def parsear_fecha(valor)
     return nil unless valor.present?
