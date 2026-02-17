@@ -164,6 +164,8 @@ get "avatar/:size/:background/:text" => Dragonfly.app.endpoint { |params, app|
 
   #INFORMES
   get "informes/index"
+  get "informes/index_gastos"
+  get "informes/index_balance"
   get "informes/indexa"
   get "informes/generar_pdf"
 

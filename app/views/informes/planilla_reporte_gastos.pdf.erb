@@ -1,0 +1,27 @@
+<style>
+  table.reporte-gastos {
+    border-collapse: collapse;
+    font-size: 11px !important;
+    width: 100%;
+    border: 1px solid #000;
+  }
+
+  table.reporte-gastos th {
+    background-color: #EEEEEE;
+    padding: 4px;
+    border-bottom: 1px solid #000;
+  }
+
+  table.reporte-gastos td {
+    padding: 4px;
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  table.reporte-gastos tr.total td {
+    font-weight: bold;
+    border-top: 1px solid #000;
+    background-color: #f7f7f7;
+  }
+</style>
+
+<%= render :partial => 'detalles_planilla_resumen_gastos' %>

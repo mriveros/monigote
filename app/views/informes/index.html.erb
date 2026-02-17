@@ -1,171 +1,238 @@
-
-<%= javascript_include_tag "sweetalert.min" %>
-<%= stylesheet_link_tag "sweetalert" %>
-
-<div>
-
-  <div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6;margin-bottom:5px;padding:0px;">
-    <h3 style="float:left;margin-top:5px;">Reportes Generales de Alumnos.</h3>
-  </div>
-
+<div class="col-sm-12" style="border-bottom: 2px solid #b6b6b6; margin-bottom: 15px; padding: 0;">
+  <h3 style="float:left; margin-top:5px;">Reportes</h3>
 </div>
 
+<div class="row" style="margin-top: 15px;">
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-body" style="text-align:center; min-height: 170px;">
+        <h4>Reporte General</h4>
+        <p>Resumen general de alumnos y cuotas por filtros.</p>
+        <button type="button" class="btn btn-primary" id="btn-abrir-modal-reporte-general">
+          Emitir reporte
+        </button>
+      </div>
+    </div>
+  </div>
 
-  
- 
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-body" style="text-align:center; min-height: 170px;">
+        <h4>Informe de Gastos</h4>
+        <p>Informe de gastos por rango de fechas.</p>
+        <button
+          type="button"
+          class="btn btn-warning btn-abrir-modal-fechas"
+          data-titulo="Informe de Gastos"
+          data-url="<%= informes_index_gastos_path(format: :pdf) %>">
+          Emitir reporte
+        </button>
+      </div>
+    </div>
+  </div>
 
-<%= form_for "informes", remote: true, url: informes_indexa_url, html: { id: "form-informes-produccion" }, method: 'GET' do |f| %>
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-body" style="text-align:center; min-height: 170px;">
+        <h4>Balance General</h4>
+        <p>Balance general por rango de fechas.</p>
+        <button
+          type="button"
+          class="btn btn-success btn-abrir-modal-fechas"
+          data-titulo="Balance General"
+          data-url="<%= informes_index_balance_path(format: :pdf) %>">
+          Emitir reporte
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="modal-body">    
-
-    <div class="col-sm-6 col-sm-offset-3">
-
-      <div class="panel-body" style="background:#e6e6e6; ">
-        
-        <div class="col-sm-4"><%= label_tag nil, "Alumno".html_safe %></div>
-        <%= hidden_field_tag :v_alumno_id %>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= text_area_tag :alumno_id, nil, rows: 3 ,class: 'form-control input-sm'%></div>
-        <br style="clear: both;"/>
-
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Sucursal".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :sucursal, :id, Sucursal.orden_01, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-        <div class="col-sm-1"></div><br />
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Nivel".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :nivel, :id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-        <div class="col-sm-1"></div><br />
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Periodo Escolar".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :periodo_escolar, :id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-        <div class="col-sm-1"></div><br />
-
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Mes Periodo".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :mes_periodo, :id, Mes.orden_mes, :id, :descripcion, { include_blank: true}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-        <div class="col-sm-1"></div><br />
-
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Estado Pago Cuota".html_safe %></div>
-        <div class="col-sm-7" style= "margin: 0px 0px 21px;"><%= collection_select :estado_pago_cuota_detalle, :id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: false}, {:class => 'form-control input-sm', style: "font-size:9px;"} %></div>
-        <div class="col-sm-1"></div><br />
-
-
-        <div class="col-sm-4"><%= label_tag :nil, "Desde la Fecha".html_safe %></div>
-        <div class='input-group date col-sm-4'>
-        <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm' %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-
-
-        <div class="col-sm-1"></div><br />
-        <div class="col-sm-4"><%= label_tag :nil, "Hasta la Fecha".html_safe %></div>
-        <div class='input-group date col-sm-4'>
-        <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm' %>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-        </div>
-        <div class="col-sm-1"></div><br /> 
-       
-
+<div class="modal fade" id="modal-reporte-general" tabindex="-1" role="dialog" aria-labelledby="titulo-modal-reporte-general">
+  <div class="modal-dialog" role="document" style="width: 760px; max-width: 95%;">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#e6e6e6;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="titulo-modal-reporte-general">Reporte General</h4>
       </div>
 
-      
-      <div class="modal-footer" style="background:#e6e6e6; text-align: center">
+      <%= form_tag informes_indexa_path, remote: true, method: :get, id: "form-reporte-general" do %>
+        <div class="modal-body" style="background:#e6e6e6;">
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Alumno" %></div>
+            <%= hidden_field_tag :v_alumno_id %>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= text_area_tag :alumno_id, nil, rows: 2, class: 'form-control input-sm' %></div>
+          </div>
 
-        <%= submit_tag  "Generar Reporte", class: "btn btn-primary", id: "btn-generar-reporte" %>
-          
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Sucursal" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= collection_select :sucursal, :id, Sucursal.orden_01, :id, :descripcion, { include_blank: true }, { class: 'form-control input-sm' } %></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Nivel" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= collection_select :nivel, :id, Nivel.orden_descripcion, :id, :descripcion, { include_blank: true }, { class: 'form-control input-sm' } %></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Periodo Escolar" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= collection_select :periodo_escolar, :id, PeriodoEscolar.orden_periodo, :id, :anho_periodo, { include_blank: true }, { class: 'form-control input-sm' } %></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Mes Periodo" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= collection_select :mes_periodo, :id, Mes.orden_mes, :id, :descripcion, { include_blank: true }, { class: 'form-control input-sm' } %></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag nil, "Estado Pago Cuota" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;"><%= collection_select :estado_pago_cuota_detalle, :id, EstadoPagoCuotaDetalle.orden_01, :id, :descripcion, { include_blank: false }, { class: 'form-control input-sm' } %></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag :fecha_desde_general, "Desde la Fecha" %></div>
+            <div class="col-sm-8" style="margin-bottom: 10px;">
+              <div class="input-group date">
+                <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm', id: 'fecha_desde_general' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-4"><%= label_tag :fecha_hasta_general, "Hasta la Fecha" %></div>
+            <div class="col-sm-8">
+              <div class="input-group date">
+                <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm', id: 'fecha_hasta_general' %>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="background:#e6e6e6;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Generar Reporte General", class: "btn btn-primary", id: "btn-generar-reporte-general" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-filtro-fechas-reporte" tabindex="-1" role="dialog" aria-labelledby="titulo-modal-filtro-fechas-reporte">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background:#e6e6e6;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="titulo-modal-filtro-fechas-reporte">Emitir reporte</h4>
       </div>
 
-    </div>  
+      <%= form_tag informes_index_path, method: :get, id: "form-filtro-fechas-reporte", target: "_blank" do %>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= label_tag :fecha_desde_simple, "Fecha desde" %>
+            <div class='input-group date'>
+              <%= text_field_tag :fecha_desde, nil, class: 'form-control input-sm', autocomplete: 'off', id: 'fecha_desde_simple' %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </div>
 
-  </div>  
-<%end%>
+          <div class="form-group">
+            <%= label_tag :fecha_hasta_simple, "Fecha hasta" %>
+            <div class='input-group date'>
+              <%= text_field_tag :fecha_hasta, nil, class: 'form-control input-sm', autocomplete: 'off', id: 'fecha_hasta_simple' %>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </div>
+        </div>
 
-<script type="text/javascript">
+        <div class="modal-footer" style="background:#e6e6e6;">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <%= submit_tag "Emitir", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<style type="text/css">
 
-  $("#btn-generar-reporte").bind('click', function(){
-    
-   // $("#btn-generar-reporte").attr('disabled', true);
-
-  })
-
-  //OBTENER ALUMNO
-  $("#alumno_id").bind('focus', function(){   
-
-    var alumnos = [];
-    $("#v_alumno_id").val('');
-    $("#alumno_id").val('');
-    $("#alumno_id").attr('readonly', false);
-
-    $.getJSON("<%= url_for(alumnos_buscar_alumno_path) %>", { alumno: $("#alumno_id").val()}, function(j){
-        
-      var nombre = "";
-      var options = "<option value=''> -- Seleccione un Profesional -- </option>"
-
-      for (var i = 0; i < j.length; i++) {
-        
-        if(j[i].nombre != nombre ){
-          
-          alumnos.push( {value: j[i].id +" - "+ j[i].nombres+" "+j[i].apellidos });
-          nombre =j[i].id +" - "+ j[i].nombre+" "+j[i].apellidos ;
-
-          options += "<option value="+ j[i].id +" - "+ j[i].nombre+" "+j[i].apellidos + "</option>"
-
-        }
-
-      }
-
-      $("#alumno_id").html(options);
-
-    })
-
-    $("#alumno_id").autocomplete({
-
-      minLength: 1,
-      source: alumnos,
-
-      focus: function( event, ui ) {
-      
-        $("#alumno_id" ).val( ui.item.label );
-        return false;
-      },
-      select: function( event, ui ) {
-
-        var datos = ui.item.value.split(" - ");
-        $("#alumno_id").val( ui.item.label );
-        $("#v_alumno_id").val(datos[0]);
-        return false;
-
-      }
-    })
-
-  });
+  #form-agregar-cita label, #form-agregar-cita input[type='text'], #form-agregar-cita select { float:left; margin-top:5px;}
+  #form-agregar-cita br {clear:both; }
+  #form-agregar-cita label { width:200px;font-size:12px;margin-top:10px;}
+  .ui-autocomplete{z-index: 1000000; font-size: 10px;}
   
-  //----------------------------INICIO -----------------------------------------//
-  aplicar_datepicker();
- 
-</script>
-
-<style>
-    /*INTRO.JS*/
-    .introjs-helperNumberLayer{
-        width: 23px;
-        height: 23px;
-        padding: 0px;
-    }
-
-    #start-tour{
-        cursor: pointer;
-    }
-    #form-buscar-informes table th { background:#e6e6e6;}
-    #form-buscar-informes table th span.limpiar { background:#fff;}
-    #form-buscar-informes label, #form-buscar-informes input[type='text'] { float:left; margin-top:5px;}
-    #form-buscar-informes br {clear:both; }
-    #form-buscar-informes label { width:200px;}
 
 </style>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    aplicar_datepicker();
+
+    $("#btn-abrir-modal-reporte-general").on("click", function() {
+      $("#modal-reporte-general").modal("show");
+    });
+
+    $(".btn-abrir-modal-fechas").on("click", function() {
+      var $btn = $(this);
+      var titulo = $btn.data("titulo");
+      var actionUrl = $btn.data("url");
+
+      $("#titulo-modal-filtro-fechas-reporte").text("Emitir " + titulo);
+      $("#form-filtro-fechas-reporte").attr("action", actionUrl);
+      $("#fecha_desde_simple").val("");
+      $("#fecha_hasta_simple").val("");
+      $("#modal-filtro-fechas-reporte").modal("show");
+    });
+
+    $("#form-filtro-fechas-reporte").on("submit", function() {
+      var fechaDesde = $.trim($("#fecha_desde_simple").val());
+      var fechaHasta = $.trim($("#fecha_hasta_simple").val());
+
+      if (fechaDesde.length === 0 || fechaHasta.length === 0) {
+        alert("Debe seleccionar la fecha desde y la fecha hasta.");
+        return false;
+      }
+
+      $("#modal-filtro-fechas-reporte").modal("hide");
+      return true;
+    });
+
+    $("#alumno_id").on("focus", function() {
+      var alumnos = [];
+      $("#v_alumno_id").val("");
+      $("#alumno_id").val("");
+      $("#alumno_id").attr("readonly", false);
+
+      $.getJSON("<%= url_for(alumnos_buscar_alumno_path) %>", { alumno: $("#alumno_id").val() }, function(j) {
+        var nombre = "";
+        var options = "<option value=''> -- Seleccione un Alumno -- </option>";
+
+        for (var i = 0; i < j.length; i++) {
+          if (j[i].nombre !== nombre) {
+            alumnos.push({ value: j[i].id + " - " + j[i].nombres + " " + j[i].apellidos });
+            nombre = j[i].id + " - " + j[i].nombre + " " + j[i].apellidos;
+            options += "<option value='" + j[i].id + " - " + j[i].nombre + " " + j[i].apellidos + "'></option>";
+          }
+        }
+
+        $("#alumno_id").html(options);
+      });
+
+      $("#alumno_id").autocomplete({
+        minLength: 1,
+        source: alumnos,
+        focus: function(event, ui) {
+          $("#alumno_id").val(ui.item.label);
+          return false;
+        },
+        select: function(event, ui) {
+          var datos = ui.item.value.split(" - ");
+          $("#alumno_id").val(ui.item.label);
+          $("#v_alumno_id").val(datos[0]);
+          return false;
+        }
+      });
+    });
+  });
+</script>

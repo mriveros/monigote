@@ -1,0 +1,199 @@
+:root {
+  --gd-bg: #f7fbfd;
+  --gd-surface: #ffffff;
+  --gd-text: #2a3b47;
+  --gd-muted: #6b7f8d;
+  --gd-primary: #2c9ab7;
+  --gd-primary-hover: #1f7f98;
+  --gd-success: #49b37d;
+  --gd-success-hover: #379063;
+  --gd-warning: #f0a63b;
+  --gd-warning-hover: #d88f24;
+  --gd-border: #d9e7ef;
+  --gd-shadow: 0 6px 18px rgba(32, 92, 117, 0.12);
+}
+
+body {
+  background: radial-gradient(circle at 15% 10%, #eef9ff 0%, var(--gd-bg) 45%, #f6fbff 100%);
+  color: var(--gd-text);
+  font-family: "Trebuchet MS", "Century Gothic", "Segoe UI", sans-serif;
+}
+
+#main_content {
+  background: transparent;
+}
+
+header.container-fluid {
+  background: linear-gradient(135deg, #e8f8ff 0%, #f8fffb 100%);
+  border-bottom: 1px solid var(--gd-border);
+  box-shadow: 0 2px 10px rgba(44, 154, 183, 0.08);
+}
+
+.navbar-principal {
+  background: linear-gradient(90deg, #2c9ab7 0%, #37b2a0 100%) !important;
+  border: 0 !important;
+  box-shadow: 0 4px 14px rgba(31, 127, 152, 0.25);
+}
+
+header nav.navbar-principal .navbar-brand,
+header nav.navbar-principal .navbar-nav > li > a {
+  color: #ffffff !important;
+  font-family: "Trebuchet MS", "Century Gothic", "Segoe UI", sans-serif;
+}
+
+.navbar-principal .dropdown-menu {
+  border: 1px solid var(--gd-border);
+  border-radius: 12px;
+  box-shadow: var(--gd-shadow);
+}
+
+header nav.navbar-principal .dropdown-menu > li > a {
+  color: var(--gd-text) !important;
+  padding: 8px 14px;
+}
+
+header nav.navbar-principal .dropdown-menu > li > a:hover,
+header nav.navbar-principal .dropdown-menu > li > a:focus {
+  background: #eff9ff;
+  color: var(--gd-primary) !important;
+}
+
+.panel {
+  border: 1px solid var(--gd-border);
+  border-radius: 14px;
+  box-shadow: var(--gd-shadow);
+  overflow: hidden;
+}
+
+.panel-default > .panel-heading {
+  background: #f3fbff;
+  border-color: var(--gd-border);
+}
+
+.panel-body {
+  background: var(--gd-surface);
+}
+
+.table,
+.table-bordered {
+  background: var(--gd-surface);
+}
+
+.table > thead > tr > th,
+.table-bordered > thead > tr > th {
+  background: #ecf8ff;
+  color: #2b5f70;
+  border-bottom: 1px solid #cce5f0;
+}
+
+.form-control {
+  border: 1px solid #c7dde8;
+  border-radius: 10px;
+  box-shadow: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.form-control:focus {
+  border-color: var(--gd-primary);
+  box-shadow: 0 0 0 3px rgba(44, 154, 183, 0.15);
+}
+
+.input-group-addon {
+  background: #f0f9fd;
+  border: 1px solid #c7dde8;
+  color: #3a7f94;
+}
+
+.btn {
+  border-radius: 999px;
+  border: 0;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 7px 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform .08s ease, box-shadow .15s ease, background-color .15s ease;
+}
+
+.btn:hover,
+.btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary {
+  background-color: var(--gd-primary);
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+  background-color: var(--gd-primary-hover);
+  color: #fff;
+}
+
+.btn-success {
+  background-color: var(--gd-success);
+  color: #fff;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active {
+  background-color: var(--gd-success-hover);
+  color: #fff;
+}
+
+.btn-warning {
+  background-color: var(--gd-warning);
+  color: #fff;
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active {
+  background-color: var(--gd-warning-hover);
+  color: #fff;
+}
+
+.btn-default {
+  background-color: #e8f2f6;
+  color: #385866;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #d8e9ef;
+  color: #2a4753;
+}
+
+.modal-content {
+  border-radius: 14px;
+  border: 1px solid var(--gd-border);
+  box-shadow: 0 12px 26px rgba(36, 95, 117, 0.22);
+}
+
+.label,
+.badge {
+  border-radius: 20px;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: var(--gd-primary);
+  border-color: #cae0ea;
+  background-color: #fff;
+}
+
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: var(--gd-primary);
+  border-color: var(--gd-primary);
+}

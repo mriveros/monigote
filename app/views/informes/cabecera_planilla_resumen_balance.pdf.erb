@@ -1,0 +1,19 @@
+<div style="width: 100%; text-align: center; margin-top: 10px;">
+  <p style="font-size: 14px; text-align: center; font-family: times new roman;">
+    Sistema de gestión para Centros Educativos y Guarderías - Monigote<br />
+    <label style="font-size: 18px;">BALANCE GENERAL</label>
+  </p>
+</div>
+
+<div style="width: 100%; font-size: 12px;">
+  <table style="text-align: left; width: 100%;">
+    <tr>
+      <th style="width: 120px;">Fecha desde:</th>
+      <td><%= @fecha_desde.strftime('%d/%m/%Y') if @fecha_desde.present? %></td>
+    </tr>
+    <tr>
+      <th>Fecha hasta:</th>
+      <td><%= @fecha_hasta.strftime('%d/%m/%Y') if @fecha_hasta.present? %></td>
+    </tr>
+  </table>
+</div>

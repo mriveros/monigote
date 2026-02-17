@@ -1,0 +1,25 @@
+<table class="reporte-gastos" align="center">
+  <tr>
+    <th style="width: 8%;">ID</th>
+    <th style="width: 15%;">Fecha</th>
+    <th style="width: 22%;">Gasto</th>
+    <th style="width: 15%;">Monto</th>
+    <th>Observación</th>
+  </tr>
+
+  <% @registros_gastos.each do |registro_gasto| %>
+    <tr>
+      <td><%= registro_gasto.registro_gasto_id %></td>
+      <td><%= registro_gasto.fecha.strftime('%d/%m/%Y') if registro_gasto.fecha.present? %></td>
+      <td><%= registro_gasto.gasto %></td>
+      <td style="text-align: right;"><%= registro_gasto.monto.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+      <td><%= registro_gasto.observacion %></td>
+    </tr>
+  <% end %>
+
+  <tr class="total">
+    <td colspan="3" style="text-align: right;">TOTAL</td>
+    <td style="text-align: right;"><%= @total_monto.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+    <td></td>
+  </tr>
+</table>

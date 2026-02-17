@@ -1,0 +1,62 @@
+<table class="balance-resumen" align="center">
+  <tr>
+    <th>Concepto</th>
+    <th style="width: 25%;">Monto</th>
+  </tr>
+  <tr>
+    <td>Total Ingresos (Cuotas cobradas)</td>
+    <td style="text-align: right;"><%= @total_ingresos.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+  </tr>
+  <tr>
+    <td>Total Egresos (Gastos)</td>
+    <td style="text-align: right;"><%= @total_egresos.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+  </tr>
+  <tr class="saldo">
+    <td>Saldo</td>
+    <td style="text-align: right;"><%= @saldo.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+  </tr>
+</table>
+
+<div class="seccion-balance">
+  <h4 style="margin: 0 0 6px 0;">Detalle de Ingresos</h4>
+  <table class="balance-detalle" align="center">
+    <tr>
+      <th style="width: 14%;">Fecha</th>
+      <th style="width: 10%;">ID Detalle</th>
+      <th>Alumno</th>
+      <th style="width: 18%;">Monto Cobrado</th>
+    </tr>
+
+    <% @ingresos.each do |ingreso| %>
+      <tr>
+        <td><%= ingreso.fecha_pago.strftime('%d/%m/%Y') if ingreso.fecha_pago.present? %></td>
+        <td><%= ingreso.cuota_detalle_id %></td>
+        <td><%= ingreso.nombre_alumno %></td>
+        <td style="text-align: right;"><%= ingreso.pago_cuota.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="seccion-balance">
+  <h4 style="margin: 0 0 6px 0;">Detalle de Egresos</h4>
+  <table class="balance-detalle" align="center">
+    <tr>
+      <th style="width: 10%;">ID</th>
+      <th style="width: 14%;">Fecha</th>
+      <th style="width: 24%;">Gasto</th>
+      <th style="width: 18%;">Monto</th>
+      <th>Observación</th>
+    </tr>
+
+    <% @egresos.each do |egreso| %>
+      <tr>
+        <td><%= egreso.registro_gasto_id %></td>
+        <td><%= egreso.fecha.strftime('%d/%m/%Y') if egreso.fecha.present? %></td>
+        <td><%= egreso.gasto %></td>
+        <td style="text-align: right;"><%= egreso.monto.to_i.to_s.reverse.gsub(/...(?=.)/, '\&.').reverse %></td>
+        <td><%= egreso.observacion %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
