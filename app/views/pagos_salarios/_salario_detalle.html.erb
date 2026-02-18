@@ -31,6 +31,7 @@
               <th>Adelantos</th>
               <th>Descuentos</th>
               <th>Rem. Extras</th>
+              <th>IPS (8%)</th>
               <th>Salario Percibido</th>
               
             </tr>
@@ -52,6 +53,7 @@
                   <td><%=psd.adelantos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=psd.descuentos.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=psd.otras_remuneraciones.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
+                  <td><%=psd.monto_ips.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
                   <td><%=psd.salario_percibido.to_s.reverse.gsub(/...(?=.)/,'\&.').reverse   %></td>
 
                   <td style="width: 50px;text-align:right;">

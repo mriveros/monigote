@@ -138,7 +138,7 @@ class PagosDescuentosController < ApplicationController
 			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
 			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
 			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
-			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos + psd.monto_ips)
 			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
 			            psd.adelantos = @personal_total_adelantos
@@ -204,7 +204,7 @@ class PagosDescuentosController < ApplicationController
 			        @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, @pago_descuento_elim.mes_periodo_id, @pago_descuento_elim.periodo_escolar_id).sum(:monto).to_i
 			        @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, @pago_descuento_elim.mes_periodo_id, @pago_descuento_elim.periodo_escolar_id).sum(:monto).to_i
 			        @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, @pago_descuento_elim.mes_periodo_id, @pago_descuento_elim.periodo_escolar_id).sum(:monto).to_i
-			        @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			        @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos + psd.monto_ips)
 			        @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
 			        psd.adelantos = @personal_total_adelantos
@@ -289,7 +289,7 @@ class PagosDescuentosController < ApplicationController
 			            @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?",psd.personal_id, params[:pago_descuento][:mes_periodo_id], params[:pago_descuento][:periodo_escolar_id]).sum(:monto).to_i
 			            @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:pago_descuento][:mes_periodo_id], params[:pago_descuento][:periodo_escolar_id]).sum(:monto).to_i
 			            @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", psd.personal_id, params[:pago_descuento][:mes_periodo_id], params[:pago_descuento][:periodo_escolar_id]).sum(:monto).to_i
-			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+			            @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos + psd.monto_ips)
 			            @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido.to_i + @personal_sueldo_percibido.to_i
 
 			            psd.adelantos = @personal_total_adelantos

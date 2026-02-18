@@ -76,6 +76,12 @@ skip_before_action :verify_authenticity_token
 
     end
 
+    if params[:form_buscar_pagos_salarios_total_ips].present?
+
+      cond << "total_ips = ?"
+      args << params[:form_buscar_pagos_salarios_total_ips]
+
+    end
 
     if params[:form_buscar_pagos_salarios_monto_total_pagado].present?
 
@@ -126,6 +132,7 @@ skip_before_action :verify_authenticity_token
     @msg = ""
     @guardado_ok = false
     @acumulacion_sueldo_percibido = 0
+    @calculo_ips = 0
     @mes = Mes.where("id = ?", params[:mes_periodo][:id]).first
     @sucursal = Sucursal.where("id = ?", params[:sucursal][:id]).first
 
@@ -152,7 +159,8 @@ skip_before_action :verify_authenticity_token
       @total_adelantos = PagoAdelanto.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
       @total_descuentos = PagoDescuento.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
       @total_remuneraciones_extras = PagoRemuneracionExtra.where("mes_periodo_id = ? and periodo_escolar_id = ?", params[:mes_periodo][:id], params[:periodo_escolar][:id]).sum(:monto)
-      
+      @total_salario_ips = VPersonal.where("sucursal_id = ?", params[:sucursal][:id]).sum(:sueldo)
+      @total_ips = (@total_salario_ips * 8)/100
       PagoSalarioDetalle.transaction do    
 
         @pago_salario = PagoSalario.new()
@@ -165,6 +173,7 @@ skip_before_action :verify_authenticity_token
         @pago_salario.total_adelantos = @total_adelantos
         @pago_salario.total_descuentos = @total_descuentos
         @pago_salario.total_remuneraciones_extras = @total_remuneraciones_extras
+        @pago_salario.total_ips = @total_ips
 
           if @pago_salario.save
 
@@ -178,7 +187,8 @@ skip_before_action :verify_authenticity_token
               @personal_total_adelantos = PagoAdelanto.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
               @personal_total_descuentos = PagoDescuento.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
               @personal_total_remuneracion_extra = PagoRemuneracionExtra.where("personal_id = ? and mes_periodo_id = ? and periodo_escolar_id = ?", ph.id, params[:mes_periodo][:id],params[:periodo_escolar][:id]).sum(:monto).to_i
-              @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos)
+              @calculo_ips = (@personal_salario.sueldo.to_i * 8)/100
+              @personal_sueldo_percibido = (@personal_salario.sueldo.to_i + @personal_total_remuneracion_extra) - (@personal_total_adelantos + @personal_total_descuentos + @calculo_ips)
               @acumulacion_sueldo_percibido = @acumulacion_sueldo_percibido + @personal_sueldo_percibido
 
               @pago_salario_detalle = PagoSalarioDetalle.new
@@ -190,7 +200,7 @@ skip_before_action :verify_authenticity_token
               @pago_salario_detalle.descuentos = @personal_total_descuentos
               @pago_salario_detalle.otras_remuneraciones = @personal_total_remuneracion_extra
               @pago_salario_detalle.salario_percibido = @personal_sueldo_percibido
-
+              @pago_salario_detalle.monto_ips = @calculo_ips
               if @pago_salario_detalle.save
 
                 auditoria_nueva("registrar pagos de salarios de personales - detalles", "pagos_salarios_detalles", @pago_salario_detalle)
@@ -242,7 +252,9 @@ skip_before_action :verify_authenticity_token
     @pago_salario_elim = @pago_salario  
 
     @registro_gasto = RegistroGasto.where("pago_salario_id = ?", @pago_salario.id).first
-    @registro_gasto.destroy
+    if @registro_gasto.present?
+      @registro_gasto.destroy
+    end
 
     if valido
 
